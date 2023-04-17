@@ -13,11 +13,11 @@
 {% for comment in seance.comments %}
 
 {{ comment.contenu }}
+{{ comment.createdAt | date('d/m/Y H:i') }}
 
 {% endfor %}
 
 {{ form_start(formComment) }}
-
 {{ form_row(formComment.contenu) }}
 
 <button type="submit" class="btn">Ajouter</button>

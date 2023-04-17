@@ -32,12 +32,17 @@ class Seance
     private Collection $comments;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Exercice::class)]
+    private Collection $exercices;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->exercices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +137,48 @@ class Seance
             // set the owning side to null (unless already changed)
             if ($comment->getSeance() === $this) {
                 $comment->setSeance(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreateAt(\DateTimeInterface $createAt): self
+    {
+        $this->createdAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Exercice>
+     */
+    public function getExercices(): Collection
+    {
+        return $this->exercices;
+    }
+
+    public function addExercice(Exercice $exercice): self
+    {
+        if (!$this->exercices->contains($exercice)) {
+            $this->exercices->add($exercice);
+            $exercice->setSeance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExercice(Exercice $exercice): self
+    {
+        if ($this->exercices->removeElement($exercice)) {
+            // set the owning side to null (unless already changed)
+            if ($exercice->getSeance() === $this) {
+                $exercice->setSeance(null);
             }
         }
 
