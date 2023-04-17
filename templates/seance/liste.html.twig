@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des seances{% endblock %}
+
+{% block body %}
+<h1>liste des seances</h1>
+
+{% for seance in seances %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ seance.name }}</h5>
+            <p class="card-text">{{ seance.description }}</p>
+            <a href="{{ path('show_seance', {'id': seance.id}) }}" class="btn btn-primary">Voir</a>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

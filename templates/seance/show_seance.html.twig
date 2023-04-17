@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Seance : {{ seance.name }} {% endblock %}
+
+{% block body %}
+
+<h1>Seance</h1>
+
+<p> {{ seance.description }} </p>
+
+<h2> Commentaires </h2>
+
+{% for comment in seance.comments %}
+
+{{ comment.contenu }}
+
+{% endfor %}
+
+{{ form_start(formComment) }}
+
+{{ form_row(formComment.contenu) }}
+
+<button type="submit" class="btn">Ajouter</button>
+
+{{ form_end(formComment) }}
+
+{% endblock %}
