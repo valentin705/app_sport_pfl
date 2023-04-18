@@ -1,3 +1,42 @@
-body {
-    background-color: aqua;
+* {
+    text-decoration: none;
 }
+
+a:visited {
+    color: #fff;
+}
+
+a {
+    padding: 50px;
+}
+
+body {
+    background-color: hsla(0, 0%, 10%, 1);
+    color: #fff;
+}
+
+nav {
+    background-color: hsla(0, 100%, 20%, 1);
+    height: 70px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 25px;
+}
+
+img {
+    height: 100%;
+    width: 70px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+
+

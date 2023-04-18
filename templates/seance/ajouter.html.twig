@@ -3,24 +3,25 @@
 {% block title %}Ajouter une seance{% endblock %}
 
 {% block stylesheets %}
-{# {{ parent() }} #}
-
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/ajout.css') }}">
 {% endblock %}
-
 
 {% block body %}
 <h1>Ajouter une seance</h1>
 
-{{ form_start(formSeance) }}
-{{ form_row(formSeance.name) }}
-{{ form_row(formSeance.description)}}
-{{ form_row(formSeance.categories) }}
+<div>
+    {{ form_start(formSeance) }}
+    {{ form_row(formSeance.name) }}
+    {{ form_row(formSeance.description)}}
+    {{ form_row(formSeance.categories) }}
+</div>
 
 <button type="submit" class="btn">Ajouter</button>
 {{ form_end(formSeance) }}
 {% endblock %}
 
 {% block javascripts %}
-{# {{ parent() }} #}
-
+{{ parent() }}
+<script src="{{ asset('js/ajout.js') }}"></script>
 {% endblock %}

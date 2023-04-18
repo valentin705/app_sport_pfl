@@ -2,10 +2,19 @@
 
 {% block title %}Liste des seances{% endblock %}
 
-{% block body %}
-<h1>liste des seances</h1>
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/liste.css') }}">
+{% endblock %}
 
-{% for seance in seances %}
+{% block body %}
+
+<h1>liste des seances</h1>
+<div>
+    <div>
+        {# <p> {{ user.username }} </p> #}
+    </div>
+    {% for seance in seances %}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{ seance.name }}</h5>
@@ -13,6 +22,12 @@
             <a href="{{ path('show_seance', {'id': seance.id}) }}" class="btn btn-primary">Voir</a>
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
 
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/liste.js') }}"></script>
 {% endblock %}
