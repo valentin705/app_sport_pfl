@@ -12,30 +12,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Comment;
 use App\Form\CommentType;
-
+use App\Entity\Exercice;
+use App\Form\ExerciceType;
+use App\Repository\ExerciceRepository;
 
 class SeanceController extends AbstractController
 {
     #[Route('/seance/ajouter', name: 'ajout_seance')]
     public function ajouterSeance(
-        Request $request,             
+        Request $request,
         EntityManagerInterface $manager,
         Seance $seance = null
-    )
-    {
+    ) {
         if (!$seance) {
             $seance = new Seance();
         }
 
-          // Récupère l'utilisateur connecté
-          $user = $this->getUser();
+        // Récupère l'utilisateur connecté
+        $user = $this->getUser();
 
         $form = $this->createForm(SeanceType::class, $seance);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             // On ajoute l'utilisateur connecté à la séance
             $seance->setUser($user);
 
@@ -50,7 +51,7 @@ class SeanceController extends AbstractController
             'formSeance' => $form->createView(),
             'editMode' => $seance->getId() !== null
         ]);
-    }   
+    }
 
     #[Route('/seance/liste', name: 'liste_seances')]
     public function listeSeances(SeanceRepository $seanceRepository): Response
@@ -63,8 +64,11 @@ class SeanceController extends AbstractController
     }
 
     #[Route('/seance/{id}', name: 'show_seance')]
-    public function afficherSeance(Seance $seance, Request $request, EntityManagerInterface $manager)
-    {
+    public function afficherSeance(
+        Seance $seance,
+        Request $request,
+        EntityManagerInterface $manager
+    ) {
 
         $comment = new Comment();
         $comment->setSeance($seance);
@@ -89,5 +93,4 @@ class SeanceController extends AbstractController
         ]);
     }
 
-   
 }

@@ -5,10 +5,19 @@
 {% block body %}
 
 <h1>Seance</h1>
-
+<h2>{{ seance.name}} </h2>
 <p> {{ seance.description }} </p>
 
-<h2> Commentaires </h2>
+{% for exercice in seance.exercices %}
+{{ exercice.name }}
+{{ exercice.description }}
+{{ exercice.serie }}
+{{ exercice.repetition }}
+{{ exercice.temps }}
+{{ exercice.recuperation }}
+{% endfor %}
+
+<h3> Commentaires </h3>
 
 {% for comment in seance.comments %}
 

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter des exercices{% endblock %}
+
+{% block body %}
+<h1>Ajouter des exercices</h1>
+
+{{ form_start(formExercice) }}
+{{ form_row(formExercice.name) }}
+{{ form_row(formExercice.description)}}
+{{ form_row(formExercice.serie) }}
+{{ form_row(formExercice.repetition) }}
+{{ form_row(formExercice.temps) }}
+{{ form_row(formExercice.recuperation) }}
+
+<button type="submit" class="btn">Ajouter</button>
+{{ form_end(formExercice) }}
+{% endblock %}
