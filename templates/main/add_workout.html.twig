@@ -10,15 +10,16 @@
 {% block body %}
 <h1>Ajouter une seance</h1>
 
-<div>
+
     {{ form_start(formSeance) }}
     {{ form_row(formSeance.name) }}
     {{ form_row(formSeance.description)}}
     {{ form_row(formSeance.categories) }}
-</div>
+
+{{ form_end(formSeance) }}
 
 <button type="submit" class="btn">Ajouter</button>
-{{ form_end(formSeance) }}
+
 {% endblock %}
 
 {% block javascripts %}
