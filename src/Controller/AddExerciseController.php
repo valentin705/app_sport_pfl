@@ -10,15 +10,13 @@ use App\Form\SeanceType;
 use App\Repository\SeanceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Comment;
-use App\Form\CommentType;
 use App\Entity\Exercice;
 use App\Form\ExerciceType;
 use App\Repository\ExerciceRepository;
 
-class ExerciceController extends AbstractController
+class AddExerciseController extends AbstractController
 {
-    #[Route('/seance/ajouter/exercice/{id}', name: 'ajout_exercice')]
+    #[Route('/main/add_exercise/{id}', name: 'add_exercise')]
     public function ajouterExercice(
         Seance $seance,
         Request $request,   
@@ -36,26 +34,26 @@ class ExerciceController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute(
-                'show_seance', ['id' => $exercice->getId()]
+                'show_workout', ['id' => $exercice->getId()]
             );
         }
 
-        return $this->render('seance/exercice.html.twig', [
+        return $this->render('main/add_exercise.html.twig', [
             'exercice' => $exercice,
             'formExercice' => $form->createView(),
         ]);
         
     }
     
-    #[Route('/seance/{id}', name: 'show_seance')]
-    public function afficherExercice(ExerciceRepository $exerciceRepository, Seance $seance): Response
-    {
-        $exercices = $exerciceRepository->findBy(['seance' => $seance]);
+    // #[Route('/seance/{id}', name: 'show_seance')]
+    // public function afficherExercice(ExerciceRepository $exerciceRepository, Seance $seance): Response
+    // {
+    //     $exercices = $exerciceRepository->findBy(['seance' => $seance]);
 
-        return $this->render('seance/show_seance.html.twig', [
-            'seance' => $seance,
-            'exercices' => $exercices
-        ]);
-    }
- 
+    //     return $this->render('seance/show_seance.html.twig', [
+    //         'seance' => $seance,
+    //         'exercices' => $exercices
+    //     ]);
+    // }
+   
 }

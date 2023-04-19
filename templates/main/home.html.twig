@@ -10,16 +10,17 @@
 {% block body %}
 
 <h1>liste des seances</h1>
-<div>
+<div id="container">
     <div>
-        {# <p> {{ user.username }} </p> #}
+  <p>{{ app.user.username }}</p>
     </div>
     {% for seance in seances %}
     <div class="card">
         <div class="card-body">
+            <p> {{seance.user.username }}</p>
             <h5 class="card-title">{{ seance.name }}</h5>
             <p class="card-text">{{ seance.description }}</p>
-            <a href="{{ path('show_seance', {'id': seance.id}) }}" class="btn btn-primary">Voir</a>
+            <a href="{{ path('show_workout', {'id': seance.id}) }}" class="btn btn-primary">Voir</a>
         </div>
     </div>
     {% endfor %}
