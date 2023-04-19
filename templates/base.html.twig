@@ -20,24 +20,29 @@
 
 <body>
     <!-- Main Navigation -->
-    <div>
-        <nav>
-            <div class="nav-left">
-                <div >
-                    <img src="{{ asset('images/SportNetLogo.png')}}" alt="">
-                </div>
-                <div>
-                    <a href="{{ path('liste_seances') }}">Acceuil</a>
-                </div>
+    <nav>
+        <div class="nav-left">
+            <div class="img-crop">
+                <img src="{{ asset('images/SportNetLogo.png')}}" alt="" id="logo">
             </div>
-            <div class="nav-right">
-                <a href="{{ path('liste_seances') }}">Mon profil</a>
-                <a href="{{ path('liste_seances') }}">Recherche</a>
-                <a href="{{ path('app_register') }}">Inscription</a>
-                <a href="{{ path('app_login') }}">Connexion</a>
-            </div>
-        </nav>
-    </div>
+            {% if app.user is not null %}
+            <a href="{{ path('liste_seances') }}" class="nav-item">Acceuil</a>
+        </div>
+        <div>
+            <a href="{{ path('liste_seances') }}" class="nav-item">Mon profil</a>
+            <a href="{{ path('liste_seances') }}" class="nav-item">Recherche</a>
+            <a href="{{ path('app_logout') }}" class="nav-item">Déconnection</a>
+        </div>
+        {% else %}
+        <a href="{{ path('app_login') }}" class="nav-item">Acceuil</a>
+        </div>
+        <div>
+            <a href="{{ path('app_register') }}" class="nav-item">Inscription</a>
+            <a href="{{ path('app_login') }}" class="nav-item">Connexion</a>
+        </div>
+        {% endif %}
+    </nav>
+
     {% block body %}{% endblock %}
 </body>
 
