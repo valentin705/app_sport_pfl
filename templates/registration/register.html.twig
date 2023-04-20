@@ -1,18 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+<div class="container min-vh-100 d-flex align-items-center">
+    <div class="card">
+        <div class="row g-0 h-100 ">
+            <div id="login-register-div" class="col-md-8 d-flex position-relative">
+                <img id="login-register-img" src="{{ asset('images/login-register-img.jpg')}}"
+                    class="img-fluid rounded-start" alt="...">
+                <div id="absolute-text" class="position-absolute px-3 d-flex flex-column-reverse">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur magnam dignissimos,
+                        voluptatibus corrupti nobis corporis ex, laudantium soluta velit quas nihil ratione pariatur
+                        voluptas ducimus debitis recusandae eligendi voluptatem. Eos.
+                        Mollitia molestias sit et culpa debitis labore harum error doloremque minima voluptatibus,
+                        asperiores architecto odit saepe totam quisquam accusantium rem commodi quos officiis minus
+                        corporis quidem eaque explicabo! Harum, praesentium?</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-body" style="height: 100%;">
+                    {{ form_start(registrationForm, {'attr' : {'class' : "d-flex flex-column", 'style' : "height:
+                    100%;"}}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    <h1 class="h3 mb-3 mt-5 font-weight-normal" style="text-align: center;">Inscription</h1>
+                    <div class="mb-5">
+                        {{ form_row(registrationForm.username) }}
+                    </div>
+                    <div class="mb-5">
+                        {{ form_row(registrationForm.email) }}
+                    </div>
+                    <div class="mb-5">
+                        {{ form_row(registrationForm.plainPassword, {
+                        label: 'Mot de passe', 'attr' : {'placeholder' : 'Entrez votre mot de passe'}
+                        }) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr' : {'class' : "form-check-input"}}) }}
+                        {{ form_label(registrationForm.agreeTerms) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                    <div class="mb-5">
+                        <button class=" mb-5 btn btn-secondary" type="submit">
+                            Inscription
+                        </button>
+                    </div>
+
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me
+                    functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/register.js') }}"></script>
 {% endblock %}
