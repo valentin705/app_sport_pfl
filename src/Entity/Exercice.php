@@ -35,6 +35,9 @@ class Exercice
     #[ORM\Column]
     private ?float $recuperation = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Exercice
     public function setRecuperation(float $recuperation): self
     {
         $this->recuperation = $recuperation;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

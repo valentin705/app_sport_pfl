@@ -17,6 +17,12 @@ class SeanceType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('picture', null, [
+                'label' => 'Image',
+                'attr' => [
+                    'placeholder' => 'lien de l\'image'
+                ]
+            ])
             ->add('description')
             ->add('categories', EntityType::class, [
                 'class' => Category::class,

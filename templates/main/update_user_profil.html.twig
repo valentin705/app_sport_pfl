@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update user profil{% endblock %}
+
+{% block body %}
+
+{{ form_start(formUserProfil) }}
+{{ form_row(formUserProfil.username) }}
+{{ form_row(formUserProfil.description) }}
+{{ form_row(formUserProfil.picture) }}
+{{ form_row(formUserProfil.email) }}
+{{ form_row(formUserProfil.sports) }}
+
+<button type="submit" class="btn">Ajouter</button>
+{{ form_end(formUserProfil) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserProfilController!{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/user_profil.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('update_user_profil', {'id': app.user.id}) }}">Editer</a>
+
+<img src="{{ app.user.picture }}" alt="" id="avatar">
+<h1>Bonjour {{ app.user.username }} </h1>
+<h2>Descriptions</h2>
+<p>{{ app.user.description }}</p>
+<h2>Sports : </h2>
+<p>{{ app.user.sports }}</p>
+
+<h2>Dernieres séances</h2>
+
+{% for seance in seances %}
+<h5>{{ seance.name }}</h5>
+<p>{{ seance.description }}</p>
+<a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
+{% endfor %}
+
+{# ----------------voir si on l'utilisera par la suite----------------  #}
+{# {% if app.user.description is not empty %}
+{# {% if app.user.sports is not empty %}
+<p>{{ app.user.sports }}</p>
+{% endif %} #}
+{# <a href="{{ path('user_edit', {'id': app.user.id}) }}">Modifier mon profil</a> #}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/user_profil.js') }}"></script>
+{% endblock %}

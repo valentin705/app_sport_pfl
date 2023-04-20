@@ -4,31 +4,46 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link rel="stylesheet" href="{{ asset('css/liste.css') }}">
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
 {% endblock %}
 
 {% block body %}
 
-<h1>liste des seances</h1>
 <div id="container">
-    <div>
-  <p>{{ app.user.username }}</p>
+    <div id="profilBloc">
+        <h1>{{ app.user.username }}</h1>
+        <img src="{{ app.user.picture }}" alt="" id="avatar">
+        <p>{{ app.user.description }}</p>
+        <a href="{{ path('user_profil', {'id': app.user.id}) }}">Profil</a>
+        <a href="{{ path('add_workout') }}">Ajouter une séance</a>
+
     </div>
-    {% for seance in seances %}
-    <div class="card">
-        <div class="card-body">
-            <p> {{seance.user.username }}</p>
-            <h5 class="card-title">{{ seance.name }}</h5>
-            <p class="card-text">{{ seance.description }}</p>
-            <a href="{{ path('show_workout', {'id': seance.id}) }}" class="btn btn-primary">Voir</a>
-        </div>
+    <div id="filActuBloc">
+        {% for seance in seances %}
+        <div id="filActu">
+            <div id="formActu">
+                <div>
+                    {% if seance.picture is not null %}
+                          <img src="{{ seance.picture }}" alt="" id="imgSeance">
+                    {% endif %}
+                  
+                </div>
+                <div>
+                    <p> {{seance.user.username }}</p>
+                    <h5>{{ seance.name }}</h5>
+                    <p>{{ seance.description }}</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
+            </div>
+        </div>{% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
-<script src="{{ asset('js/liste.js') }}"></script>
+<script src="{{ asset('js/home.js') }}"></script>
 {% endblock %}

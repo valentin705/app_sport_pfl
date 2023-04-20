@@ -4,9 +4,15 @@
 
 {% block body %}
 
+<img src="{{ seance.picture }}" alt="">
 <h1>Seance</h1>
 <h2>{{ seance.name}} </h2>
 <p> {{ seance.description }} </p>
+
+<h5>Categories</h5>
+{% for categorie in seance.categories %}
+<p>{{ categorie.name }}</p>
+{% endfor %}
 
 {% for exercice in seance.exercices %}
 {{ exercice.name }}
@@ -21,8 +27,9 @@
 
 {% for comment in seance.comments %}
 
-{{ comment.contenu }}
-{{ comment.createdAt | date('d/m/Y H:i') }}
+<p>{{ comment.contenu }}</p>
+<div>{{ comment.createdAt | date('d/m/Y H:i') }}
+par : {{ comment.user.username }}</div>
 
 {% endfor %}
 

@@ -15,6 +15,9 @@ class ExerciceType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom de l\'exercice'
             ])
+            ->add('picture', null, [
+                'label' => 'Image'
+            ])
             ->add('description', null, [
                 'label' => 'Description de l\'exercice'
             ])

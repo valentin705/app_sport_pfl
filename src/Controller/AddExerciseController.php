@@ -34,7 +34,7 @@ class AddExerciseController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute(
-                'show_workout', ['id' => $exercice->getId()]
+                'show_workout', ['id' => $seance->getId()]
             );
         }
 
@@ -44,16 +44,5 @@ class AddExerciseController extends AbstractController
         ]);
         
     }
-    
-    // #[Route('/seance/{id}', name: 'show_seance')]
-    // public function afficherExercice(ExerciceRepository $exerciceRepository, Seance $seance): Response
-    // {
-    //     $exercices = $exerciceRepository->findBy(['seance' => $seance]);
-
-    //     return $this->render('seance/show_seance.html.twig', [
-    //         'seance' => $seance,
-    //         'exercices' => $exercices
-    //     ]);
-    // }
    
 }

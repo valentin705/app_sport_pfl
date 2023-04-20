@@ -13,7 +13,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('contenu', null, [
-                'label' => 'Commentaire'
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Commentaire'
+                ]
             ])
         ;
     }
