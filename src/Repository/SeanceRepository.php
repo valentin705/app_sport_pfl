@@ -39,6 +39,54 @@ class SeanceRepository extends ServiceEntityRepository
         }
     }
 
+        public function findByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('p.name', ':query'),
+                        // $qb->expr()->like('p.description', ':query'),
+                    ),
+                )
+            )
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+  public function createdOrderByLikesQueryBuilder()
+{
+    $qb = $this->createQueryBuilder('p');
+    $qb
+        ->leftJoin('p.likes', 'l') // Jointure avec la relation likes
+        ->groupBy('p.id') // Groupement par l'ID de la séance
+        ->orderBy('COUNT(l.id)', 'DESC') // Tri par le nombre de likes (le COUNT() de l'ID des likes)
+        ->setMaxResults(3);
+
+    return $qb
+        ->getQuery()
+        ->getResult();
+}
+
+public function findByCategory($category)
+{
+    $qb = $this->createQueryBuilder('p');
+    $qb
+        ->leftJoin('p.categories', 'l') 
+        ->groupBy('p.id')
+        ->orderBy('p.createdAt', 'DESC')
+    ;
+    return $qb
+        ->getQuery()
+        ->getResult();
+}
+ 
+
 //    /**
 //     * @return Seance[] Returns an array of Seance objects
 //     */

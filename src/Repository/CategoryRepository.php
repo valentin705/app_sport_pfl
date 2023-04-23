@@ -39,6 +39,27 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function findSeancesByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('seance.name', ':query'),
+                        // $qb->expr()->like('p.content', ':query'),
+                    ),
+                    // $qb->expr()->isNotNull('p.created_at')
+                )
+            )
+            ->setParameter('query', '%' . $query . '%')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+   
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */

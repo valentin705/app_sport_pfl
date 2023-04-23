@@ -19,25 +19,52 @@
 
     </div>
     <div id="filActuBloc">
+
+        {{ render(controller(
+        'App\\Controller\\SearchController::searchBar'
+        )) }}
+
         {% for seance in seances %}
         <div id="filActu">
             <div id="formActu">
                 <div>
+
                     {% if seance.picture is not null %}
-                          <img src="{{ seance.picture }}" alt="" id="imgSeance">
+                    <img src="{{ seance.picture }}" alt="" id="imgSeance">
                     {% endif %}
-                  
+
+                    <p>{{ seance.likes | length}} likes</p>
+
                 </div>
                 <div>
                     <p> {{seance.user.username }}</p>
                     <h5>{{ seance.name }}</h5>
                     <p>{{ seance.description }}</p>
+                    Créer le {{ seance.createAt | date('d/m/Y') }}
                 </div>
             </div>
             <div>
                 <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
             </div>
         </div>{% endfor %}
+    </div>
+
+    <div id="topSeancebloc">
+        <h1>top séances</h1>
+        {% for seance in seancesByLikes %}
+        <div id="topSeance">
+            <div>
+                <img src="{{ seance.picture }}" alt="" id="imgTopSeance">
+            </div>
+            <div>
+                <h3>{{ seance.name }}</h3>
+                likes {{ seance.likes | length}}
+                par {{ seance.user.username }} <br>
+                le {{ seance.createAt | date('d/m/Y') }}
+                <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 

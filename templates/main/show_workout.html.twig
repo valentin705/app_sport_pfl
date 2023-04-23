@@ -5,7 +5,9 @@
 {% block body %}
 
 <img src="{{ seance.picture }}" alt="">
-<h1>Seance</h1>
+<h1>Seance</h1> 
+{{ seance.likes | length}}
+<a href="{{ path('app_likes', {'id': seance.id}) }}">Like</a>
 <h2>{{ seance.name}} </h2>
 <p> {{ seance.description }} </p>
 
@@ -15,11 +17,16 @@
 {% endfor %}
 
 {% for exercice in seance.exercices %}
+<p>Nom de la seance</p>
 {{ exercice.name }}
+<p>Description </p>
 {{ exercice.description }}
+<p>Series</p>
 {{ exercice.serie }}
+<p>Repetitions ou temps d'effort</p>
 {{ exercice.repetition }}
 {{ exercice.temps }}
+<p>Recuperation</p>
 {{ exercice.recuperation }}
 {% endfor %}
 
