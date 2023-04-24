@@ -1,11 +1,4 @@
 /* 
-
-
-
-.black-btn {
-
-}
-
 .red-btn {
     background-color: #680000;
 }
@@ -13,12 +6,31 @@
 */
 
 * {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    color: #fff;
+}
+
+h3,
+h4,
+h5,
+h6 {
     color: #fff;
 }
 
 body {
     background-color: #191919;
+}
+
+.date {
+    font-size: 0.6em;
+    color: #797979;
+
+}
+
+.infos {
+    font-size: 0.8em;
+    color: #797979;
+    margin-bottom: 0;
 }
 
 .navbar {
@@ -42,10 +54,23 @@ body {
     padding-top: 3px;
 }
 
-/* .img-crop {
-    height: 40px;
-    overflow: hidden;
-} */
+.avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatar-2 {
+    width: 60px;
+    height: 60px;
+}
+
+.seance-picture {
+    object-fit: cover;
+    height: 150px;
+    border-radius: 10px;
+}
 
 .btn-secondary {
     border: none;
@@ -55,6 +80,16 @@ body {
 
 .btn-secondary:hover {
     background-color: #090909;
+}
+
+.btn-primary {
+    border: none;
+    min-width: 100%;
+    background-color: #680000;
+}
+
+.btn-primary:hover {
+    background-color: #680000;
 }
 
 .card {
@@ -81,4 +116,8 @@ body {
     bottom: 0;
     background: linear-gradient(#ffffff00, #000000);
     border-bottom-left-radius: var(--bs-border-radius) !important;
+}
+
+.mt-6 {
+    margin-top: 70px;
 }

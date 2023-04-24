@@ -15,6 +15,7 @@ class UserProfilType extends AbstractType
             ->add('email', null, [
                 'label' => 'Mettre à jour votre Email',
                 'attr' => [
+                    'class' => 'form-control',
                     'placeholder' => 'Email'
                 ]
             ])
@@ -27,28 +28,33 @@ class UserProfilType extends AbstractType
             ->add('username', null, [
                 'label' => 'Mettre à jour votre Pseudo',
                 'attr' => [
+                    'class' => 'form-control',
                     'placeholder' => 'Pseudo'
                 ]
             ])
             ->add('description', null, [
                 'label' => 'Votre description',
                 'attr' => [
-                    'placeholder' => 'Description'
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
+                    'rows' => '4',
+                    'cols' => '10'
                 ]
             ])
             ->add('sports', null, [
                 'label' => 'Vos sports',
                 'attr' => [
+                    'class' => 'form-control',
                     'placeholder' => 'Sport'
                 ]
             ])
             ->add('picture', null, [
                 'label' => 'Lien de votre photo de profil',
                 'attr' => [
+                    'class' => 'form-control',
                     'placeholder' => 'Photo'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
