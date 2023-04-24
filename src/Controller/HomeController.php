@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\SeanceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+
+use App\Repository\CategoryRepository;
+use App\Form\CategoryType;
 
 class HomeController extends AbstractController
 {
@@ -24,27 +28,41 @@ class HomeController extends AbstractController
     }
 
     #[Route('/main/home', name: 'home_list')]
-    public function listeSeances(SeanceRepository $seanceRepository): Response
+    public function listeSeances(
+        SeanceRepository $seanceRepository,
+        CategoryRepository $categoryRepository,
+        ): Response
     {
+      
+        $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findBy([], ['id' => 'DESC']);
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
 
         return $this->render('main/home.html.twig', [
             'seances' => $seances,
-            'seancesByLikes' => $seancesByLikes
+            'seancesByLikes' => $seancesByLikes,
+            'categories' => $categories,
         ]);
     }
 
-    // #[Route('/main/home/{category}', name: 'home_list_byCategory')]
-    // public function listeSeancesByCategory(SeanceRepository $seanceRepository, string $category): Response
-    // {
-    //     $seances = $seanceRepository->findByCategory(['category' => $category], ['id' => 'DESC']);
-    //     $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
+    #[Route('/main/home/{slug}', name: 'home_list_by_category')]
+    public function listeSeancesByCategory(
+        string $slug, 
+        SeanceRepository $seanceRepository,
+        CategoryRepository $categoryRepository,
+        ): Response
+    {
 
-    //     return $this->render('main/home.html.twig', [
-    //         'seances' => $seances,
-    //         'seancesByLikes' => $seancesByLikes
-    //     ]);
-    // }
+        $categories = $categoryRepository->findAll();
+        $seances = $seanceRepository->findByCategory($slug);
+        $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
 
+        return $this->render('main/home.html.twig', [
+            'seances' => $seances,
+            'seancesByLikes' => $seancesByLikes,
+            'categories' => $categories,
+ 
+        ]);
+    }
+    
 }

@@ -1,3 +1,1 @@
-
-
-console.log('hello world');
+console.log('Hello Webpack Encore! Edit me in assets/js/main.js');

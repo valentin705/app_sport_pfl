@@ -18,17 +18,6 @@ class SearchController extends AbstractController
      * @Route("/handleSearch", name="handleSearch")
      * @param Request $request
      */
-    // public function handleSearch(Request $request, SeanceRepository $repo)
-    // {
-    //     $query = $request->request->all('form')['query'];
-    //     if($query) {
-    //         $seances = $repo->findByName($query);
-    //     }
-    //     return $this->render('search/index.html.twig', [
-    //         'seances' => $seances
-            
-    //     ]);
-    // }
 
     public function handleSearch(Request $request,
     SeanceRepository $repoSeance, UserRepository $repoUser)

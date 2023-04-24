@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+
 
 ///////////////////////////A FAIRE  : Modifier le form pour repetition/temps///////////////////////////////
 // use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -52,6 +55,11 @@ class ExerciceType extends AbstractType
             ->add('recuperation', null, [
                 'label' => 'Temps de récupération'
             ])
+            // ->add('exercices', CollectionType::class, [
+            //     'entry_type' => ExerciceType::class,
+            //     'entry_options' => ['label' => false],
+            //     'allow_add' => true,
+            // ]);
             // ->add('ajouter', ButtonType::class, [ // Ajouter un bouton "Ajouter un exercice supplémentaire"
             //     'label' => 'Ajouter un exercice supplémentaire',
             //     'attr' => [

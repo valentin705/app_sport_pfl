@@ -1,0 +1,28 @@
+<div id="filterCategory">
+    <h3>Filtrer par catégorie</h3>
+    <select name="category" id="category" class="form-control">
+        {# <option value="{{ app.request.attributes.get('slug') }}"{{ app.request.attributes.get('slug') == '' ? ' selected' : '' }}>Filtrer par catégorie</option> #}
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Toutes les catégories'}) }}"{{ app.request.attributes.get('slug') == 'Toutes les catégories' ? ' selected' : '' }}>Toutes les catégories</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Cardio'}) }}"{{ app.request.attributes.get('slug') == 'Cardio' ? ' selected' : '' }}>Cardio</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Renforcement musculaire'}) }}"{{ app.request.attributes.get('slug') == 'Renforcement musculaire' ? ' selected' : '' }}>Renforcement musculaire</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Stretching'}) }}"{{ app.request.attributes.get('slug') == 'Stretching' ? ' selected' : '' }}>Stretching</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Upper body'}) }}"{{ app.request.attributes.get('slug') == 'Upper body' ? ' selected' : '' }}>Upper body</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Lower body'}) }}"{{ app.request.attributes.get('slug') == 'Lower body' ? ' selected' : '' }}>Lower body</option>
+        <option data-url="{{ path('home_list_by_category', {'slug': 'Full body'}) }}"{{ app.request.attributes.get('slug') == 'Full body' ? ' selected' : '' }}>Full body</option>
+    </select>
+</div>
+
+<script>
+    document.getElementById("category").addEventListener("change", function() {
+        let selectedOption = this.options[this.selectedIndex];
+        let url = selectedOption.getAttribute("data-url");
+        if (url) {
+            if (selectedOption.value === 'Toutes les catégories') {
+                window.location.href = '/main/home';
+            } else {
+                window.location.href = url;
+            }
+        }
+    });
+</script>
+    

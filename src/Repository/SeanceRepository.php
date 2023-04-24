@@ -73,14 +73,17 @@ class SeanceRepository extends ServiceEntityRepository
         ->getResult();
 }
 
+// filtre par catégorie avec un slug
 public function findByCategory($category)
 {
     $qb = $this->createQueryBuilder('p');
     $qb
-        ->leftJoin('p.categories', 'l') 
-        ->groupBy('p.id')
+        ->leftJoin('p.categories', 'c')
+        ->where('c.name = :category')
+        ->setParameter('category', $category)
         ->orderBy('p.createdAt', 'DESC')
     ;
+
     return $qb
         ->getQuery()
         ->getResult();
