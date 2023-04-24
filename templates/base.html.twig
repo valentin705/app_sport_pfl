@@ -49,7 +49,7 @@
                     <li class="img-crop nav-item">
                         <a class="navbar-brand"
                             href="{% if app.user is not null %} {{ path('home_list') }} {% else %} {{ path('app_login') }} {% endif %}">
-                            <img id="logo" src="{{ asset('images/logoV1.png')}}" alt="">
+                            <img class="px-4" id="logo" src="{{ asset('images/logoV1.png')}}" alt="">
                         </a>
                     </li>
                     {% if app.user is not null %}
@@ -60,10 +60,10 @@
                 <span class="navbar-text">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="{{ path('home_list') }}" class="nav-link">Mon profil</a>
+                            <a href="{{ path('home_list') }}" class="nav-link">Recherche</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ path('home_list') }}" class="nav-link">Recherche</a>
+                            <a href="{{ path('user_profil', {'id': app.user.id}) }}" class="nav-link">Mon profil</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a>
