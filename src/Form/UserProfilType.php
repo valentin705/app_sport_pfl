@@ -15,7 +15,7 @@ class UserProfilType extends AbstractType
             ->add('email', null, [
                 'label' => 'Mettre à jour votre Email',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'placeholder' => 'Email'
                 ]
             ])
@@ -28,15 +28,15 @@ class UserProfilType extends AbstractType
             ->add('username', null, [
                 'label' => 'Mettre à jour votre Pseudo',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'placeholder' => 'Pseudo'
                 ]
             ])
             ->add('description', null, [
-                'label' => 'Votre description',
+                'label' => 'Description',
                 'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Description',
+                    'class' => 'form-control mb-3',
+                    'placeholder' => 'Parle nous de toi !',
                     'rows' => '4',
                     'cols' => '10'
                 ]
@@ -44,7 +44,7 @@ class UserProfilType extends AbstractType
             ->add('sports', null, [
                 'label' => 'Vos sports',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'placeholder' => 'Sport'
                 ]
             ])

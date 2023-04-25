@@ -24,7 +24,7 @@ body {
 .date {
     font-size: 0.6em;
     color: #797979;
-
+    margin-bottom: 0;
 }
 
 .infos {

@@ -8,18 +8,42 @@
 {% endblock %}
 
 {% block body %}
-<h1>Ajouter une seance</h1>
 
+<div class="container mt-6">
+    <div class="row">
+        <div class="col-11">
+            <h5 class="mx-5">Ajouter une seance :</h5>
+            <div class="card p-4 mb-3">
+                <div class="card-body">
 
-    {{ form_start(formSeance) }}
-    {{ form_row(formSeance.name) }}  
-    {{ form_row(formSeance.picture) }}
-    {{ form_row(formSeance.description)}}
-    {{ form_row(formSeance.categories) }}
+                    {{ form_start(formSeance) }}
+                    {{ form_row(formSeance.name) }}
+                    {{ form_row(formSeance.picture) }}
+                    {{ form_row(formSeance.description)}}
+                    <div class="d-flex">
+                        {% for choice in formSeance.categories %}
+                        <div class="form-check mx-1">
+                            {{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(choice) }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {# {{ form_row(formSeance.categories) }} #}
+                    {# , {'attr': {'class': 'form-check-label'}} #}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
+        </div>
+        {{ form_end(formSeance) }}
+        <div class="card p-2 col-1">
+            <button id="add" class="btn btn-secondary my-3">+</button>
+            <button id="remove" class="btn btn-secondary my-3">-</button>
+        </div>
+    </div>
+</div>
+<div id="content">
 
-
-<button type="submit" class="btn">Ajouter</button>
-{{ form_end(formSeance) }}
+</div>
 
 {% endblock %}
 
