@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Repository\CategoryRepository;
 use App\Form\CategoryType;
+use App\Repository\UserRepository;
 
 class HomeController extends AbstractController
 {
@@ -42,6 +43,7 @@ class HomeController extends AbstractController
             'seances' => $seances,
             'seancesByLikes' => $seancesByLikes,
             'categories' => $categories,
+
         ]);
     }
 

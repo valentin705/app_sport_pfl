@@ -54,14 +54,14 @@
 
                 </div>
                 <div>
-                    <p> {{seance.user.username }}</p>
                     <h5>{{ seance.name }}</h5>
                     <p>{{ seance.description }}</p>
                     Créer le {{ seance.createAt | date('d/m/Y') }}
+                    <a href="{{ path('user_profil_visited', {'id': seance.user.username })}}">Voir le profil de <p> {{seance.user.username }}</p> </a>
                 </div>
             </div>
             <div>
-                <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
+                <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir La seance </a>
             </div>
         </div>{% endfor %}
     </div>
