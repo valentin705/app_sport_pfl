@@ -16,22 +16,37 @@ class SeanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                ]
+            ])
             ->add('picture', null, [
                 'label' => 'Image',
                 'attr' => [
+                    'class' => 'form-control mb-3',
                     'placeholder' => 'lien de l\'image'
                 ]
             ])
-            ->add('description')
+            ->add('description', null, [
+                'label' => 'Description',
+                'attr' => [
+                    'class' => 'form-control mb-3',
+                    'placeholder' => 'Description de ta séance',
+                    'rows' => '4',
+                    'cols' => '10'
+                ]
+            ])
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-            ])
-        ;
+                'attr' => [
+                    'class' => 'form-check'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
