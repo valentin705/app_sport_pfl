@@ -13,12 +13,12 @@
     <h1 class="text-center">Résultats de la recherche pour les séances</h1>
     {% for seance in seances %}
     <div>
-    <img src="{{ seance.picture }}" alt="">
-    <h1>{{ seance.name }}</h1>
-    <p>{{ seance.description }} </p>
-    par {{ seance.user.username }} <br>
-    le {{ seance.createAt | date('d/m/Y') }}
-    <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
+        <img src="{{ seance.picture }}" alt="">
+        <h1>{{ seance.name }}</h1>
+        <p>{{ seance.description }} </p>
+        par {{ seance.user.username }} <br>
+        le {{ seance.createAt | date('d/m/Y') }}
+        <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
     </div>
     {% endfor %}
     {% endif %}
@@ -27,7 +27,7 @@
     <h1 class="text-center">Résultats de la recherche pour les utilisateurs</h1>
     {% for user in users %}
     <div>
-        <img src="{{ user.picture}}" alt="">
+        <img src="{{ user.picture}}" alt="" class="avatar">
         <h1>{{ user.username }}</h1>
         <p>{{ user.description }} </p>
         par {{ user.username }}

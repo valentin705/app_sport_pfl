@@ -32,9 +32,8 @@ class HomeController extends AbstractController
     public function listeSeances(
         SeanceRepository $seanceRepository,
         CategoryRepository $categoryRepository,
-        ): Response
-    {
-      
+    ): Response {
+
         $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findBy([], ['id' => 'DESC']);
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
@@ -49,12 +48,10 @@ class HomeController extends AbstractController
 
     #[Route('/main/home/{slug}', name: 'home_list_by_category')]
     public function listeSeancesByCategory(
-        string $slug, 
+        string $slug,
         SeanceRepository $seanceRepository,
         CategoryRepository $categoryRepository,
-        ): Response
-    {
-
+    ): Response {
         $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findByCategory($slug);
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
@@ -63,8 +60,7 @@ class HomeController extends AbstractController
             'seances' => $seances,
             'seancesByLikes' => $seancesByLikes,
             'categories' => $categories,
- 
+
         ]);
     }
-    
 }

@@ -14,16 +14,18 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SearchController extends AbstractController
 {
-        /**
+    /**
      * @Route("/handleSearch", name="handleSearch")
      * @param Request $request
      */
 
-    public function handleSearch(Request $request,
-    SeanceRepository $repoSeance, UserRepository $repoUser)
-    {
+    public function handleSearch(
+        Request $request,
+        SeanceRepository $repoSeance,
+        UserRepository $repoUser
+    ) {
         $query = $request->request->all('form')['query'];
-        if($query) {
+        if ($query) {
             $seances = $repoSeance->findByName($query);
             $users = $repoUser->findByUsername($query);
         }
@@ -32,7 +34,7 @@ class SearchController extends AbstractController
             'users' => $users
         ]);
     }
- 
+
     public function searchBar()
     {
         $form = $this->createFormBuilder()
@@ -44,15 +46,9 @@ class SearchController extends AbstractController
                     'placeholder' => 'Entrez un mot-clé'
                 ]
             ])
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
             ->getForm();
         return $this->render('search/searchBar.html.twig', [
             'formSearch' => $form->createView()
         ]);
     }
-
 }
