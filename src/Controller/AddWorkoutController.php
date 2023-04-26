@@ -10,7 +10,8 @@ use App\Form\SeanceType;
 use App\Repository\SeanceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Form\SeanceExercicesType;
+use App\Entity\Exercice;
 
 class AddWorkoutController extends AbstractController
 {
@@ -24,10 +25,14 @@ class AddWorkoutController extends AbstractController
             $seance = new Seance();
         }
 
+        $exercice = new Exercice();
+
+        $seance->addExercice($exercice);
+    
         // Récupère l'utilisateur connecté
         $user = $this->getUser();
 
-        $form = $this->createForm(SeanceType::class, $seance);
+        $form = $this->createForm(SeanceExercicesType::class, $seance);
 
         $form->handleRequest($request);
 
@@ -40,12 +45,24 @@ class AddWorkoutController extends AbstractController
 
             $manager->flush();
 
-            return $this->redirectToRoute('add_exercise', ['id' => $seance->getId()]);
+            // return $this->redirectToRoute('add_workout', ['id' => $seance->getId()]);
+
+            if ($request->request->get('route') === 'ajouter') {
+                // Logique pour la route 'ajouter'
+                return $this->redirectToRoute('add_exercise', ['id' => $seance->getId()]);
+            } elseif ($request->request->get('route') === 'finir') {
+                // Logique pour la route 'finir'
+                return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
+            }
+    
         }
+
+
 
         return $this->render('main/add_workout.html.twig', [
             'formSeance' => $form->createView(),
-            'editMode' => $seance->getId() !== null
+            'editMode' => $seance->getId() !== null,
+            'seance' => $seance,
         ]);
     }
 

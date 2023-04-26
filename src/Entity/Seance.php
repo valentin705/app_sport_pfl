@@ -34,7 +34,7 @@ class Seance
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Exercice::class)]
+    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Exercice::class, cascade: ['persist', 'remove'])]
     private Collection $exercices;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -232,6 +232,11 @@ class Seance
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
 }

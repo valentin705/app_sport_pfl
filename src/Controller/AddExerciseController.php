@@ -34,13 +34,14 @@ class AddExerciseController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute(
-                'show_workout', ['id' => $seance->getId()]
+                'add_exercise', ['id' => $seance->getId()]
             );
         }
 
         return $this->render('main/add_exercise.html.twig', [
             'exercice' => $exercice,
             'formExercice' => $form->createView(),
+            'seance' => $seance,
         ]);
         
     }

@@ -2,8 +2,29 @@
 
 {% block title %}Ajouter des exercices{% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
 {% block body %}
-<h1>Ajouter des exercices</h1>
+
+
+<h1>{{ exercice.seance.name }}</h1>
+<p>{{ exercice.seance.description }}</p>
+<img src="{{ exercice.seance.picture }}" alt="">
+
+<h2>Exercices</h2>
+{% for exercice in exercice.seance.exercices %}
+<h3>{{ exercice.name }}</h3>
+<p>{{ exercice.description }}</p>
+<img src="{{ exercice.picture }}" alt="">
+<p>{{ exercice.serie }}</p>
+<p>{{ exercice.repetition }}</p>
+<p>{{ exercice.temps }}</p>
+<p>{{ exercice.recuperation }}</p>
+{% endfor %}
+
+<h3>Ajouter des exercices</h3>
 
 {{ form_start(formExercice) }}
 {{ form_row(formExercice.name) }}
@@ -15,5 +36,10 @@
 {{ form_row(formExercice.recuperation) }}
 
 <button type="submit" class="btn">Ajouter</button>
+<a href="{{ path('show_workout', {'id': seance.id})}}">Retour à ma séance</a>
 {{ form_end(formExercice) }}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
 {% endblock %}

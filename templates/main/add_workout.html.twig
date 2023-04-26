@@ -30,25 +30,40 @@
                     </div>
                     {# {{ form_row(formSeance.categories) }} #}
                     {# , {'attr': {'class': 'form-check-label'}} #}
+
+                    {% for exercice in formSeance.exercices %}
+                    <div class="card p-4 mb-3 exercice-form">
+                        <div class="card-body">
+                            {{ form_row(exercice.name) }}
+                            {{ form_row(exercice.picture) }}
+                            {{ form_row(exercice.description)}}
+                            {{ form_row(exercice.serie) }}
+                            {{ form_row(exercice.repetition) }}
+                            {{ form_row(exercice.temps) }}
+                            {{ form_row(exercice.recuperation) }}
+                        </div>
+                        {% endfor %}
+                    </div>
+
                 </div>
+                {# <button type="submit" class="btn btn-primary mt-2">Ajouter un exercice</button> #}
+                <button type="submit" class="btn btn-primary mt-2" name="route" value="ajouter">Ajouter un
+                    exercice</button>
+                <button type="submit" class="btn btn-primary mt-2" name="route" value="finir">Finir ma séance</button>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
-        </div>
-        {{ form_end(formSeance) }}
-        <div class="card p-2 col-1">
-            <button id="add" class="btn btn-secondary my-3">+</button>
-            <button id="remove" class="btn btn-secondary my-3">-</button>
+            {{ form_end(formSeance) }}
+            <div class="card p-2 col-1">
+                <button id="add" class="btn btn-secondary my-3">+</button>
+                <button id="remove" class="btn btn-secondary my-3">-</button>
+            </div>
         </div>
     </div>
-</div>
-<div id="content">
+    <div id="content">
 
-</div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/ajout.js') }}"></script>
-{% endblock %}
-
+    {% block javascripts %}
+    {{ parent() }}
+    {% endblock %}

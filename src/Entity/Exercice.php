@@ -32,7 +32,7 @@ class Exercice
     #[ORM\Column(nullable: true)]
     private ?float $temps = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $recuperation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -138,4 +138,10 @@ class Exercice
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
 }
