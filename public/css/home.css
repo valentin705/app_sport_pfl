@@ -1,49 +1,6 @@
-#container {
-   display: flex;
-   flex-direction: row;
-   margin: 2%;
-   margin-top: 10%;
-}
-
-#profilBloc{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   width: 30%;
-   height: 100%;
-   background-color: #680000;
-   border-radius: 50px;
-}
-
-#filActuBloc {
- align-items: center;
-    justify-content: center;
-}
-
-
-#filActu {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   width: 800px;
-   background-color: #680000;
-   border-radius: 50px;
-   margin-left: 10%;
-   margin-bottom: 3%;
-   height: 300px;
-}
-
-#avatar {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
 #imgSeance {
-    width: 200px;
-    height: 200px;
+   width: 200px;
+   height: 200px;
 }
 
 #formActu {
@@ -79,4 +36,42 @@
    height: 50px;
 }
 
+.menu-div {
+   display: flex;
+   align-items: center;
+}
 
+.menu {
+   width: 50px;
+   text-align: center;
+   font-size: 0.8em;
+   border: none;
+   color: white;
+   background: none;
+}
+
+.menu>option {
+   background-color: #680000;
+}
+
+.ligne {
+   height: 3px;
+   width: 90%;
+   background-color: #680000;
+}
+
+.top-seance {
+   border-radius: 15px;
+   background: linear-gradient(#000000, #00000000);
+   min-height: 150px;
+}
+
+.top-seance-parent {
+   border-radius: 15px;
+   background-size: cover;
+}
+
+.seance-picture {
+   height: 100px;
+   width: 170px;
+}
