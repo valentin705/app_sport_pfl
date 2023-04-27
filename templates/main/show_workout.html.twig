@@ -2,50 +2,121 @@
 
 {% block title %} Seance : {{ seance.name }} {% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/show_workout.css') }}">
+{% endblock %}
 {% block body %}
 
-<img src="{{ seance.picture }}" alt="">
-<h1>Seance</h1> 
-{{ seance.likes | length}}
-<a href="{{ path('app_likes', {'id': seance.id}) }}">Like</a>
-<h2>{{ seance.name}} </h2>
-<p> {{ seance.description }} </p>
+<div class="container mt-6 d-flex">
+    <div class="row">
+        <div class="col-3">
+            <div class="card p-4 mb-3">
+                <div class="card-body d-flex flex-column align-items-center ">
+                    <div>
+                        <img src="{{ seance.user.picture }}" alt="" class="avatar">
+                        <h4 class="mt-2 text-center">{{ seance.user.username }}</h4>
+                    </div>
+                    <p class="description">{{ seance.user.description }}</p>
+                    <div>
+                        <a href="{{ path('user_profil', {'id': seance.user.id}) }}">profil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h5>Categories</h5>
-{% for categorie in seance.categories %}
-<p>{{ categorie.name }}</p>
-{% endfor %}
 
-{% for exercice in seance.exercices %}
-<img src="{{ exercice.picture }}" alt="">
-<p>Nom de la seance</p>
-{{ exercice.name }}
-<p>Description </p>
-{{ exercice.description }}
-<p>Series</p>
-{{ exercice.serie }}
-<p>Repetitions ou temps d'effort</p>
-{{ exercice.repetition }}
-{{ exercice.temps }}
-<p>Recuperation</p>
-{{ exercice.recuperation }}
-{% endfor %}
+        <div class="col">
 
-<h3> Commentaires </h3>
+            <h2 class="name-seance">{{ seance.name }}</h2>
+            <div class="card p-4 mb-3">
+                <div class="mx-5">
+                    <p class="date">{{ seance.createAt | date('d/m/Y') }}</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img class="seance-picture" src="{{ seance.picture }}" alt="">
+                    </div>
+                    <div class="col">
+                        <h5>Description :</h5>
+                        <p> {{ seance.description }} </p>
+                    </div>
+                    <div class="col">
+                        <h5>Categories :</h5>
+                        {% for categorie in seance.categories %}
+                        <p>{{ categorie.name }}</p>
+                        {% endfor %}
+                        <div class="d-flex flex-column align-items-end">
+                            <a href="{{ path('app_likes', {'id': seance.id}) }}">Like</a>
+                            {{ seance.likes | length}}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-{% for comment in seance.comments %}
+            <div class="card p-4 mb-3">
+                {% for exercice in seance.exercices %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <img class="seance-picture" src="{{ exercice.picture }}" alt="">
+                    </div>
+                    <div class="col">
+                        <p>{{ exercice.name }}</p>
+                        <h5>Description :</h5>
+                        <p> {{ exercice.description }} </p>
+                    </div>
+                    <div class="col">
+                        <p>Series : {{ exercice.serie }}</p>
+                        <p>Repetitions : {{ exercice.repetition }}</p>
+                        <p>Temps : {{ exercice.temps }}</p>
+                        <p>Recuperation : {{ exercice.recuperation}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-<p>{{ comment.contenu }}</p>
-<div>{{ comment.createdAt | date('d/m/Y H:i') }}
-par : {{ comment.user.username }}</div>
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{ app.user.picture }}" alt="" class="avatar avatar-com">
+                </div>
+                <div class="col">
+                    {{ form_start(formComment) }}
+                    <div class="form-contenu">{{ form_row(formComment.contenu) }} </div>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn">Ajouter</button>
+                </div>
+                {{ form_end(formComment) }}
+            </div>
 
-{% endfor %}
+            {% for comment in seance.comments %}
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{ seance.user.picture }}" alt="" class="avatar avatar-com">
+                </div>
 
-{{ form_start(formComment) }}
-{{ form_row(formComment.contenu) }}
+                <div class="col mb-3 p-1">
+                    <div class="card card-com">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="comment-user">{{ comment.user.username }}</h3>
+                            </div>
+                            <div class="col">
+                                <p class="date">{{ comment.createdAt | date('d/m/Y H:i') }}</p>
+                            </div>
+                        </div>
+                        <p class="comment-contenu">{{ comment.contenu }}</p>
+                    </div>
+                </div>
 
-<button type="submit" class="btn">Ajouter</button>
 
-{{ form_end(formComment) }}
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

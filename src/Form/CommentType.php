@@ -15,7 +15,8 @@ class CommentType extends AbstractType
             ->add('contenu', null, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Commentaire'
+                    'placeholder' => 'Commentaire',
+                    'class' => 'form-control mb-3 form-contenu'
                 ]
             ])
         ;

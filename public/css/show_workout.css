@@ -1,0 +1,29 @@
+.name-seance {
+    margin-left: 50px;
+}
+
+.comment-user {
+    margin-left: 50px;
+}
+
+.comment-contenu {
+    margin-left: 20px;
+}
+
+.comment-date {
+    margin-right: 20px;
+}
+
+.card-com {
+   background-color: rgb(64, 62, 62);
+}
+
+.avatar-com {
+    height: 60px;
+    width: 60px;
+
+}
+
+.form-contenu {
+    background-color: #191919;
+}

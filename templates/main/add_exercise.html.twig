@@ -8,36 +8,74 @@
 
 {% block body %}
 
+<div class="container mt-6">
+    <div class="row">
+        <div class="col-11">
 
-<h1>{{ exercice.seance.name }}</h1>
-<p>{{ exercice.seance.description }}</p>
-<img src="{{ exercice.seance.picture }}" alt="">
+            <div class="card p-4 mb-3">
+                <h2 class="mb-4 text-center">Seance : {{ exercice.seance.name }}</h2>
+                <div class="row">
+                    <div class="col">
+                        <img class="seance-picture mx-auto d-block" src="{{ exercice.seance.picture }}" alt="">
+                    </div>
+                    <div class="col">
+                        <h5>Description :</h5>
+                        <p>{{ exercice.seance.description }}</p>
+                    </div>
+                </div>
+            </div>
 
-<h2>Exercices</h2>
-{% for exercice in exercice.seance.exercices %}
-<h3>{{ exercice.name }}</h3>
-<p>{{ exercice.description }}</p>
-<img src="{{ exercice.picture }}" alt="">
-<p>{{ exercice.serie }}</p>
-<p>{{ exercice.repetition }}</p>
-<p>{{ exercice.temps }}</p>
-<p>{{ exercice.recuperation }}</p>
-{% endfor %}
+            <div class="card p-4 mb-3">
+                {% for exercice in exercice.seance.exercices %}
+                <h2 class="mb-4 text-center">Exercice : {{ exercice.name }}</h2>
+                <div class="row">
+                    <div class="col">
+                        <img class="seance-picture" src="{{ exercice.picture }}" alt="">
+                    </div>
+                    <div class="col">
+                        <h5>Description :</h5>
+                        <p>{{ exercice.description }}</p>
+                    </div>
+                    <div class="col">
+                        <h5>Series : {{ exercice.serie }}</h5>
+                        <h5>Repetitions : {{ exercice.repetition }}</h5>
+                        <h5>Temps : {{ exercice.temps }}</h5>
+                        <h5>Recuperation : {{ exercice.recuperation }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-<h3>Ajouter des exercices</h3>
+            <h5 class="mx-5">Ajouter un exercice :</h5>
+            <div class="card p-4 mb-3">
+                {{ form_start(formExercice) }}
+                {{ form_row(formExercice.name) }}
+                {{ form_row(formExercice.picture) }}
+                {{ form_row(formExercice.description)}}
+                {{ form_row(formExercice.serie) }}
+                {{ form_row(formExercice.repetition) }}
+                {{ form_row(formExercice.temps) }}
+                {{ form_row(formExercice.recuperation) }}
+            </div>
 
-{{ form_start(formExercice) }}
-{{ form_row(formExercice.name) }}
-{{ form_row(formExercice.picture) }}
-{{ form_row(formExercice.description)}}
-{{ form_row(formExercice.serie) }}
-{{ form_row(formExercice.repetition) }}
-{{ form_row(formExercice.temps) }}
-{{ form_row(formExercice.recuperation) }}
+            <div class="row d-flex">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary mt-2 w100">Ajouter un
+                        exercice</button>
+                </div>
+                <div class="col">
+                    <a href="{{ path('show_workout', {'id': seance.id})}}"> <button type="button"
+                            class="btn btn-primary mt-2 w100" name="route" value="finir">Finir ma
+                            séance</button></a>
+                </div>
+            </div>
 
-<button type="submit" class="btn">Ajouter</button>
-<a href="{{ path('show_workout', {'id': seance.id})}}">Retour à ma séance</a>
-{{ form_end(formExercice) }}
+
+            {{ form_end(formExercice) }}
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block javascripts %}
