@@ -3,7 +3,7 @@
         <select id="category" name="category" class="menu">
             {# <option value="{{ app.request.attributes.get('slug') }}" {{ app.request.attributes.get('slug')==''
                 ? ' selected' : '' }}>Filtrer par catégorie</option> #}
-            <option data-url="" {{ app.request.attributes.get('slug')=='Toutes les catégories' ? ' selected' : '' }}>
+            <option data-url="{{ path('home_list') }}">
                 Filtre
             </option>
             <option data-url="{{ path('home_list_by_category', {'slug': 'Cardio'}) }}" {{

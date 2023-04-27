@@ -39,6 +39,14 @@
                         {{ form_row(registrationForm.plainPassword, {
                         label: 'Mot de passe', 'attr' : {'placeholder' : 'Entrez votre mot de passe'}
                         }) }}
+                        <div class="d-flex">
+                            <p class="mt-1" style="font-size:0.8em;">Tu as déjà un compte ?
+                                <a class="login-register-link" href="{{ path('app_login') }}">Connecte toi
+                                    !</a>
+                            </p>
+                        </div>
+
+
                     </div>
                     <div class="mb-3">
                         {{ form_widget(registrationForm.agreeTerms, {'attr' : {'class' : "form-check-input"}}) }}

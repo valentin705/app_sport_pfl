@@ -47,6 +47,9 @@
                             <label for="inputPassword">Mot de passe</label>
                             <input type="password" name="password" id="inputPassword" class="form-control"
                                 autocomplete="current-password" placeholder="Entrez votre mot de passe" required>
+                            <p class="mt-1" style="font-size:0.8em;">Pas encore de compte ? <a
+                                    class="login-register-link" href="{{ path('app_register') }}">Inscris
+                                    toi !</a></p>
                         </div>
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -62,6 +65,7 @@
                             </label>
                         </div>
                         #}
+
 
                         <button class=" mb-5 btn btn-secondary" type="submit">
                             Connexion

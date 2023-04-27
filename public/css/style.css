@@ -113,6 +113,10 @@ a {
     object-fit: cover;
 }
 
+.login-register-link {
+    text-decoration: underline;
+}
+
 #absolute-text {
     font-size: 0.8em;
     height: 100%;

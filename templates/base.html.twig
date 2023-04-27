@@ -16,32 +16,8 @@
 </head>
 
 <body>
-    <!-- Main Navigation -->
-    {# <nav>
-        <div class="nav-left">
-            <div class="img-crop">
-                <img src="{{ asset('images/SportNetLogo.png')}}" alt="" id="logo">
-            </div>
-            {% if app.user is not null %}
-            <a href="{{ path('home_list') }}" class="nav-item">Acceuil</a>
-        </div>
-        <div>
-            <a href="{{ path('home_list') }}" class="nav-item">Mon profil</a>
-            <a href="{{ path('home_list') }}" class="nav-item">Recherche</a>
-            <a href="{{ path('app_logout') }}" class="nav-item">Déconnection</a>
-        </div>
-        {% else %}
-        <a href="{{ path('app_login') }}" class="nav-item">Acceuil</a>
-        </div>
-        <div>
-            <a href="{{ path('app_register') }}" class="nav-item">Inscription</a>
-            <a href="{{ path('app_login') }}" class="nav-item">Connexion</a>
-        </div>
-        {% endif %}
-    </nav> #}
-
-
-
+    {% if app.request.attributes.get('_route') != 'app_register' and
+    app.request.attributes.get('_route') != 'app_login' %}
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-lg">
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarText">
@@ -69,22 +45,11 @@
                         </li>
                     </ul>
                 </span>
-                {% else %}
-                </ul>
-                <span class="navbar-text">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a href="{{ path('app_register') }}" class="nav-link">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ path('app_login') }}" class="nav-link">Connexion</a>
-                        </li>
-                    </ul>
-                </span>
                 {% endif %}
             </div>
         </div>
     </nav>
+    {% endif %}
     <div id="screen"></div>
     {% block body %}{% endblock %}
     {% block javascripts %}
@@ -125,7 +90,6 @@
 
     </script>
     {% endblock %}
-    {# {{ render(controller('App\\Controller\\SearchController::searchBar')) }} #}
 </body>
 
 </html>
