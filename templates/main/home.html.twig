@@ -88,47 +88,29 @@
                     </div>
                 </div>
             </a>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="ml-2">Meilleurs séances :</h4>
-                {% for seance in seancesByLikes %}
-                <div>
-                    <a href="{{ path('show_workout', {'id': seance.id}) }}">
-                        <div class="top-seance-parent" style="background-image: url(' {{ seance.picture }}');">
-                            <div class="top-seance d-flex flex-column justify-content-between py-2 px-4 mt-4">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <p>{{ seance.user.username }}</p>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <p class="date">{{ seance.createAt | date('d/m/Y') }}</p>
-                                        <p>{{ seance.name }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    {# <div class="img-top-div position-absolute">
-                        <img class="img-top" src="{{ seance.picture }}" alt="">
-                    </div> #}
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="ml-2">Meilleurs séances :</h4>
+                    {% for seance in seancesByLikes %}
                     <div>
-                        <div class="top-seance-parent" style="background-image: url(' {{ seance.picture }}');">
-                            <div class="top-seance d-flex flex-column justify-content-between py-2 px-4 mt-4">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <p>{{ seance.user.username }}</p>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <p class="date">{{ seance.createAt | date('d/m/Y') }}</p>
-                                        <p>{{ seance.name }}</p>
+                        <a href="{{ path('show_workout', {'id': seance.id}) }}">
+                            <div class="top-seance-parent" style="background-image: url(' {{ seance.picture }}');">
+                                <div class="top-seance d-flex flex-column justify-content-between py-2 px-4 mt-4">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <p>{{ seance.user.username }}</p>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <p class="date">{{ seance.createAt | date('d/m/Y') }}</p>
+                                            <p>{{ seance.name }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="px-4 d-flex justify-content-between">
                             <div class="d-flex justify-content-between" style="width: 100%;">
                                 <div class="d-flex align-items-center">
