@@ -51,11 +51,16 @@ class SeanceExercicesType extends AbstractType
         ])
             ->add('exercices', CollectionType::class, [
                 'entry_type' => ExerciceType::class,
-                'entry_options' => ['label' => false],
+                'entry_options' => [
+                    'attr' => [
+                        'class' => 'form-control mb-3',
+                    ]
+                ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'label' => false,
                 ]);
     }
 

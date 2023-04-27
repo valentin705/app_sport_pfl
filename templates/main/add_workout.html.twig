@@ -14,7 +14,7 @@
         <div class="col-11">
             <h5 class="mx-5">Ajouter une seance :</h5>
             <div class="card p-4 mb-3">
-                <div class="card-body">
+                {# <div class="card-body"> #}
 
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
@@ -30,40 +30,44 @@
                     </div>
                     {# {{ form_row(formSeance.categories) }} #}
                     {# , {'attr': {'class': 'form-check-label'}} #}
-
-                    {% for exercice in formSeance.exercices %}
-                    <div class="card p-4 mb-3 exercice-form">
-                        <div class="card-body">
-                            {{ form_row(exercice.name) }}
-                            {{ form_row(exercice.picture) }}
-                            {{ form_row(exercice.description)}}
-                            {{ form_row(exercice.serie) }}
-                            {{ form_row(exercice.repetition) }}
-                            {{ form_row(exercice.temps) }}
-                            {{ form_row(exercice.recuperation) }}
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
-                {# <button type="submit" class="btn btn-primary mt-2">Ajouter un exercice</button> #}
-                <button type="submit" class="btn btn-primary mt-2" name="route" value="ajouter">Ajouter un
-                    exercice</button>
-                <button type="submit" class="btn btn-primary mt-2" name="route" value="finir">Finir ma séance</button>
+                    {#
+                </div> #}
             </div>
-            {{ form_end(formSeance) }}
-            <div class="card p-2 col-1">
-                <button id="add" class="btn btn-secondary my-3">+</button>
-                <button id="remove" class="btn btn-secondary my-3">-</button>
+
+            <h5 class="mx-5">Ajouter un exercice :</h5>
+            <div class="card p-4 mb-3">
+                {% for exercice in formSeance.exercices %}
+                {{ form_row(exercice.name) }}
+                {{ form_row(exercice.picture) }}
+                {{ form_row(exercice.description)}}
+                {{ form_row(exercice.serie) }}
+                {{ form_row(exercice.repetition) }}
+                {{ form_row(exercice.temps) }}
+                {{ form_row(exercice.recuperation) }}
+                {% endfor %}
             </div>
         </div>
-    </div>
-    <div id="content">
+
+        <div>
+            <button type="submit" class="btn btn-primary mt-2" name="route" value="ajouter">Ajouter un
+                exercice</button>
+            <button type="submit" class="btn btn-primary mt-2" name="route" value="finir">Finir ma séance</button>
+        </div>
 
     </div>
+    {{ form_end(formSeance) }}
+    {# <div class="card p-2 col-1">
+        <button id="add" class="btn btn-secondary my-3">+</button>
+        <button id="remove" class="btn btn-secondary my-3">-</button>
+    </div> #}
+</div>
+</div>
+<div id="content">
 
-    {% endblock %}
+</div>
 
-    {% block javascripts %}
-    {{ parent() }}
-    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}
