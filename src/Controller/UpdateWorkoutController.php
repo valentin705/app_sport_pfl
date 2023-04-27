@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\SeanceType;
+use App\Form\SeanceExercicesType;
 
 class UpdateWorkoutController extends AbstractController
 {
@@ -20,7 +21,7 @@ class UpdateWorkoutController extends AbstractController
         Request $request
     )
     {
-        $form = $this->createForm(SeanceType::class, $seance);
+        $form = $this->createForm(SeanceExercicesType::class, $seance);
 
         $form->handleRequest($request);
 
@@ -35,7 +36,8 @@ class UpdateWorkoutController extends AbstractController
 
         return $this->render('main/update_workout.html.twig', [
             'formSeance' => $form->createView(),
-            'editMode' => $seance->getId() !== null
+            'editMode' => $seance->getId() !== null,
+            'seance' => $seance,
         ]);
     }
 }

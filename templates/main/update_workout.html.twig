@@ -31,23 +31,41 @@
                     {# {{ form_row(formSeance.categories) }} #}
                     {# , {'attr': {'class': 'form-check-label'}} #}
                 </div>
+                
+                {% if seance.exercices is empty %}
+                <h2>Vous n'avez pas de séance</h2>
+                {% else %}
+                {% for exercice in formSeance.exercices %}
+                <div class="card p-4 mb-3 exercice-form">
+                    <div class="card-body">
+                        {{ form_row(exercice.name) }}
+                        {{ form_row(exercice.picture) }}
+                        {{ form_row(exercice.description)}}
+                        {{ form_row(exercice.serie) }}
+                        {{ form_row(exercice.repetition) }}
+                        {{ form_row(exercice.temps) }}
+                        {{ form_row(exercice.recuperation) }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
-        </div>
-        {{ form_end(formSeance) }}
-        <div class="card p-2 col-1">
-            <button id="add" class="btn btn-secondary my-3">+</button>
-            <button id="remove" class="btn btn-secondary my-3">-</button>
+            {{ form_end(formSeance) }}
+            <div class="card p-2 col-1">
+                <button id="add" class="btn btn-secondary my-3">+</button>
+                <button id="remove" class="btn btn-secondary my-3">-</button>
+            </div>
         </div>
     </div>
-</div>
-<div id="content">
+    <div id="content">
 
-</div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/ajout.js') }}"></script>
-{% endblock %}
+    {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ajout.js') }}"></script>
+    {% endblock %}
