@@ -12,7 +12,6 @@
     {% if seances is not empty %}
     <h1 class="text-center">Résultats de la recherche pour les séances</h1>
     {% for seance in seances %}
-<<<<<<< HEAD
     <div class="mb-3">
         <div class="card">
             <div class="card-body d-flex justify-content-between">
@@ -49,15 +48,6 @@
                 </div>
             </div>
         </div>
-=======
-    <div>
-        <img src="{{ seance.picture }}" alt="">
-        <h1>{{ seance.name }}</h1>
-        <p>{{ seance.description }} </p>
-        par {{ seance.user.username }} <br>
-        le {{ seance.createAt | date('d/m/Y') }}
-        <a href="{{ path('show_workout', {'id': seance.id}) }}">Voir</a>
->>>>>>> 4501fe71411332186c46fdd6034cb70155ad8043
     </div>
     {% endfor %}
     {% endif %}
@@ -65,7 +55,6 @@
     {% if users is not empty %}
     <h1 class="text-center">Résultats de la recherche pour les utilisateurs</h1>
     {% for user in users %}
-<<<<<<< HEAD
     <div class="row">
         <div class="card p-4 mb-3">
             <div class="card-body d-flex justify-content-around">
@@ -89,13 +78,6 @@
                     </svg></a> #}
             </div>
         </div>
-=======
-    <div>
-        <img src="{{ user.picture}}" alt="" class="avatar">
-        <h1>{{ user.username }}</h1>
-        <p>{{ user.description }} </p>
-        par {{ user.username }}
->>>>>>> 4501fe71411332186c46fdd6034cb70155ad8043
     </div>
     {% endfor %}
     {% endif %}
