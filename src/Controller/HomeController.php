@@ -42,7 +42,6 @@ class HomeController extends AbstractController
             'seances' => $seances,
             'seancesByLikes' => $seancesByLikes,
             'categories' => $categories,
-
         ]);
     }
 
@@ -60,7 +59,6 @@ class HomeController extends AbstractController
             'seances' => $seances,
             'seancesByLikes' => $seancesByLikes,
             'categories' => $categories,
-
         ]);
     }
 }

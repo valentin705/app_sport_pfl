@@ -39,7 +39,7 @@ class SeanceRepository extends ServiceEntityRepository
         }
     }
 
-        public function findByName(string $query)
+    public function findByName(string $query)
     {
         $qb = $this->createQueryBuilder('p');
         $qb
@@ -52,66 +52,64 @@ class SeanceRepository extends ServiceEntityRepository
                 )
             )
             ->setParameter('query', '%' . $query . '%')
-            ->orderBy('p.createdAt', 'DESC')
-        ;
+            ->orderBy('p.createdAt', 'DESC');
         return $qb
             ->getQuery()
             ->getResult();
     }
 
-  public function createdOrderByLikesQueryBuilder()
-{
-    $qb = $this->createQueryBuilder('p');
-    $qb
-        ->leftJoin('p.likes', 'l') // Jointure avec la relation likes
-        ->groupBy('p.id') // Groupement par l'ID de la séance
-        ->orderBy('COUNT(l.id)', 'DESC') // Tri par le nombre de likes (le COUNT() de l'ID des likes)
-        ->setMaxResults(3);
+    public function createdOrderByLikesQueryBuilder()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->leftJoin('p.likes', 'l') // Jointure avec la relation likes
+            ->groupBy('p.id') // Groupement par l'ID de la séance
+            ->orderBy('COUNT(l.id)', 'DESC') // Tri par le nombre de likes (le COUNT() de l'ID des likes)
+            ->setMaxResults(3);
 
-    return $qb
-        ->getQuery()
-        ->getResult();
-}
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 
-// filtre par catégorie avec un slug
-public function findByCategory($category)
-{
-    $qb = $this->createQueryBuilder('p');
-    $qb
-        ->leftJoin('p.categories', 'c')
-        ->where('c.name = :category')
-        ->setParameter('category', $category)
-        ->orderBy('p.createdAt', 'DESC')
-    ;
+    // filtre par catégorie avec un slug
+    public function findByCategory($category)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->leftJoin('p.categories', 'c')
+            ->where('c.name = :category')
+            ->setParameter('category', $category)
+            ->orderBy('p.createdAt', 'DESC');
 
-    return $qb
-        ->getQuery()
-        ->getResult();
-}
- 
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 
-//    /**
-//     * @return Seance[] Returns an array of Seance objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Seance
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Seance[] Returns an array of Seance objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('s.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Seance
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
