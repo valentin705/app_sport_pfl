@@ -35,7 +35,10 @@
     <div class="row gx-5 mt-2">
         <div class="col-9 mb-3">
             <div class="row">
-                <h5 class="px-5">Dernieres séances :</h5>
+                <div class="d-flex justify-content-between">
+                    <h5 class="px-5">Dernieres séances :</h5>
+                    <h5 class="px-5">Nombre de séances : {{ app.user.seances | length}}</h5>
+                </div>
                 {% for seance in seances %}
                 <div class="mb-3">
                     <div class="card">

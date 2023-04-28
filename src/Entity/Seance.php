@@ -28,7 +28,7 @@ class Seance
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'seance')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
     private Collection $comments;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -40,7 +40,7 @@ class Seance
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Likes::class)]
+    #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Likes::class, cascade: ['persist', 'remove'])]
     private Collection $likes;
 
     public function __construct()

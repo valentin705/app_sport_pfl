@@ -80,17 +80,6 @@ class ExerciceType extends AbstractType
                     'class' => 'form-control mb-3',
                 ]
             ])
-            // ->add('exercices', CollectionType::class, [
-            //     'entry_type' => ExerciceType::class,
-            //     'entry_options' => ['label' => false],
-            //     'allow_add' => true,
-            // ]);
-            // ->add('ajouter', ButtonType::class, [ // Ajouter un bouton "Ajouter un exercice supplémentaire"
-            //     'label' => 'Ajouter un exercice supplémentaire',
-            //     'attr' => [
-            //         'class' => 'btn btn-primary', // Classe CSS du bouton
-            //     ],
-            // ]);
         ;
     }
 

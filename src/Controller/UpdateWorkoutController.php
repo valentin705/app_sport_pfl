@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Exercice;
 use App\Entity\Seance;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +52,7 @@ class UpdateWorkoutController extends AbstractController
     }
 
     #[Route('/main/update_workout/{id}/delete', name: 'delete_workout')]
-    public function delete(
+    public function deleteWorkout(
         Seance $seance,
         EntityManagerInterface $manager
     )
@@ -58,6 +60,21 @@ class UpdateWorkoutController extends AbstractController
         $manager->remove($seance);
         $manager->flush();
 
-        return $this->redirectToRoute('main/update_workout.html.twig');
+        return $this->redirectToRoute('home_list');
+    }
+    
+    #[Route('/main/update_workout/{id}/delete_exercise/{exercice}', name: 'delete_exercise')]
+    public function deleteExercise(
+        Seance $seance,
+        Exercice $exercice,
+        EntityManagerInterface $manager,
+    )
+    {
+        // $seance->removeExercice($exercice);
+        $manager->remove($exercice);
+        $manager->persist($seance);
+        $manager->flush();
+    
+        return $this->redirectToRoute('update_workout', ['id' => $seance->getId()]);
     }
 }

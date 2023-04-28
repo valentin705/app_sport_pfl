@@ -15,7 +15,11 @@
             <h5 class="mx-5">Modifier votre seance :</h5>
             <div class="card p-4 mb-3">
                 <div class="card-body">
-                    {# <a href="{{ path('delete_workout', {'id': seance.id})}}">Supprimer</a> #}
+                    <div class=" d-flex justify-content-end">
+                        <a href="{{ path('delete_workout', {'id': seance.id}) }}" class="btn btn-dark btn-sm">
+                            Supprimer la séance
+                        </a>
+                    </div>
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
                     {{ form_row(formSeance.picture) }}
@@ -33,11 +37,16 @@
                 </div>
             </div>
             <h5 class="mx-5">Modifier vos exercices :</h5>
-            {% if seance.exercices is empty %} <h2>Vous n'avez pas de séance</h2>
+            {% if seance.exercices is empty %} <h2>Vous n'avez pas d'exercices</h2>
             {% else %}
             {% for exercice in formSeance.exercices %}
             <div class="card p-4 mb-3 exercice-form">
                 <div class="card-body">
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ path('delete_exercise', {'id': seance.id, 'exercice': exercice.vars.value.id}) }}" class="btn btn-dark btn-sm">
+                            Supprimer l'exercice
+                        </a>
+                    </div>
                     {{ form_row(exercice.name) }}
                     {{ form_row(exercice.picture) }}
                     {{ form_row(exercice.description)}}
@@ -56,7 +65,8 @@
                         exercice</button>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="modifier">Valider la modification</button>
+                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="modifier">Valider la
+                        modification</button>
                 </div>
             </div>
             {{ form_end(formSeance) }}
