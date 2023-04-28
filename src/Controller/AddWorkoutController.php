@@ -57,8 +57,6 @@ class AddWorkoutController extends AbstractController
     
         }
 
-
-
         return $this->render('main/add_workout.html.twig', [
             'formSeance' => $form->createView(),
             'editMode' => $seance->getId() !== null,

@@ -20,7 +20,7 @@ class UserProfilVisitedController extends AbstractController
         UserRepository $userRepository
     ): Response
     {
-        $user = $userRepository->findOneByUsername($id);
+        $user = $userRepository->findOneById($id);
 
         if (!$user) {
             throw $this->createNotFoundException('User not found');

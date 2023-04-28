@@ -31,7 +31,15 @@ class UpdateWorkoutController extends AbstractController
 
             $manager->flush();
 
-            return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
+            // return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
+
+            if ($request->request->get('route') === 'ajouter') {
+                // Logique pour la route 'ajouter'
+                return $this->redirectToRoute('add_exercise', ['id' => $seance->getId()]);
+            } elseif ($request->request->get('route') === 'modifier') {
+                // Logique pour la route 'finir'
+                return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
+            }
         }
 
         return $this->render('main/update_workout.html.twig', [
@@ -39,5 +47,17 @@ class UpdateWorkoutController extends AbstractController
             'editMode' => $seance->getId() !== null,
             'seance' => $seance,
         ]);
+    }
+
+    #[Route('/main/update_workout/{id}/delete', name: 'delete_workout')]
+    public function delete(
+        Seance $seance,
+        EntityManagerInterface $manager
+    )
+    {
+        $manager->remove($seance);
+        $manager->flush();
+
+        return $this->redirectToRoute('main/update_workout.html.twig');
     }
 }

@@ -16,8 +16,8 @@ class CommentType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Commentaire',
-                    'class' => 'form-control mb-3 form-contenu'
-                ]
+                    'class' => 'mb-3 form-contenu'
+                ],
             ])
         ;
     }

@@ -26,4 +26,15 @@
 
 .form-contenu {
     background-color: #191919;
+    color: white;
+    height: 70px;
+    width: 100%;
+    border-radius: 25px;
+    resize: none;
+    padding: 10px;
 }
+
+.logoSend {
+    display: flex;
+}
+

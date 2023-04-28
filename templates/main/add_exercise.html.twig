@@ -60,16 +60,14 @@
 
             <div class="row d-flex">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary mt-2 w100">Ajouter un
+                    <button type="submit" class="btn btn-primary mt-2 w100">Ajouter cet
                         exercice</button>
                 </div>
                 <div class="col">
                     <a href="{{ path('show_workout', {'id': seance.id})}}"> <button type="button"
-                            class="btn btn-primary mt-2 w100" name="route" value="finir">Finir ma
-                            séance</button></a>
+                            class="btn btn-primary mt-2 w100" name="route" value="finir">Terminer la séance</button></a>
                 </div>
             </div>
-
 
             {{ form_end(formExercice) }}
         </div>

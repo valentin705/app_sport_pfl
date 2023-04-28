@@ -15,7 +15,7 @@
             <h5 class="mx-5">Modifier votre seance :</h5>
             <div class="card p-4 mb-3">
                 <div class="card-body">
-
+                    {# <a href="{{ path('delete_workout', {'id': seance.id})}}">Supprimer</a> #}
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
                     {{ form_row(formSeance.picture) }}
@@ -31,41 +31,46 @@
                     {# {{ form_row(formSeance.categories) }} #}
                     {# , {'attr': {'class': 'form-check-label'}} #}
                 </div>
-                
-                {% if seance.exercices is empty %}
-                <h2>Vous n'avez pas de séance</h2>
-                {% else %}
-                {% for exercice in formSeance.exercices %}
-                <div class="card p-4 mb-3 exercice-form">
-                    <div class="card-body">
-                        {{ form_row(exercice.name) }}
-                        {{ form_row(exercice.picture) }}
-                        {{ form_row(exercice.description)}}
-                        {{ form_row(exercice.serie) }}
-                        {{ form_row(exercice.repetition) }}
-                        {{ form_row(exercice.temps) }}
-                        {{ form_row(exercice.recuperation) }}
-                    </div>
+            </div>
+            <h5 class="mx-5">Modifier vos exercices :</h5>
+            {% if seance.exercices is empty %} <h2>Vous n'avez pas de séance</h2>
+            {% else %}
+            {% for exercice in formSeance.exercices %}
+            <div class="card p-4 mb-3 exercice-form">
+                <div class="card-body">
+                    {{ form_row(exercice.name) }}
+                    {{ form_row(exercice.picture) }}
+                    {{ form_row(exercice.description)}}
+                    {{ form_row(exercice.serie) }}
+                    {{ form_row(exercice.repetition) }}
+                    {{ form_row(exercice.temps) }}
+                    {{ form_row(exercice.recuperation) }}
                 </div>
-                {% endfor %}
-                {% endif %}
+            </div>
+            {% endfor %}
+            {% endif %}
 
-                <button type="submit" class="btn btn-primary mt-2">Ajouter</button>
+            <div class="row d-flex">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
+                        exercice</button>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="modifier">Valider la modification</button>
+                </div>
             </div>
             {{ form_end(formSeance) }}
-            <div class="card p-2 col-1">
-                <button id="add" class="btn btn-secondary my-3">+</button>
-                <button id="remove" class="btn btn-secondary my-3">-</button>
-            </div>
+
         </div>
     </div>
-    <div id="content">
+</div>
+<div id="content">
 
-    </div>
+</div>
 
-    {% endblock %}
+{% endblock %}
 
-    {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/ajout.js') }}"></script>
-    {% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/ajout.js') }}"></script>
+{% endblock %}
