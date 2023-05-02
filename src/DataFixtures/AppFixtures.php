@@ -11,6 +11,7 @@ use App\Entity\Exercice;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Likes;
+use App\Repository\CategoryRepository;
 
 class AppFixtures extends Fixture
 {
@@ -106,6 +107,14 @@ class AppFixtures extends Fixture
         $manager->persist($user8);
 
         /////////////////////////// SEANCE 1 ///////////////////////////
+        // $categoryRepository = $manager->getRepository(Category::class);
+        // $categorC = $categoryRepository->findOneBy(['name' => 'Cardio']);
+        // $categoryRm = $categoryRepository->findOneBy(['name' => 'Renforcement musculaire']);
+        // $categoryS = $categoryRepository->findOneBy(['name' => 'Stretching']);
+        // $categoryUb = $categoryRepository->findOneBy(['name' => 'Upper body']);
+        // $categoryLb = $categoryRepository->findOneBy(['name' => 'Lower body']);
+        // $categoryFb = $categoryRepository->findOneBy(['name' => 'Full body']);
+
         $seance = new Seance();
         $seance->setUser($user);
         $seance->setName('Séance de musculation');
@@ -114,13 +123,9 @@ class AppFixtures extends Fixture
         $seance->setCreateAt(new \DateTime('2021-06-01'));
 
         $category = new Category();
-        $category->setName('Upper body');
+        $category->setName('Cardio');
         $category->addSeance($seance);
         $seance->addCategory($category);
-        $category1 = new Category();
-        $category1->setName('Renforcement musculaire');
-        $category1->addSeance($seance);
-        $seance->addCategory($category1);
 
         $exercice = new Exercice();
         $exercice->setName('Développé couché');
@@ -163,7 +168,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($seance);
         $manager->persist($category);
-        $manager->persist($category1);
         $manager->persist($exercice);
         $manager->persist($exercice1);
         $manager->persist($exercice2);
@@ -180,12 +184,9 @@ class AppFixtures extends Fixture
         $seance2->setCreateAt(new \DateTime('2023-03-05'));
 
         $category2 = new Category();
-        $category2->setName('Cardio');
+        $category2->setName('Renforcement musculaire');
         $category2->addSeance($seance2);
         $seance2->addCategory($category2);
-        $category3 = new Category();
-        $category3->setName('Upper body');
-        $category3->addSeance($seance2);
 
         $exercice3 = new Exercice();
         $exercice3->setName('Abdos Crunch');
@@ -224,7 +225,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($seance2);
         $manager->persist($category2);
-        $manager->persist($category3);
         $manager->persist($exercice3);
         $manager->persist($exercice4);
         $manager->persist($comment2);
@@ -249,14 +249,10 @@ class AppFixtures extends Fixture
         $like5->setUser($user);
         $like5->setSeance($seance3);
 
-
-        $category4 = new Category();
-        $category4->setName('Lower body');
-        $category4->addSeance($seance3);
-        $seance3->addCategory($category4);
-        $category5 = new Category();
-        $category5->setName('Renforcement musculaire');
-        $category5->addSeance($seance3);
+        $category3 = new Category();
+        $category3->setName('Stretching');
+        $category3->addSeance($seance3);
+        $seance3->addCategory($category3);
 
         $exercice5 = new Exercice();
         $exercice5->setName('Squat');
@@ -294,8 +290,7 @@ class AppFixtures extends Fixture
         $comment7->setCreatedAt(new \DateTime('2023-03-08, 08:35:00'));
 
         $manager->persist($seance3);
-        $manager->persist($category4);
-        $manager->persist($category5);
+        $manager->persist($category3);
         $manager->persist($exercice5);
         $manager->persist($exercice6);
         $manager->persist($comment5);
@@ -321,13 +316,9 @@ class AppFixtures extends Fixture
         $like7->setUser($user3);
         $like7->setSeance($seance4);
         
-        $category6 = new Category();
-        $category6->setName('Cardio');
-        $category6->addSeance($seance4);
-        $seance4->addCategory($category6);
+     
         
         $manager->persist($seance4);
-        $manager->persist($category6);
         $manager->persist($like6);
         $manager->persist($like7);
 
@@ -365,18 +356,14 @@ class AppFixtures extends Fixture
         $exercice9->setSeance($seance5);
         $seance5->addExercice($exercice9);
 
-        $category7 = new Category();    
-        $category7->setName('Cardio');
-        $category7->addSeance($seance5);
-        $seance5->addCategory($category7);
-        $category8 = new Category();
-        $category8->setName('Renforcement musculaire');
-        $category8->addSeance($seance5);
-        $seance5->addCategory($category8);
-        $category9 = new Category();
-        $category9->setName('Full body');
-        $category9->addSeance($seance5);
-        $seance5->addCategory($category9);
+        $category4 = new Category();
+        $category4->setName('Upper body');
+        $category4->addSeance($seance5);
+        $seance4->addCategory($category4);
+        $category5 = new Category();
+        $category5->setName('Lower body');
+        $category5->addSeance($seance5);
+        $seance5->addCategory($category5);
 
         $comment5 = new Comment();
         $comment5->setUser($user);
@@ -404,9 +391,8 @@ class AppFixtures extends Fixture
         $manager->persist($exercice7);
         $manager->persist($exercice8);
         $manager->persist($exercice9);
-        $manager->persist($category7);
-        $manager->persist($category8);
-        $manager->persist($category9);
+        $manager->persist($category4);
+        $manager->persist($category5);
         $manager->persist($comment5);
         $manager->persist($comment6);
         $manager->persist($like8);
@@ -421,13 +407,10 @@ class AppFixtures extends Fixture
         $seance6->setPicture('https://medias.lequipe.fr/img-photo-jpg/muscles-dos-epaules/1500000000899363/123:63,1133:736-1200-800-75/774a0.jpg');
         $seance6->setCreateAt(new \DateTime('2023-04-07'));
 
-        $category10 = new Category();
-        $category10->setName('Renforcement musculaire');
-        $category10->addSeance($seance6);
-        $seance6->addCategory($category10);
-        $category11 = new Category();
-        $category11->setName('Upper body');
-
+        $category6 = new Category();
+        $category6->setName('Full body');
+        $category6->addSeance($seance6);
+        $seance6->addCategory($category6);
 
         $exercice10 = new Exercice();
         $exercice10->setName('Traction');
@@ -441,9 +424,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($seance6);
         $manager->persist($exercice10);
-        $manager->persist($category10);
-        $manager->persist($category11);
-
+        $manager->persist($category6);
 
         $manager->flush();
 
