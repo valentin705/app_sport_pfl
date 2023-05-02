@@ -21,8 +21,12 @@ class UpdateWorkoutController extends AbstractController
         Seance $seance,
         EntityManagerInterface $manager,
         Request $request
-    )
-    {
+    ) {
+        // Verification user avant action
+        if ($this->VerifyUser($seance)) {
+            return;
+        }
+
         $form = $this->createForm(SeanceExercicesType::class, $seance);
 
         $form->handleRequest($request);
@@ -55,26 +59,42 @@ class UpdateWorkoutController extends AbstractController
     public function deleteWorkout(
         Seance $seance,
         EntityManagerInterface $manager
-    )
-    {
+    ) {
+        // Verification user avant action
+        if ($this->VerifyUser($seance)) {
+            return;
+        }
+
         $manager->remove($seance);
         $manager->flush();
 
         return $this->redirectToRoute('home_list');
     }
-    
+
     #[Route('/main/update_workout/{id}/delete_exercise/{exercice}', name: 'delete_exercise')]
     public function deleteExercise(
         Seance $seance,
         Exercice $exercice,
         EntityManagerInterface $manager,
-    )
-    {
+    ) {
+        // Verification user avant action
+        if ($this->VerifyUser($seance)) {
+            return;
+        }
+
         // $seance->removeExercice($exercice);
         $manager->remove($exercice);
         $manager->persist($seance);
         $manager->flush();
-    
+
         return $this->redirectToRoute('update_workout', ['id' => $seance->getId()]);
+    }
+
+    public function VerifyUser($seance)
+    {
+        $user = $this->getUser();
+        if ($user != $seance->getUser()) {
+            return $this->redirectToRoute('home_list')->send();
+        }
     }
 }
