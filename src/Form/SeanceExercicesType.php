@@ -21,6 +21,7 @@ class SeanceExercicesType extends AbstractType
         ->add('name', null, [
             'attr' => [
                 'class' => 'form-control mb-3',
+                'placeholder' => 'Nom de ta séance'
             ]
         ])
         ->add('picture', null, [

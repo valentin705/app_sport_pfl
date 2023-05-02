@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SeanceRepository::class)]
 class Seance
@@ -16,13 +17,21 @@ class Seance
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner un nom pour votre séance')]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'Le nom de la séance doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le nom de la séance ne peut pas dépasser {{ limit }} caractères'
+    )]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'seances')]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length: 500, type: Types::TEXT, nullable: true)]
+    #[Assert\Length(max: 500, maxMessage: 'La description ne peut pas dépasser {{ limit }} caractères')]
     private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'seance')]
@@ -238,5 +247,4 @@ class Seance
     {
         return $this->name;
     }
-
 }

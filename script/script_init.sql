@@ -1,4 +1,4 @@
-USE app_sport_test_pfl;
+USE app_sport_pfl;
 
 INSERT INTO category(name) VALUES('Cardio');
 INSERT INTO category(name) VALUES('Renforcement musculaire');

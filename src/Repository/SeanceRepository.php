@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Seance;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -87,6 +88,13 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findSeancesOrderedByIdDesc()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Seance[] Returns an array of Seance objects

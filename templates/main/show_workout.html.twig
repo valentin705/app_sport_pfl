@@ -71,8 +71,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card p-4 mb-3">
+            {% if seance.exercices is empty %} <h2>Aucun exercices pour cette séance</h2>
+            {% else %}
+            <div class="card p-4 mb-3"> 
                 {% for exercice in seance.exercices %}
                 <div class="row mb-3">
                     <div class="col">
@@ -91,6 +92,7 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
 
             <div class="row my-3">

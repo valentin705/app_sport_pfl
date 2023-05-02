@@ -13,6 +13,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CategoryRepository;
 use App\Form\CategoryType;
 use App\Repository\UserRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+
 
 class HomeController extends AbstractController
 {
@@ -35,7 +39,7 @@ class HomeController extends AbstractController
     ): Response {
 
         $categories = $categoryRepository->findAll();
-        $seances = $seanceRepository->findBy([], ['id' => 'DESC']);
+        $seances = $seanceRepository->findSeancesOrderedByIdDesc();
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
 
         return $this->render('main/home.html.twig', [

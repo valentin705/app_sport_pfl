@@ -24,6 +24,7 @@ class ExerciceType extends AbstractType
                 'label' => 'Nom de l\'exercice',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'Nom de l\'exercice'
                 ]
             ])
             ->add('picture', null, [
@@ -46,38 +47,29 @@ class ExerciceType extends AbstractType
                 'label' => 'Nombre de série',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'exemple "4"'
                 ]
             ])
-        //         ->add('choice', ChoiceType::class, [
-        //     'label' => 'Choix',
-        //     'choices' => [
-        //         'Nombre de répétitions' => 'repetition',
-        //         'Temps d\'exécution' => 'temps',
-        //     ],
-        //     'expanded' => true,
-        //     'multiple' => false,
-        //     'required' => true,
-        // ])
-        // ->add('value', null, [
-        //     'label' => 'Valeur',
-        //     'required' => true,
-        // ])
+        
             ->add('repetition', null, [
                 'label' => 'Nombre de répétition',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'exemple "12"'
                 ]
             ])
             ->add('temps', null, [
-                'label' => 'Temps d\'exécution',
+                'label' => 'Temps d\'exécution (en secondes)',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'exemple "30"'
                 ]
             ])
             ->add('recuperation', null, [
-                'label' => 'Temps de récupération',
+                'label' => 'Temps de récupération (en secondes)',
                 'attr' => [
                     'class' => 'form-control mb-3',
+                    'placeholder' => 'exemple "90"'
                 ]
             ])
         ;
