@@ -26,7 +26,6 @@ class CategoryType extends AbstractType
             'label' => 'Submit',
             'attr' => ['class' => 'btn btn-primary'],
         ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
