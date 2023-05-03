@@ -119,7 +119,7 @@
                 {{ form_end(formComment) }}
             </div>
 
-            {% for comment in seance.comments |sort((a, b) => b.createdAt <=> a.createdAt) %}
+            {% for comment in seance.comments %}
             <div class="d-flex mb-3 justify-content-between">
                 <img src="{{ comment.user.picture }}" alt="" class="avatar avatar-2 ">
                 <div class="w-100">
