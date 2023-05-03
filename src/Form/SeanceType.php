@@ -13,6 +13,7 @@ use App\Entity\Category;
 class SeanceType extends AbstractType
 {
 
+     ///////////////////////////PLUS UTILISE POUR LE MOMENT///////////////////////////////
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

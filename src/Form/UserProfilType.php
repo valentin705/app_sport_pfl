@@ -7,6 +7,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+
 class UserProfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -17,20 +21,66 @@ class UserProfilType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Email'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez un email.',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre email doit faire au minimum {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/',
+                        'message' => 'Votre email doit être valide'
+                    ])
+                ],
             ])
-            // ->add('password', null, [
-            //     'label' => 'Mettre à jour votre Mot de passe',
+            // ->add('plainPassword', PasswordType::class, [
+            //     // instead of being set onto the object directly,
+            //     // this is read and encoded in the controller
+            //     'mapped' => false,
             //     'attr' => [
-            //         'placeholder' => 'Mot de passe'
-            //     ]
+            //         'autocomplete' => 'new-password',
+            //         'class' => 'form-control'
+            //     ],
+            //     'constraints' => [
+            //         new NotBlank([
+            //             'message' => 'Entrez un mot de passe.',
+            //         ]),
+            //         new Length([
+            //             'min' => 6,
+            //             // 'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères.',
+            //             // max length allowed by Symfony for security reasons
+            //             'max' => 4096,
+            //         ]),
+            //         new Regex([
+            //             'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/',
+            //             'message' => 'Votre mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule et un chiffre'
+            //         ])
+            //     ],
             // ])
             ->add('username', null, [
                 'label' => 'Mettre à jour votre Pseudo',
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Pseudo'
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez un nom d\'utilisateur.',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre nom d\'utilisateur doit faire au minimum {{ limit }} caractères.',
+                        'max' => 60,
+                        'maxMessage' => 'Votre nom d\'utilisateur doit faire au maximum {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9_-]+$/',
+                        'message' => 'Votre nom d\'utilisateur ne doit contenir que des lettres, des chiffres, des tirets et des underscores'
+                    ])
+                ],
             ])
             ->add('description', null, [
                 'label' => 'Description',
@@ -39,6 +89,14 @@ class UserProfilType extends AbstractType
                     'placeholder' => 'Parle nous de toi !',
                     'rows' => '4',
                     'cols' => '10'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'max' => 500,
+                        'minMessage' => 'Votre description doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre description ne doit pas dépasser {{ limit }} caractères'
+                    ]),
                 ]
             ])
             ->add('sports', null, [
@@ -46,6 +104,14 @@ class UserProfilType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Sport'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 2,
+                        'max' => 255,
+                        'minMessage' => 'Votre description doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre description ne doit pas dépasser {{ limit }} caractères'
+                    ]),
                 ]
             ])
             ->add('picture', null, [

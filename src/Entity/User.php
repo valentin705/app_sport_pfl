@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet email')]
@@ -23,13 +22,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    // #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
-    // #[Assert\Email(message: 'Veuillez renseigner un email valide')]
-    // #[Assert\Length(max: 255, maxMessage: 'L\'email ne peut pas dépasser {{ limit }} caractères')]
-    // #[Assert\Regex(
-    //     pattern: '/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$/',
-    //     message: 'Veuillez renseigner un email valide'
-    // )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -39,12 +31,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column(nullable: false)]
-    // #[Assert\NotBlank(message: 'Veuillez renseigner un mot de passe')]
-    // #[Assert\Length(min: 6, minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères')]
-    // #[Assert\Regex(
-    //     pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$/',
-    //     message: 'Le mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial'
-    // )]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Seance::class)]
@@ -54,25 +40,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\Column(length: 60, unique: true)]
-    // #[Assert\NotBlank(message: 'Veuillez renseigner un nom d\'utilisateur')]
-    // #[Assert\Length(
-    //     max: 60,
-    //     min: 3,
-    //     minMessage: 'Le nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
-    //     maxMessage: 'Le nom d\'utilisateur ne peut pas dépasser {{ limit }} caractères'
-    // )]
-    // #[Assert\Regex(pattern: '/^[a-zA-Z0-9\s]+$/', message: 'Le nom d\'utilisateur ne peut contenir que des lettres et des chiffres')]
     private ?string $username = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(length: 500, type: Types::TEXT, nullable: true)]
-    #[Assert\Length(max: 500, maxMessage: 'La description ne peut pas dépasser {{ limit }} caractères')]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\Length(max: 500, maxMessage: 'Les sports ne peuvent pas dépasser {{ limit }} caractères')]
     private ?string $sports = null;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -7,13 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
-
-
-///////////////////////////A FAIRE  : Modifier le form pour repetition/temps///////////////////////////////
-// use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class ExerciceType extends AbstractType
 {
@@ -25,6 +21,17 @@ class ExerciceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Nom de l\'exercice'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'max' => 180,
+                        'minMessage' => 'Votre nom doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre nom ne doit pas dépasser {{ limit }} caractères'
+                    ]),
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner un nom d\'exercice'
+                    ])
                 ]
             ])
             ->add('picture', null, [
@@ -41,6 +48,14 @@ class ExerciceType extends AbstractType
                     'placeholder' => 'Description de l\'exercice',
                     'rows' => '4',
                     'cols' => '10'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'max' => 500,
+                        'minMessage' => 'Votre description doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre description ne doit pas dépasser {{ limit }} caractères'
+                    ]),
                 ]
             ])
             ->add('serie', null, [
@@ -48,14 +63,38 @@ class ExerciceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'exemple "4"'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez renseigner un nombre de répétition'
+                    ]),
+                    new Length([
+                        'min' => 1,
+                        'max' => 5,
+                        'minMessage' => 'Votre nombre de répétition doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre nombre de répétition ne doit pas dépasser {{ limit }} caractères'
+                    ]),
+                    new Positive([
+                        'message' => 'Veuillez renseigner un nombre positif'
+                    ])
                 ]
             ])
-        
             ->add('repetition', null, [
                 'label' => 'Nombre de répétition',
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'exemple "12"'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 1,
+                        'max' => 5,
+                        'minMessage' => 'Votre nombre de répétition doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre nombre de répétition ne doit pas dépasser {{ limit }} caractères'
+                    ]),
+                    new Positive([
+                        'message' => 'Veuillez renseigner un nombre positif'
+                    ])
                 ]
             ])
             ->add('temps', null, [
@@ -63,6 +102,17 @@ class ExerciceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'exemple "30"'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 1,
+                        'max' => 5,
+                        'minMessage' => 'Votre temps d\'exécution doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre temps d\'exécution ne doit pas dépasser {{ limit }} caractères'
+                    ]),
+                    new Positive([
+                        'message' => 'Veuillez renseigner un nombre positif'
+                    ])
                 ]
             ])
             ->add('recuperation', null, [
@@ -70,9 +120,19 @@ class ExerciceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'exemple "90"'
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 1,
+                        'max' => 5,
+                        'minMessage' => 'Votre temps de récupération doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre temps de récupération ne doit pas dépasser {{ limit }} caractères'
+                    ]),
+                    new Positive([
+                        'message' => 'Veuillez renseigner un nombre positif'
+                    ])
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

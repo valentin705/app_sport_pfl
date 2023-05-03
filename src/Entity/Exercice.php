@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\ExerciceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExerciceRepository::class)]
 class Exercice
@@ -16,52 +15,27 @@ class Exercice
     private ?int $id = null;
 
     #[ORM\Column(length: 180, nullable: false)]
-    #[Assert\Length(min: 3, max: 180,
-        minMessage: 'Votre nom doit contenir au moins {{ limit }} caractères',
-        maxMessage: 'Votre nom ne doit pas dépasser {{ limit }} caractères')]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'exercices')]
     private ?Seance $seance = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\Length(max: 500,
-        maxMessage: 'Votre description ne doit pas dépasser {{ limit }} caractères')]
+    #[ORM\Column(length: 500, type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 5, nullable: false)]
-    #[Assert\Positive(message: 'La valeur doit être positive et au miminum égale à 1')]
-    #[Assert\NotBlank(message: 'Le nombre de série doit être d\'au moins 1')]
-    #[Assert\Type(type: 'int', message: 'La valeur doit être un nombre')]
-    #[Assert\Length(min: 1, max: 5,
-        minMessage: 'Votre série doit contenir au moins {{ limit }} séries',
-        maxMessage: 'Votre série ne doit pas dépasser {{ limit }} caractères')]
     private ?int $serie = null;
 
     #[ORM\Column(length: 5, nullable: true)]
-    #[Assert\Positive(message: 'La valeur doit être positive et au miminum égale à 1')]
-    #[Assert\Type(type: 'int', message: 'La valeur doit être un nombre')]
-    #[Assert\Length(max: 5,
-        maxMessage: 'Votre répétition ne doit pas dépasser {{ limit }} caractères')]
     private ?int $repetition = null;
 
     #[ORM\Column(length: 5, nullable: true)]
-    #[Assert\Positive(message: 'La valeur doit être positive et au miminum égale à 1')]
-    #[Assert\Type(type: 'int', message: 'La valeur doit être un nombre')]
-    #[Assert\Length(max: 5,
-        maxMessage: 'Votre temps ne doit pas dépasser {{ limit }} caractères')]
     private ?int $temps = null;
 
     #[ORM\Column(length: 5, nullable: true)]
-    #[Assert\Positive(message: 'La valeur doit être positive et au miminum égale à 1')]
-    #[Assert\Type(type: 'int', message: 'La valeur doit être un nombre')]
-    #[Assert\Length(max: 5,
-        maxMessage: 'Votre temps de récupération ne doit pas dépasser {{ limit }} caractères')] 
     private ?int $recuperation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Length(max: 255,
-        maxMessage: 'Votre image ne doit pas dépasser {{ limit }} caractères')]
     private ?string $picture = null;
 
     public function getId(): ?int

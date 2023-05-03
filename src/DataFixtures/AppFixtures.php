@@ -26,14 +26,14 @@ class AppFixtures extends Fixture
     {
         ///////////////////////////// USERS /////////////////////////////
         $user = new User();
-        $user->setEmail('valoo@hotmail.com');    
+        $user->setEmail('valoo@hotmail.com');
         $user->setPassword($this->userPasswordHasher->hashPassword($user, 'mdp705'));
         $user->setRoles(['ROLE_USER']);
         $user->setUsername('Valoo');
         $user->setDescription('J\'aime le sport et je pratique le fitness depuis plusieurs années. Je suis ici pour partager mes séances et en découvrir de nouvelles !');
         $user->setSports('Natation, course à pied, vélo');
         $user->setPicture('https://www.masculin.com/wp-content/uploads/sites/2/2021/06/sous-vetement-sport-homme-1568x1109.jpg');
-      
+
         $user2 = new User();
         $user2->setEmail('zakkios@hotmail.com');
         $user2->setPassword($this->userPasswordHasher->hashPassword($user, 'mdp705'));
@@ -60,14 +60,14 @@ class AppFixtures extends Fixture
         $user4->setDescription('Je pratique l\équitation et la course à pied. Je suis ici pour partager mes séances et en découvrir de nouvelles !');
         $user4->setSports('Equitation, course à pied');
         $user4->setPicture('https://st2.depositphotos.com/1000315/6515/i/450/depositphotos_65152063-stock-photo-young-sporty-woman-taking-a.jpg');
-        
+
         $user5 = new User();
         $user5->setEmail('hakim@hotmail.com');
         $user5->setPassword($this->userPasswordHasher->hashPassword($user, 'mdp705'));
         $user5->setRoles(['ROLE_USER']);
         $user5->setUsername('Hakim');
         $user5->setDescription('Je suis un utilisateur de l\'application');
-        $user5->setSports('Boxe');  
+        $user5->setSports('Boxe');
         $user5->setPicture('https://img.freepik.com/vecteurs-libre/gants-boxe-suspendus-materiel-competition-protection-main-illustration-vectorielle_1284-41868.jpg?w=2000');
 
         $user6 = new User();
@@ -107,13 +107,18 @@ class AppFixtures extends Fixture
         $manager->persist($user8);
 
         /////////////////////////// SEANCE 1 ///////////////////////////
-        // $categoryRepository = $manager->getRepository(Category::class);
-        // $categorC = $categoryRepository->findOneBy(['name' => 'Cardio']);
-        // $categoryRm = $categoryRepository->findOneBy(['name' => 'Renforcement musculaire']);
-        // $categoryS = $categoryRepository->findOneBy(['name' => 'Stretching']);
-        // $categoryUb = $categoryRepository->findOneBy(['name' => 'Upper body']);
-        // $categoryLb = $categoryRepository->findOneBy(['name' => 'Lower body']);
-        // $categoryFb = $categoryRepository->findOneBy(['name' => 'Full body']);
+        $categoryCardio = new Category();
+        $categoryCardio->setName('Cardio');
+        $categoryRenforcementMusculaire = new Category();
+        $categoryRenforcementMusculaire->setName('Renforcement musculaire');
+        $categoryStretching = new Category();
+        $categoryStretching->setName('Stretching');
+        $categoryUpperBody = new Category();
+        $categoryUpperBody->setName('Upper body');
+        $categoryLowerBody = new Category();
+        $categoryLowerBody->setName('Lower body');
+        $categoryFullBody = new Category();
+        $categoryFullBody->setName('Full body');
 
         $seance = new Seance();
         $seance->setUser($user);
@@ -122,15 +127,15 @@ class AppFixtures extends Fixture
         $seance->setPicture('https://img.passeportsante.net/1200x675/2020-11-26/i97824-.jpeg');
         $seance->setCreateAt(new \DateTime('2021-06-01'));
 
-        $category = new Category();
-        $category->setName('Cardio');
-        $category->addSeance($seance);
-        $seance->addCategory($category);
+        $categoryUpperBody->addSeance($seance);
+        $seance->addCategory($categoryUpperBody);
+        $categoryRenforcementMusculaire->addSeance($seance);
+        $seance->addCategory($categoryRenforcementMusculaire);
 
         $exercice = new Exercice();
         $exercice->setName('Développé couché');
         $exercice->setDescription('Allongé sur un banc, les pieds au sol, les fesses et les épaules en contact avec le banc, les bras tendus à la verticale, les mains écartées de la largeur des épaules, descendre la barre jusqu’à ce qu’elle touche la poitrine, puis la remonter à la verticale.');
-        $exercice->setPicture('https://www.fitadium.com/fstrz/r/s/www.fitadium.com/conseils/wp-content/uploads/2020/06/00251105-Barbell-Bench-Press_Chest_small.png?frz-v=1391');  
+        $exercice->setPicture('https://www.fitadium.com/fstrz/r/s/www.fitadium.com/conseils/wp-content/uploads/2020/06/00251105-Barbell-Bench-Press_Chest_small.png?frz-v=1391');
         $exercice->setSerie(4);
         $exercice->setRepetition(10);
         $exercice->setRecuperation(90);
@@ -167,7 +172,8 @@ class AppFixtures extends Fixture
         $comment1->setCreatedAt(new \DateTime('2021-06-01, 11:56:00'));
 
         $manager->persist($seance);
-        $manager->persist($category);
+        $manager->persist($categoryUpperBody);
+        $manager->persist($categoryRenforcementMusculaire);
         $manager->persist($exercice);
         $manager->persist($exercice1);
         $manager->persist($exercice2);
@@ -175,7 +181,7 @@ class AppFixtures extends Fixture
         $manager->persist($comment1);
 
         /////////////////////////// SEANCE 2 ///////////////////////////
-        
+
         $seance2 = new Seance();
         $seance2->setUser($user2);
         $seance2->setName('Séance de boxe');
@@ -183,10 +189,10 @@ class AppFixtures extends Fixture
         $seance2->setPicture('https://media.istockphoto.com/id/1006291908/fr/photo/gants-de-boxe-rouges.jpg?s=612x612&w=0&k=20&c=tD_JJMXLDZru_HEBBnGcY9QYsudHDei0Py_vkHfngMA=');
         $seance2->setCreateAt(new \DateTime('2023-03-05'));
 
-        $category2 = new Category();
-        $category2->setName('Renforcement musculaire');
-        $category2->addSeance($seance2);
-        $seance2->addCategory($category2);
+        $categoryCardio->addSeance($seance2);
+        $seance2->addCategory($categoryCardio);
+        $categoryRenforcementMusculaire->addSeance($seance2);
+        $seance2->addCategory($categoryRenforcementMusculaire);
 
         $exercice3 = new Exercice();
         $exercice3->setName('Abdos Crunch');
@@ -206,7 +212,7 @@ class AppFixtures extends Fixture
         $exercice4->setRecuperation(60);
         $exercice4->setSeance($seance2);
         $seance2->addExercice($exercice4);
-        
+
         $comment2 = new Comment();
         $comment2->setUser($user3);
         $comment2->setSeance($seance2);
@@ -224,7 +230,8 @@ class AppFixtures extends Fixture
         $comment4->setCreatedAt(new \DateTime('2023-03-08, 08:35:00'));
 
         $manager->persist($seance2);
-        $manager->persist($category2);
+        $manager->persist($categoryCardio);
+        $manager->persist($categoryRenforcementMusculaire);
         $manager->persist($exercice3);
         $manager->persist($exercice4);
         $manager->persist($comment2);
@@ -249,10 +256,10 @@ class AppFixtures extends Fixture
         $like5->setUser($user);
         $like5->setSeance($seance3);
 
-        $category3 = new Category();
-        $category3->setName('Stretching');
-        $category3->addSeance($seance3);
-        $seance3->addCategory($category3);
+        $categoryRenforcementMusculaire->addSeance($seance3);
+        $seance3->addCategory($categoryRenforcementMusculaire);
+        $categoryLowerBody->addSeance($seance3);
+        $seance3->addCategory($categoryLowerBody);
 
         $exercice5 = new Exercice();
         $exercice5->setName('Squat');
@@ -290,7 +297,8 @@ class AppFixtures extends Fixture
         $comment7->setCreatedAt(new \DateTime('2023-03-08, 08:35:00'));
 
         $manager->persist($seance3);
-        $manager->persist($category3);
+        $manager->persist($categoryRenforcementMusculaire);
+        $manager->persist($categoryLowerBody);
         $manager->persist($exercice5);
         $manager->persist($exercice6);
         $manager->persist($comment5);
@@ -315,9 +323,9 @@ class AppFixtures extends Fixture
         $like7 = new Likes();
         $like7->setUser($user3);
         $like7->setSeance($seance4);
-        
-     
-        
+
+
+
         $manager->persist($seance4);
         $manager->persist($like6);
         $manager->persist($like7);
@@ -356,14 +364,10 @@ class AppFixtures extends Fixture
         $exercice9->setSeance($seance5);
         $seance5->addExercice($exercice9);
 
-        $category4 = new Category();
-        $category4->setName('Upper body');
-        $category4->addSeance($seance5);
-        $seance4->addCategory($category4);
-        $category5 = new Category();
-        $category5->setName('Lower body');
-        $category5->addSeance($seance5);
-        $seance5->addCategory($category5);
+        $categoryCardio->addSeance($seance5);
+        $seance5->addCategory($categoryCardio);
+        $categoryFullBody->addSeance($seance5);
+        $seance5->addCategory($categoryFullBody);
 
         $comment5 = new Comment();
         $comment5->setUser($user);
@@ -391,14 +395,14 @@ class AppFixtures extends Fixture
         $manager->persist($exercice7);
         $manager->persist($exercice8);
         $manager->persist($exercice9);
-        $manager->persist($category4);
-        $manager->persist($category5);
+        $manager->persist($categoryCardio);
+        $manager->persist($categoryFullBody);
         $manager->persist($comment5);
         $manager->persist($comment6);
         $manager->persist($like8);
         $manager->persist($like9);
         $manager->persist($like10);
-        
+
         /////////////////////////// SEANCE 6 ///////////////////////////
         $seance6 = new Seance();
         $seance6->setUser($user);
@@ -407,10 +411,10 @@ class AppFixtures extends Fixture
         $seance6->setPicture('https://medias.lequipe.fr/img-photo-jpg/muscles-dos-epaules/1500000000899363/123:63,1133:736-1200-800-75/774a0.jpg');
         $seance6->setCreateAt(new \DateTime('2023-04-07'));
 
-        $category6 = new Category();
-        $category6->setName('Full body');
-        $category6->addSeance($seance6);
-        $seance6->addCategory($category6);
+        $categoryUpperBody->addSeance($seance6);
+        $seance6->addCategory($categoryUpperBody);
+        $categoryRenforcementMusculaire->addSeance($seance6);
+        $seance6->addCategory($categoryRenforcementMusculaire);
 
         $exercice10 = new Exercice();
         $exercice10->setName('Traction');
@@ -424,10 +428,32 @@ class AppFixtures extends Fixture
 
         $manager->persist($seance6);
         $manager->persist($exercice10);
-        $manager->persist($category6);
+        $manager->persist($categoryUpperBody);
+        $manager->persist($categoryRenforcementMusculaire);
+
+        /////////////////////////// SEANCE 7 ///////////////////////////
+        $seance7 = new Seance();
+        $seance7->setUser($user4);
+        $seance7->setName('Seance relaxation / étirement');
+        $seance7->setDescription('Le stretching est une pratique qui consiste à étirer les muscles pour les assouplir. Il permet de se détendre et de se relaxer. Voici une séance de stretching pour vous aider à vous relaxer et à vous détendre.');
+        $seance7->setPicture('https://www.pure-sportclub.ch/wp-content/uploads/2020/01/stretching-freepik-440x0-c-default.jpg');
+        $seance7->setCreateAt(new \DateTime('2023-02-08'));
+
+        $categoryStretching->addSeance($seance7);
+        $seance7->addCategory($categoryStretching);
+
+        $exercice11 = new Exercice();
+        $exercice11->setName('Étirement des ischio-jambiers');
+        $exercice11->setDescription('Allongé sur le dos, les jambes tendues, les bras le long du corps, ramener une jambe vers la poitrine, en la tenant avec les mains, puis ramener la jambe en arrière et répéter le mouvement avec l\'autre jambe.');
+        $exercice11->setPicture('https://www.lesdessousdusport.fr/wp-content/uploads/2020/02/%C3%89tirements-des-ischio-jambiers-position-assise.jpg');
+        $exercice11->setSerie(3);
+        $exercice11->setTemps(45);
+
+        $manager->persist($seance7);
+        $manager->persist($exercice11);
+        $manager->persist($categoryStretching);
+
 
         $manager->flush();
-
-      
     }
 }

@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Validator\Constraints\Length;
+
 class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -19,7 +21,7 @@ class CommentType extends AbstractType
                     'class' => 'mb-3 form-contenu'
                 ],
                 'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\Length([
+                    new Length([
                         'min' => 2,
                         'max' => 300,
                         'minMessage' => 'Votre commentaire doit contenir au moins {{ limit }} caractères',
