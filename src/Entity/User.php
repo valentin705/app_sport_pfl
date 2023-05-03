@@ -22,10 +22,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 60, unique: true)]
+    #[ORM\Column(length: 255, unique: true)]
     // #[Assert\NotBlank(message: 'Veuillez renseigner votre email')]
     // #[Assert\Email(message: 'Veuillez renseigner un email valide')]
-    // #[Assert\Length(max: 60, maxMessage: 'L\'email ne peut pas dépasser {{ limit }} caractères')]
+    // #[Assert\Length(max: 255, maxMessage: 'L\'email ne peut pas dépasser {{ limit }} caractères')]
     // #[Assert\Regex(
     //     pattern: '/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$/',
     //     message: 'Veuillez renseigner un email valide'
@@ -40,11 +40,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(nullable: false)]
     // #[Assert\NotBlank(message: 'Veuillez renseigner un mot de passe')]
-    #[Assert\Length(min: 6, minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères')]
-    #[Assert\Regex(
-        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$/',
-        message: 'Le mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial'
-    )]
+    // #[Assert\Length(min: 6, minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères')]
+    // #[Assert\Regex(
+    //     pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$/',
+    //     message: 'Le mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial'
+    // )]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Seance::class)]
@@ -53,14 +53,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private Collection $comments;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(length: 60, unique: true)]
     // #[Assert\NotBlank(message: 'Veuillez renseigner un nom d\'utilisateur')]
-    #[Assert\Length(
-        max: 180,
-        min: 3,
-        minMessage: 'Le nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
-        maxMessage: 'Le nom d\'utilisateur ne peut pas dépasser {{ limit }} caractères'
-    )]
+    // #[Assert\Length(
+    //     max: 60,
+    //     min: 3,
+    //     minMessage: 'Le nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
+    //     maxMessage: 'Le nom d\'utilisateur ne peut pas dépasser {{ limit }} caractères'
+    // )]
     // #[Assert\Regex(pattern: '/^[a-zA-Z0-9\s]+$/', message: 'Le nom d\'utilisateur ne peut contenir que des lettres et des chiffres')]
     private ?string $username = null;
 

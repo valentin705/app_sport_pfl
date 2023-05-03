@@ -17,11 +17,11 @@ class Seance
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: false)]
+    #[ORM\Column(length: 180, nullable: false)]
     #[Assert\NotBlank(message: 'Veuillez renseigner un nom pour votre séance')]
     #[Assert\Length(
         min: 3,
-        max: 255,
+        max: 180,
         minMessage: 'Le nom de la séance doit contenir au moins {{ limit }} caractères',
         maxMessage: 'Le nom de la séance ne peut pas dépasser {{ limit }} caractères'
     )]

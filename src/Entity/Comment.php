@@ -15,7 +15,7 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\Length(min: 1, max: 300,
+    #[Assert\Length(min: 2, max: 300,
         minMessage: 'Votre commentaire doit contenir au moins {{ limit }} caractères',
         maxMessage: 'Votre commentaire ne doit pas dépasser {{ limit }} caractères')]
     #[ORM\Column(type: Types::TEXT, length: 300)]

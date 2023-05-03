@@ -12,6 +12,7 @@ use App\Entity\Exercice;
 use App\Form\ExerciceType;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SeanceExercicesType extends AbstractType
 {
@@ -22,7 +23,12 @@ class SeanceExercicesType extends AbstractType
             'attr' => [
                 'class' => 'form-control mb-3',
                 'placeholder' => 'Nom de ta séance'
-            ]
+            ],
+            // 'constraints' => [
+            //     new NotBlank([
+            //         'message' => 'Entrez un nom de séance.',
+            //     ]),
+            // ],
         ])
         ->add('picture', null, [
             'label' => 'Image',

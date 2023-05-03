@@ -15,8 +15,8 @@ class Exercice
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: false)]
-    #[Assert\Length(min: 3, max: 255,
+    #[ORM\Column(length: 180, nullable: false)]
+    #[Assert\Length(min: 3, max: 180,
         minMessage: 'Votre nom doit contenir au moins {{ limit }} caractères',
         maxMessage: 'Votre nom ne doit pas dépasser {{ limit }} caractères')]
     private ?string $name = null;
@@ -25,8 +25,7 @@ class Exercice
     private ?Seance $seance = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\Length(min: 1, max: 500,
-        minMessage: 'Votre description doit contenir au moins {{ limit }} caractères',
+    #[Assert\Length(max: 500,
         maxMessage: 'Votre description ne doit pas dépasser {{ limit }} caractères')]
     private ?string $description = null;
 
@@ -42,8 +41,7 @@ class Exercice
     #[ORM\Column(length: 5, nullable: true)]
     #[Assert\Positive(message: 'La valeur doit être positive et au miminum égale à 1')]
     #[Assert\Type(type: 'int', message: 'La valeur doit être un nombre')]
-    #[Assert\Length(min: 1, max: 5,
-        minMessage: 'Votre répétition doit contenir au moins {{ limit }} répétitions',
+    #[Assert\Length(max: 5,
         maxMessage: 'Votre répétition ne doit pas dépasser {{ limit }} caractères')]
     private ?int $repetition = null;
 

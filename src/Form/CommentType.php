@@ -18,6 +18,14 @@ class CommentType extends AbstractType
                     'placeholder' => 'Commentaire',
                     'class' => 'mb-3 form-contenu'
                 ],
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\Length([
+                        'min' => 2,
+                        'max' => 300,
+                        'minMessage' => 'Votre commentaire doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Votre commentaire ne doit pas dépasser {{ limit }} caractères'
+                    ])
+                ]
             ])
         ;
     }
