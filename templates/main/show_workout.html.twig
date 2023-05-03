@@ -17,35 +17,32 @@
                         <img src="{{ seance.user.picture }}" alt="" class="avatar">
                         <h4 class="mt-2 text-center">{{ seance.user.username }}</h4>
                     </div>
-                    <p class="description">{{ seance.user.description }}</p>
+                    <p class="description description-5 text-center">{{ seance.user.description }}</p>
                     <div>
-                        <a href="{{ path('user_profil_visited', {'id': seance.user.id}) }}">profil</a>
+                        <a href="{{ path('user_profil_visited', {'id': seance.user.id}) }}">Profil du créateur</a>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="col">
-
-            <h2 class="name-seance">{{ seance.name }}</h2>
-            <div class="card p-4 mb-3">
-                <div class="mx-5">
-                    <p class="date">{{ seance.createAt | date('d/m/Y') }}</p>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <img class="seance-picture" src="{{ seance.picture }}" alt="">
-                    </div>
-                    <div class="col">
-                        <h5>Description :</h5>
-                        <p> {{ seance.description }} </p>
-                    </div>
-                    <div class="col">
-                        <h5>Categories :</h5>
-                        {% for categorie in seance.categories %}
-                        <p>{{ categorie.name }}</p>
-                        {% endfor %}
+        <div class="col-9">
+            <h2 class="name-seance" style="text-align: center;">{{ seance.name }}</h2>
+            <div class="seance-card-parent" style="background-image: url(' {{ seance.picture }}');">
+                <div class="card p-4 mb-3 seance-card">
+                    <p class="date mb-3">{{ seance.createAt | date('d/m/Y') }}</p>
+                    <div class="d-flex justify-content-between">
+                        <div style="flex: auto;">
+                            <h5>Description :</h5>
+                            <p class="px-3 description description-5"> {{ seance.description }} </p>
+                        </div>
+                        <div class="mx-3" style="flex: none;">
+                            <h6>Categories :</h6>
+                            <ul class="list">
+                                {% for categorie in seance.categories %}
+                                <li>{{ categorie.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                         <div class="d-flex flex-column align-items-end">
                             <div class="d-flex flex-column align-items-end">
                                 <div class="d-flex align-items-center">
@@ -71,40 +68,47 @@
                     </div>
                 </div>
             </div>
-            {% if seance.exercices is empty %} <h2>Aucun exercices pour cette séance</h2>
-            {% else %}
-            <div class="card p-4 mb-3"> 
-                {% for exercice in seance.exercices %}
-                <div class="row mb-3">
-                    <div class="col">
-                        <img class="seance-picture" src="{{ exercice.picture }}" alt="">
-                    </div>
-                    <div class="col">
-                        <p>{{ exercice.name }}</p>
-                        <h5>Description :</h5>
-                        <p> {{ exercice.description }} </p>
-                    </div>
-                    <div class="col">
-                        <p>Series : {{ exercice.serie }}</p>
-                        <p>Repetitions : {{ exercice.repetition }}</p>
-                        <p>Temps : {{ exercice.temps }}</p>
-                        <p>Recuperation : {{ exercice.recuperation}}</p>
-                    </div>
-                </div>
-                {% endfor %}
-                {% endif %}
+            {% if seance.exercices is empty %}
+            <div class="card p-4 mb-3">
+                <h2 style="text-align: center;">Cette séance n'a pas encore d'exercices</h2>
             </div>
-
-            <div class="row my-3">
-                <div class="col-2 mt-2">
-                    <img src="{{ app.user.picture }}" alt="" class="avatar avatar-com">
+            {% else %}
+            {% for exercice in seance.exercices %}
+            <div class="card p-4 mb-3">
+                <div class="row mb-3">
+                    <div class="d-flex">
+                        <div>
+                            <img class="seance-picture" src="{{ exercice.picture }}" alt="">
+                        </div>
+                        <div class="px-3">
+                            <h5 style="text-align: center;">{{ exercice.name }}</h5>
+                            <h6>Description :</h6>
+                            <p class="px-3 description description-5"> {{ exercice.description }} </p>
+                        </div>
+                        <ul class="list" style="white-space: nowrap;">
+                            <li>Series : {{ exercice.serie }}</li>
+                            {% if exercice.repetition %}
+                            <li>Repetitions : {{ exercice.repetition }}</li>
+                            {% endif %}
+                            {% if exercice.temps %}
+                            <li>Temps : {{ exercice.temps }}</li>
+                            {% endif %}
+                            {% if exercice.recuperation %}
+                            <li>Recuperation : {{ exercice.recuperation}}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-8">
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="d-flex m-3 align-items-center justify-content-between">
+                <div class="w-100 mx-2 my-3">
                     {{ form_start(formComment) }}
-                    <div class="form-contenu">{{ form_row(formComment.contenu) }}</div>
+                    {{ form_row(formComment.contenu) }}
                 </div>
-                <div class="col  logoSend">
-                    <button type="submit" class="btn">
+                <div class="">
+                    <button type="submit" class="btn p-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -116,31 +120,28 @@
             </div>
 
             {% for comment in seance.comments %}
-            <div class="row">
-                <div class="col-2">
-                    <img src="{{ comment.user.picture }}" alt="" class="avatar avatar-com">
-                </div>
-
-                <div class="col mb-3 p-1">
-                    <div class="card card-com">
+            <div class="d-flex mb-3 justify-content-between">
+                <img src="{{ comment.user.picture }}" alt="" class="avatar avatar-2 ">
+                <div class="w-100">
+                    <div class="card comment-card mx-2 p-3">
                         <div class="row">
-                            <div class="col">
-                                <h3 class="comment-user">{{ comment.user.username }}</h3>
-                            </div>
-                            <div class="col">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mx-3">{{ comment.user.username }}</h6>
                                 <p class="date">{{ comment.createdAt | date('d/m/Y H:i') }}</p>
                             </div>
                         </div>
-                        <p class="comment-contenu">{{ comment.contenu }}</p>
+                        <p class="description">{{ comment.contenu }}</p>
                     </div>
                 </div>
             </div>
             {% endfor %}
-
-
         </div>
     </div>
 </div>
 
 
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/show_workout.js') }}"></script>
 {% endblock %}

@@ -16,7 +16,9 @@ class CommentType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Commentaire',
-                    'class' => 'mb-3 form-contenu'
+                    'class' => 'no-resize comment-text w-100 d-flex align-items-center px-3 py-2',
+                    'rows' => '1',
+                    'cols' => '10'
                 ],
                 'constraints' => [
                     new \Symfony\Component\Validator\Constraints\Length([
@@ -26,8 +28,7 @@ class CommentType extends AbstractType
                         'maxMessage' => 'Votre commentaire ne doit pas dépasser {{ limit }} caractères'
                     ])
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

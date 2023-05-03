@@ -7,6 +7,7 @@ body {
     background-color: #191919;
 }
 
+h2,
 h3,
 h4,
 h5,
@@ -57,6 +58,7 @@ a {
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
+    box-shadow: 0 0 10px #000000;
 }
 
 .avatar-2 {
@@ -68,7 +70,8 @@ a {
     object-fit: cover;
     height: 150px;
     width: 250px;
-    border-radius: 10px;
+    border-radius: 0.375rem;
+    box-shadow: 0 0 10px #000000;
 }
 
 .btn-secondary {
@@ -92,13 +95,14 @@ a {
 }
 
 .btn-primary:active {
-    background-color: chartreuse;
+    background-color: #680000;
 }
 
 .card {
     margin: auto;
     background-color: #680000;
     border: none;
+    overflow-wrap: break-word;
 }
 
 
@@ -134,11 +138,16 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
-    /* Limite le texte à 3 lignes */
     -webkit-box-orient: vertical;
     white-space: normal;
     line-height: 1.3em;
+    cursor: pointer;
+    max-width: 60em;
+}
+
+.description-5 {
+    /* Limite le texte à 5 lignes */
+    -webkit-line-clamp: 5;
 }
 
 .search_bar {
