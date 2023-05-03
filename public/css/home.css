@@ -15,7 +15,7 @@
    justify-content: center;
    width: 800px;
    background-color: #680000;
-   border-radius: 50px;
+   border-radius: 0.375rem;
    margin-left: 10%;
    margin-bottom: 3%;
    height: 300px;
@@ -60,14 +60,15 @@
 }
 
 .top-seance {
-   border-radius: 15px;
+   border-radius: 0.375rem;
    background: linear-gradient(#000000, #00000000);
    min-height: 150px;
 }
 
 .top-seance-parent {
-   border-radius: 15px;
+   border-radius: 0.375rem;
    background-size: cover;
+   box-shadow: 0 0 10px #000000;
 }
 
 .seance-picture {
