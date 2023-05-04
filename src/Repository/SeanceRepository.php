@@ -96,6 +96,20 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByUser($user)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->leftJoin('p.user', 'u')
+            ->where('u.id = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.createdAt', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Seance[] Returns an array of Seance objects
     //     */

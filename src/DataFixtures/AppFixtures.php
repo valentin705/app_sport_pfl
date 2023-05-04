@@ -448,6 +448,9 @@ class AppFixtures extends Fixture
         $exercice11->setPicture('https://www.lesdessousdusport.fr/wp-content/uploads/2020/02/%C3%89tirements-des-ischio-jambiers-position-assise.jpg');
         $exercice11->setSerie(3);
         $exercice11->setTemps(45);
+        $exercice11->setSeance($seance7);
+        $seance7->addExercice($exercice11);
+
 
         $manager->persist($seance7);
         $manager->persist($exercice11);
