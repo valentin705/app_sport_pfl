@@ -49,7 +49,7 @@
                                     <div class="d-flex align-items-center pb-3">
                                         <div class="d-flex align-items-center">
                                             <img class="avatar avatar-2 m-3"
-                                            src="{{ asset('uploads/avatars/' ~ seance.user.pictureFile) }}" alt="">
+                                                src="{{ asset('uploads/avatars/' ~ seance.user.pictureFile) }}" alt="">
                                             <p>{{ seance.user.username }}</p>
                                         </div>
                                         <div class="mx-5">
@@ -108,7 +108,8 @@
                     {% for seance in seancesByLikes %}
                     <div>
                         <a href="{{ path('show_workout', {'id': seance.id}) }}">
-                            <div class="top-seance-parent" style="background-image: url('{{ asset("uploads/picturesSeances/" ~ seance.pictureFile) }}');">
+                            <div class="top-seance-parent" style="background-image: url('{{ asset("
+                                uploads/picturesSeances/" ~ seance.pictureFile) }}');">
                                 <div class="top-seance d-flex flex-column justify-content-between py-2 px-4 mt-4">
                                     <div class="d-flex justify-content-between">
                                         <div>
