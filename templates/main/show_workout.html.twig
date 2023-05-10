@@ -8,13 +8,16 @@
 {% endblock %}
 {% block body %}
 
-<div class="container mt-6 d-flex">
+{% set seanceUserPicture = asset('uploads/avatars/' ~ seance.user.pictureFile) %}
+{% set seancePicture = asset('uploads/picturesSeances/' ~ seance.pictureFile) %}
+
+<div class="container mt-6">
     <div class="row">
         <div class="col-3">
             <div class="card p-4 mb-3">
                 <div class="card-body d-flex flex-column align-items-center ">
                     <div>
-                        <img src="{{ asset('uploads/avatars/' ~ seance.user.pictureFile) }}" alt="" class="avatar">
+                        <img src="{{ seanceUserPicture }}" alt="" class="avatar">
                         <h4 class="mt-2 text-center">{{ seance.user.username }}</h4>
                     </div>
                     <p class="description description-5 text-center">{{ seance.user.description }}</p>
@@ -27,7 +30,8 @@
 
         <div class="col-9">
             <h2 class="name-seance" style="text-align: center;">{{ seance.name }}</h2>
-            <div class="seance-card-parent" style="background-image: url('{{ asset("uploads/picturesSeances/" ~ seance.pictureFile) }}');">
+            <div class="seance-card-parent" style="background-image: url('{{ asset(" uploads/picturesSeances/" ~
+                seance.pictureFile) }}');">
                 <div class="card p-4 mb-3 seance-card">
                     <p class="date mb-3">{{ seance.createAt | date('d/m/Y') }}</p>
                     <div class="d-flex justify-content-between">
@@ -74,17 +78,18 @@
             </div>
             {% else %}
             {% for exercice in seance.exercices %}
+            {% set exercicePicture = asset('uploads/picturesExercices/' ~ exercice.pictureFile) %}
             <div class="card p-4 mb-3">
                 <div class="row mb-3">
-                    <div class="d-flex">
-                        <div>
-                            <img class="seance-picture"
-                                src="{{ asset('uploads/picturesExercices/' ~ exercice.pictureFile) }}" alt="">
-                        </div>
-                        <div class="px-3">
-                            <h5 style="text-align: center;">{{ exercice.name }}</h5>
-                            <h6>Description :</h6>
-                            <p class="px-3 description description-5"> {{ exercice.description }} </p>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <div>
+                                <img class="seance-picture" src="{{ exercicePicture }}" alt="">
+                            </div>
+                            <div class="px-3">
+                                <h5 class="px-3" style="text-align: center;">{{ exercice.name }}</h5>
+                                <p class="description description-5"> {{ exercice.description }} </p>
+                            </div>
                         </div>
                         <ul class="list" style="white-space: nowrap;">
                             <li>Series : {{ exercice.serie }}</li>
