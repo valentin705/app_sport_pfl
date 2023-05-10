@@ -30,8 +30,7 @@
 
         <div class="col-9">
             <h2 class="name-seance" style="text-align: center;">{{ seance.name }}</h2>
-            <div class="seance-card-parent" style="background-image: url('{{ asset(" uploads/picturesSeances/" ~
-                seance.pictureFile) }}');">
+            <div class="seance-card-parent" style="background-image: url('{{ seancePicture }}');">
                 <div class="card p-4 mb-3 seance-card">
                     <p class="date mb-3">{{ seance.createAt | date('d/m/Y') }}</p>
                     <div class="d-flex justify-content-between">
