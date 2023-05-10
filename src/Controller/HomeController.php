@@ -39,7 +39,7 @@ class HomeController extends AbstractController
     ): Response {
 
         $categories = $categoryRepository->findAll();
-        $seances = $seanceRepository->findSeancesOrderedByIdDesc();
+        $seances = $seanceRepository->findSeancesOrderedByDesc();
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
 
         return $this->render('main/home.html.twig', [

@@ -31,7 +31,7 @@ class UpdateWorkoutController extends AbstractController
             return;
         }
 
-        $form = $this->createForm(SeanceExercicesType::class, $seance);
+        $form = $this->createForm(SeanceType::class, $seance);
 
         $form->handleRequest($request);
 
@@ -65,7 +65,6 @@ class UpdateWorkoutController extends AbstractController
             }
 
             $manager->persist($seance);
-            dd($seance);die;
             $manager->flush();
 
             if ($request->request->get('route') === 'ajouter') {
@@ -74,6 +73,9 @@ class UpdateWorkoutController extends AbstractController
             } elseif ($request->request->get('route') === 'modifier') {
                 // Logique pour la route 'finir'
                 return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
+            } elseif ($request->request->get('route') === 'seance') {
+                // Logique pour la route 'finir'
+                return $this->redirectToRoute('home_list');
             }
         }
 

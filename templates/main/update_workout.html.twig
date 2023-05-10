@@ -11,11 +11,12 @@
 
 <div class="container mt-6">
     <div class="row">
-        <div class="col-11">
+       
             <h5 class="mx-5">Modifier votre seance :</h5>
             <div class="card p-4 mb-3">
                 <div class="card-body">
                     <div class=" d-flex justify-content-end">
+
                         <a href="{{ path('delete_workout', {'id': seance.id}) }}" class="btn btn-dark btn-sm">
                             Supprimer la séance
                         </a>
@@ -36,38 +37,74 @@
                     {# , {'attr': {'class': 'form-check-label'}} #}
                 </div>
             </div>
-            <h5 class="mx-5">Modifier vos exercices :</h5>
-            {% if seance.exercices is empty %} <h2>Vous n'avez pas d'exercices</h2>
-            {% else %}
-            {% for exercice in formSeance.exercices %}
-            <div class="card p-4 mb-3 exercice-form">
-                <div class="card-body">
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ path('delete_exercise', {'id': seance.id, 'exercice': exercice.vars.value.id}) }}" class="btn btn-dark btn-sm">
-                            Supprimer l'exercice
-                        </a>
+
+            <button type="submit" class="btn btn-primary mt-2 w100 mb-4" name="route" value="modifier">Valider la
+                modification</button>
+        
+        {# <h5 class="mx-5">Modifier vos exercices :</h5>
+        {% if seance.exercices is empty %} <h2>Vous n'avez pas d'exercices</h2>
+        {% else %}
+        {% for exercice in formSeance.exercices %}
+        <div class="card p-4 mb-3 exercice-form">
+            <div class="card-body">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ path('delete_exercise', {'id': seance.id, 'exercice': exercice.vars.value.id}) }}"
+                        class="btn btn-dark btn-sm">
+                        Supprimer l'exercice
+                    </a>
+                </div>
+                {{ form_row(exercice.name) }}
+                {{ form_row(exercice.pictureFile) }}
+                {{ form_row(exercice.description)}}
+                {{ form_row(exercice.serie) }}
+                {{ form_row(exercice.repetition) }}
+                {{ form_row(exercice.temps) }}
+                {{ form_row(exercice.recuperation) }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %} #}
+
+        {% for exercice in seance.exercices %}
+        <div class="card p-4 mb-3">
+            <div class="d-flex justify-content-end">
+                <a href="{{ path('delete_exercise', {'id': seance.id, 'exercice': exercice.id}) }}"
+                    class="btn btn-dark btn-sm">
+                    Supprimer l'exercice
+                </a>
+            </div>
+            <div class="row mb-3">
+                <div class="d-flex">
+                    <div>
+                        <img class="seance-picture"
+                            src="{{ asset('uploads/picturesExercices/' ~ exercice.pictureFile) }}" alt="">
                     </div>
-                    {{ form_row(exercice.name) }}
-                    {{ form_row(exercice.pictureFile) }}
-                    {{ form_row(exercice.description)}}
-                    {{ form_row(exercice.serie) }}
-                    {{ form_row(exercice.repetition) }}
-                    {{ form_row(exercice.temps) }}
-                    {{ form_row(exercice.recuperation) }}
+                    <div class="px-3">
+                        <h5 style="text-align: center;">{{ exercice.name }}</h5>
+                        <h6>Description :</h6>
+                        <p class="px-3 description description-5"> {{ exercice.description }} </p>
+                    </div>
+                    <ul class="list" style="white-space: nowrap;">
+                        <li>Series : {{ exercice.serie }}</li>
+                        {% if exercice.repetition %}
+                        <li>Repetitions : {{ exercice.repetition }}</li>
+                        {% endif %}
+                        {% if exercice.temps %}
+                        <li>Temps : {{ exercice.temps }}</li>
+                        {% endif %}
+                        {% if exercice.recuperation %}
+                        <li>Recuperation : {{ exercice.recuperation}}</li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
+        </div>
+        {% endfor %}
 
-            <div class="row d-flex">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
-                        exercice</button>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="modifier">Valider la
-                        modification</button>
-                </div>
+        <div class="row d-flex">
+            <div class="col">
+                <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
+                    exercice</button>
             </div>
             {{ form_end(formSeance) }}
 

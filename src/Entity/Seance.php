@@ -31,7 +31,7 @@ class Seance
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Comment::class, cascade: ['persist', 'remove'])]
     private Collection $comments;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Exercice::class, cascade: ['persist', 'remove'])]

@@ -88,10 +88,13 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findSeancesOrderedByIdDesc()
+    public function findSeancesOrderedByDesc()
     {
-        return $this->createQueryBuilder('s')
-            ->orderBy('s.createdAt', 'DESC')
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->orderBy('p.id', 'DESC');
+
+        return $qb
             ->getQuery()
             ->getResult();
     }

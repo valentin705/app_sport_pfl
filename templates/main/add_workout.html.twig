@@ -15,7 +15,6 @@
             <h5 class="mx-5">Ajouter une seance :</h5>
             <div class="card p-4 mb-3">
                 {# <div class="card-body"> #}
-
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
                     {{ form_row(formSeance.pictureFile) }}
@@ -33,8 +32,7 @@
                     {#
                 </div> #}
             </div>
-
-            <h5 class="mx-5">Ajouter un exercice :</h5>
+            {# <h5 class="mx-5">Ajouter un exercice :</h5>
             <div class="card p-4 mb-3">
                 {% for exercice in formSeance.exercices %}
                 {{ form_row(exercice.name) }}
@@ -45,8 +43,7 @@
                 {{ form_row(exercice.temps) }}
                 {{ form_row(exercice.recuperation) }}
                 {% endfor %}
-            </div>
-
+            </div> #}
             <div class="row d-flex">
                 <div class="col">
                     <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un

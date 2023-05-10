@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+ ///////////////////////////PLUS UTILISE POUR LE MOMENT///////////////////////////////
 class SeanceExercicesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

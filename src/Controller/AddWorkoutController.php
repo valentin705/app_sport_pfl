@@ -28,14 +28,14 @@ class AddWorkoutController extends AbstractController
             $seance = new Seance();
         }
 
-        $exercice = new Exercice();
-
-        $seance->addExercice($exercice);
+        // $exercice = new Exercice();
+        // $seance->addExercice($exercice);
     
         // Récupère l'utilisateur connecté
         $user = $this->getUser();
 
-        $form = $this->createForm(SeanceExercicesType::class, $seance);
+        // $form = $this->createForm(SeanceExercicesType::class, $seance);
+        $form = $this->createForm(SeanceType::class, $seance);
 
         $form->handleRequest($request);
 
@@ -49,34 +49,19 @@ class AddWorkoutController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
                 try {
-                    // $pictureFile->move(
-                    //     $this->getParameter('seance_avatar_directory'),
-                    //     $newFilename
-                    // );
-                    $pictureType = $form->get('pictureType')->getData();
-                    if ($pictureType === 'seance') {
-                        $directory = $this->getParameter('seance_avatar_directory');
-                    } elseif ($pictureType === 'exercice') {
-                        $directory = $this->getParameter('exercice_avatar_directory');
-                    }
-                    // $directory = $pictureType === 'seance' ? $this->getParameter('seance_avatar_directory') : $this->getParameter('exercice_avatar_directory');
-                    $pictureFile->move($directory, $newFilename);
+                    $pictureFile->move(
+                        $this->getParameter('seance_avatar_directory'),
+                        $newFilename
+                    );
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                // $seance->setPictureFile($newFilename); 
-                if ($pictureType === 'seance') {
-                    $seance->setPictureFile($newFilename);
-                } elseif ($pictureType === 'exercice') {
-                    $exercice->setPictureFile($newFilename);
-                }
+                $seance->setPictureFile($newFilename); 
+             
             }
-
             $manager->persist($seance);
             $manager->flush();
-
             // return $this->redirectToRoute('add_workout', ['id' => $seance->getId()]);
-
             if ($request->request->get('route') === 'ajouter') {
                 // Logique pour la route 'ajouter'
                 return $this->redirectToRoute('add_exercise', ['id' => $seance->getId()]);

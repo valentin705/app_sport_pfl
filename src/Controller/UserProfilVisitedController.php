@@ -20,7 +20,13 @@ class UserProfilVisitedController extends AbstractController
         UserRepository $userRepository
     ): Response
     {
+
+        $currentUser = $this->getUser();
+    
         $user = $userRepository->findOneById($id);
+        if ($currentUser === $user) {
+            return $this->redirectToRoute('user_profil');
+        }
 
         if (!$user) {
             throw $this->createNotFoundException('User not found');

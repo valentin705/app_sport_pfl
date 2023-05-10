@@ -125,7 +125,7 @@ class AppFixtures extends Fixture
         $seance->setName('Séance de musculation');
         $seance->setDescription('Séance de musculation pour les pectoraux');
         $seance->setPictureFile('seanceDeMusculation.jpeg');
-        $seance->setCreateAt(new \DateTime('2021-06-01'));
+        $seance->setCreateAt(new \DateTime('2021-06-01 12:00:00'));
 
         $categoryUpperBody->addSeance($seance);
         $seance->addCategory($categoryUpperBody);
@@ -187,7 +187,7 @@ class AppFixtures extends Fixture
         $seance2->setName('Séance de boxe');
         $seance2->setDescription('Séance de boxe pour les abdos');
         $seance2->setPictureFile('seanceDeBoxe.jpg');
-        $seance2->setCreateAt(new \DateTime('2023-03-05'));
+        $seance2->setCreateAt(new \DateTime('2023-03-05 18:25:00'));
 
         $categoryCardio->addSeance($seance2);
         $seance2->addCategory($categoryCardio);
@@ -245,7 +245,7 @@ class AppFixtures extends Fixture
         $seance3->setName('Seance fessiers');
         $seance3->setDescription('Séance fessiers');
         $seance3->setPictureFile('seanceFessiers.jpg');
-        $seance3->setCreateAt(new \DateTime('2023-02-08'));
+        $seance3->setCreateAt(new \DateTime('2023-02-08 06:32:56'));
         $like3 = new Likes();
         $like3->setUser($user2);
         $like3->setSeance($seance3);
@@ -316,7 +316,7 @@ class AppFixtures extends Fixture
         Pour réaliser cette séance, commencez par un échauffement de 10 minutes à une allure modérée. Ensuite, enchaînez avec des sprints de 30 secondes à une allure maximale, suivis de 30 secondes de récupération active à une allure lente. Répétez ce cycle de sprint et récupération 10 fois, pour un total de 20 minutes d\'entraînement.
         Cette séance est particulièrement exigeante, car elle vous pousse à donner le maximum de vos capacités à chaque sprint. Il est important de bien vous hydrater et de vous étirer après la séance pour éviter les blessures.');
         $seance4->setPictureFile('running.jpg');
-        $seance4->setCreateAt(new \DateTime('2023-02-08'));
+        $seance4->setCreateAt(new \DateTime('2023-02-08 08:32:56'));
         $like6 = new Likes();
         $like6->setUser($user2);
         $like6->setSeance($seance4);
@@ -337,7 +337,7 @@ class AppFixtures extends Fixture
         $seance5->setDescription('Le circle training est un entraînement complet qui combine des exercices de cardio et de renforcement musculaire. Il permet de brûler des calories, de tonifier les muscles et d\'améliorer la condition physique générale.
         Le but sera de faire le plus de tours possible en 20 minutes. Pour cela, enchaînez les exercices suivants, sans temps de repos entre chaque exercice :');
         $seance5->setPictureFile('circuit.jpg');
-        $seance5->setCreateAt(new \DateTime('2023-01-10'));
+        $seance5->setCreateAt(new \DateTime('2023-01-10 04:06:26'));
 
         $exercice7 = new Exercice();
         $exercice7->setName('Jumping jack');
@@ -409,7 +409,7 @@ class AppFixtures extends Fixture
         $seance6->setName('Seance dos');
         $seance6->setDescription('Le dos est une partie du corps qui est souvent négligée. Pourtant, il est important de le travailler pour éviter les douleurs dorsales et les problèmes de posture. Voici une séance de musculation pour le dos qui vous permettra de le renforcer et de le tonifier.');
         $seance6->setPictureFile('dos.jpg');
-        $seance6->setCreateAt(new \DateTime('2023-04-07'));
+        $seance6->setCreateAt(new \DateTime('2023-04-07 04:06:26'));
 
         $categoryUpperBody->addSeance($seance6);
         $seance6->addCategory($categoryUpperBody);
@@ -437,7 +437,7 @@ class AppFixtures extends Fixture
         $seance7->setName('Seance relaxation / étirement');
         $seance7->setDescription('Le stretching est une pratique qui consiste à étirer les muscles pour les assouplir. Il permet de se détendre et de se relaxer. Voici une séance de stretching pour vous aider à vous relaxer et à vous détendre.');
         $seance7->setPictureFile('stretchSeance.jpg');
-        $seance7->setCreateAt(new \DateTime('2023-02-08'));
+        $seance7->setCreateAt(new \DateTime('2023-02-08 23:06:26'));
 
         $categoryStretching->addSeance($seance7);
         $seance7->addCategory($categoryStretching);
