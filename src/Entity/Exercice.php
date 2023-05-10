@@ -36,9 +36,6 @@ class Exercice
     private ?int $recuperation = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $pictureFile = null;
 
     public function getId(): ?int
@@ -126,18 +123,6 @@ class Exercice
     public function setRecuperation(int $recuperation): self
     {
         $this->recuperation = $recuperation;
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }

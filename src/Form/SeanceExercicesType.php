@@ -68,6 +68,7 @@ class SeanceExercicesType extends AbstractType
             ])
             ->add('description', null, [
                 'label' => 'Description',
+                'required' => true,
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Description de ta séance',
@@ -81,6 +82,9 @@ class SeanceExercicesType extends AbstractType
                         'minMessage' => 'Votre description doit contenir au moins {{ limit }} caractères',
                         'maxMessage' => 'Votre description ne doit pas dépasser {{ limit }} caractères'
                     ]),
+                    new NotBlank([
+                        'message' => 'Entrez une description.',
+                    ])
                 ]
             ])
             ->add('categories', EntityType::class, [

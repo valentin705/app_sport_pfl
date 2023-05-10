@@ -22,7 +22,7 @@ class Seance
     #[ORM\ManyToOne(inversedBy: 'seances')]
     private ?User $user = null;
 
-    #[ORM\Column(length: 500, type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length: 2000, type: Types::TEXT, nullable: false)]
     private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'seance')]
@@ -36,9 +36,6 @@ class Seance
 
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Exercice::class, cascade: ['persist', 'remove'])]
     private Collection $exercices;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
 
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Likes::class, cascade: ['persist', 'remove'])]
     private Collection $likes;
@@ -191,18 +188,6 @@ class Seance
                 $exercice->setSeance(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }

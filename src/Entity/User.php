@@ -51,9 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $sports = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class)]
     private Collection $likes;
 
@@ -248,18 +245,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSports(?string $sports): self
     {
         $this->sports = $sports;
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }
