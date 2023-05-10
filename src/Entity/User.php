@@ -57,6 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class)]
     private Collection $likes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pictureFile = null;
+
     public function __construct()
     {
         $this->seances = new ArrayCollection();
@@ -287,6 +290,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $like->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
 
         return $this;
     }

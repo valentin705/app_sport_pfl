@@ -43,6 +43,9 @@ class Seance
     #[ORM\OneToMany(mappedBy: 'seance', targetEntity: Likes::class, cascade: ['persist', 'remove'])]
     private Collection $likes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pictureFile = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -237,5 +240,17 @@ class Seance
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
+
+        return $this;
     }
 }

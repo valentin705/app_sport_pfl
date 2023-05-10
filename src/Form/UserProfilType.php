@@ -4,17 +4,24 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\File;
+
+
 
 class UserProfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['data'] ?? null;
+
         $builder
             ->add('email', null, [
                 'label' => 'Mettre à jour votre Email',
@@ -36,30 +43,31 @@ class UserProfilType extends AbstractType
                     ])
                 ],
             ])
-            // ->add('plainPassword', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => [
-            //         'autocomplete' => 'new-password',
-            //         'class' => 'form-control'
-            //     ],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Entrez un mot de passe.',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             // 'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères.',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 4096,
-            //         ]),
-            //         new Regex([
-            //             'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/',
-            //             'message' => 'Votre mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule et un chiffre'
-            //         ])
-            //     ],
-            // ])
+            ->add('password', PasswordType::class, [
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'label' => 'Mettre à jour votre mot de passe',
+                'mapped' => false,
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'class' => 'form-control'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrez un mot de passe.',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        // 'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères.',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/',
+                        'message' => 'Votre mot de passe doit contenir au moins 6 caractères dont une majuscule, une minuscule et un chiffre'
+                    ])
+                ],
+            ])
             ->add('username', null, [
                 'label' => 'Mettre à jour votre Pseudo',
                 'attr' => [
@@ -114,11 +122,26 @@ class UserProfilType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('picture', null, [
-                'label' => 'Lien de votre photo de profil',
+            ->add('pictureFile', FileType::class, [
+                'label' => 'Photo de profil (JPG, PNG, GIF, JPEG)',
+                'mapped' => false,
+                'required' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control mb-3',
                     'placeholder' => 'Photo'
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'maxSizeMessage' => 'Votre photo ne doit pas dépasser 1Mo',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Votre photo doit être au format JPG, JPEG ou PNG'
+                    ])
                 ]
             ]);
     }

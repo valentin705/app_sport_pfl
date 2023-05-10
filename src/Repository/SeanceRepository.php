@@ -110,6 +110,7 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
     //    /**
     //     * @return Seance[] Returns an array of Seance objects
     //     */

@@ -10,6 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ExerciceType extends AbstractType
 {
@@ -34,11 +37,30 @@ class ExerciceType extends AbstractType
                     ])
                 ]
             ])
-            ->add('picture', null, [
-                'label' => 'Image',
+            ->add('pictureType', HiddenType::class, [
+                'mapped' => false,
+                'data' => 'exercice'
+            ])
+            ->add('pictureFile', FileType::class, [
+                'label' => 'Photo de profil (JPG, PNG, GIF, JPEG)',
+                'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control mb-3',
-                    'placeholder' => 'lien de l\'image'
+                    'placeholder' => 'Photo'
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'maxSizeMessage' => 'Votre photo ne doit pas dépasser 1Mo',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Votre photo doit être au format JPG, JPEG ou PNG'
+                    ])
                 ]
             ])
             ->add('description', null, [

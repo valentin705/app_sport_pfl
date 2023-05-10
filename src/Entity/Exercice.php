@@ -38,6 +38,9 @@ class Exercice
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pictureFile = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,6 +145,18 @@ class Exercice
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getPictureFile(): ?string
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(?string $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
+
+        return $this;
     }
 
 }

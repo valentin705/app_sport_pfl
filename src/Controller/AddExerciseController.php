@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Exercice;
 use App\Form\ExerciceType;
 use App\Repository\ExerciceRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AddExerciseController extends AbstractController
 {
@@ -21,6 +23,7 @@ class AddExerciseController extends AbstractController
         Seance $seance,
         Request $request,   
         EntityManagerInterface $manager,
+        SluggerInterface $slugger
     ) {
         $exercice = new Exercice();
         $exercice->setSeance($seance);
@@ -30,6 +33,21 @@ class AddExerciseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pictureFile = $form->get('pictureFile')->getData();
+            if($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('exercice_avatar_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $exercice->setPictureFile($newFilename);
+            }
             $manager->persist($exercice);
             $manager->flush();
 

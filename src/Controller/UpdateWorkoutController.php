@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\SeanceType;
 use App\Form\SeanceExercicesType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class UpdateWorkoutController extends AbstractController
 {
@@ -20,7 +22,9 @@ class UpdateWorkoutController extends AbstractController
     public function updateWorkout(
         Seance $seance,
         EntityManagerInterface $manager,
-        Request $request
+        Request $request,
+        SluggerInterface $slugger,
+        Exercice $exercice = null
     ) {
         // Verification user avant action
         if ($this->VerifyUser($seance)) {
@@ -33,11 +37,36 @@ class UpdateWorkoutController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $pictureFile = $form->get('pictureFile')->getData();
+        
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
+                try {
+                    // $pictureFile->move(
+                    //     $this->getParameter('seance_avatar_directory'),
+                    //     $newFilename
+                    // );
+                    $pictureType = $form->get('pictureType')->getData();
+                    if ($pictureType === 'seance') {
+                        $directory = $this->getParameter('seance_avatar_directory');
+                        $seance->setPictureFile($newFilename);
+                    } 
+                    if ($pictureType === 'exercice') {
+                        $directory = $this->getParameter('exercice_avatar_directory');
+                        $exercice->setPictureFile($newFilename);
+                    }
+                    $pictureFile->move($directory, $newFilename);
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                // $seance->setPictureFile($newFilename); 
+            }
+
             $manager->persist($seance);
-
+            dd($seance);die;
             $manager->flush();
-
-            // return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
 
             if ($request->request->get('route') === 'ajouter') {
                 // Logique pour la route 'ajouter'

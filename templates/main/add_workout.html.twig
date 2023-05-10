@@ -18,7 +18,7 @@
 
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
-                    {{ form_row(formSeance.picture) }}
+                    {{ form_row(formSeance.pictureFile) }}
                     {{ form_row(formSeance.description)}}
                     <div class="d-flex">
                         {% for choice in formSeance.categories %}
@@ -38,7 +38,7 @@
             <div class="card p-4 mb-3">
                 {% for exercice in formSeance.exercices %}
                 {{ form_row(exercice.name) }}
-                {{ form_row(exercice.picture) }}
+                {{ form_row(exercice.pictureFile) }}
                 {{ form_row(exercice.description)}}
                 {{ form_row(exercice.serie) }}
                 {{ form_row(exercice.repetition) }}
