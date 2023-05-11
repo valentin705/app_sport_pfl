@@ -8,71 +8,45 @@
 
 {% block body %}
 
-<div class="container mt-6">
+<div class="container mt-6 mb-5">
     <div class="row">
-        <div class="col-11">
-
-            <div class="card p-4 mb-3">
-                <h2 class="mb-4 text-center">Seance : {{ exercice.seance.name }}</h2>
-                <div class="row">
-                    <div class="col">
-                        <img class="seance-picture mx-auto d-block"
-                            src="{{ asset('uploads/picturesSeances/' ~ exercice.seance.pictureFile) }}" alt="">
-                    </div>
-                    <div class="col">
-                        <h5>Description :</h5>
-                        <p>{{ exercice.seance.description }}</p>
-                    </div>
+        <div class="col">
+            {% include "components/_seance_banner.html.twig" %}
+            <div class="w-100">
+                <div class="my-2 mx-auto w-25">
+                    <a href="{{ path('show_workout', {'id': seance.id})}}">
+                        <button type="button" class="btn btn-primary py-3" name="route" value="finir">Terminer la
+                            séance</button>
+                    </a>
                 </div>
             </div>
-
-            {% if seance.exercices is not empty %}
-            <div class="card p-4 mb-3">
-                {% for exercice in exercice.seance.exercices %}
-                <h2 class="mb-4 text-center">Exercice : {{ exercice.name }}</h2>
-                <div class="row">
-                    <div class="col">
-                        <img class="seance-picture"
-                            src="{{ asset('uploads/picturesExercices/' ~ exercice.pictureFile) }}" alt="">
+            <div class="row">
+                <div class="form-container col">
+                    <h5 class="mx-5">Ajouter un exercice :</h5>
+                    <div class="card p-4 mb-3">
+                        {{ form_start(formExercice) }}
+                        {{ form_row(formExercice.name) }}
+                        {{ form_row(formExercice.pictureFile) }}
+                        {{ form_row(formExercice.description)}}
+                        {{ form_row(formExercice.serie) }}
+                        {{ form_row(formExercice.repetition) }}
+                        {{ form_row(formExercice.temps) }}
+                        {{ form_row(formExercice.recuperation) }}
                     </div>
-                    <div class="col">
-                        <h5>Description :</h5>
-                        <p>{{ exercice.description }}</p>
-                    </div>
-                    <div class="col">
-                        <h5>Series : {{ exercice.serie }}</h5>
-                        <h5>Repetitions : {{ exercice.repetition }}</h5>
-                        <h5>Temps : {{ exercice.temps }}</h5>
-                        <h5>Recuperation : {{ exercice.recuperation }}</h5>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
-            
-            <h5 class="mx-5">Ajouter un exercice :</h5>
-            <div class="card p-4 mb-3">
-                {{ form_start(formExercice) }}
-                {{ form_row(formExercice.name) }}
-                {{ form_row(formExercice.pictureFile) }}
-                {{ form_row(formExercice.description)}}
-                {{ form_row(formExercice.serie) }}
-                {{ form_row(formExercice.repetition) }}
-                {{ form_row(formExercice.temps) }}
-                {{ form_row(formExercice.recuperation) }}
-            </div>
-
-            <div class="row d-flex">
-                <div class="col">
                     <button type="submit" class="btn btn-primary mt-2 w100">Ajouter cet
                         exercice</button>
                 </div>
                 <div class="col">
-                    <a href="{{ path('show_workout', {'id': seance.id})}}"> <button type="button"
-                            class="btn btn-primary mt-2 w100" name="route" value="finir">Terminer la séance</button></a>
+                    <h5 class="mx-5">Exercices actuels :</h5>
+                    {% if seance.exercices is not empty %}
+                    {% include "components/_exercice.html.twig" %}
+                    {% else %}
+                    <div class="card p-4 col m-0">
+                        <h6>Créé ton premier exercice !</h6>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-
             {{ form_end(formExercice) }}
         </div>
     </div>

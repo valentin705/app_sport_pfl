@@ -1,0 +1,30 @@
+{% for exercice in seance.exercices %}
+{% set exercicePicture = asset('uploads/picturesExercices/' ~ exercice.pictureFile) %}
+<div class="card p-4 mb-3">
+    <div class="row mb-3">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <div>
+                    <img class="seance-picture" src="{{ exercicePicture }}" alt="">
+                </div>
+                <div class="px-3">
+                    <h5 class="px-3" style="text-align: center;">{{ exercice.name }}</h5>
+                    <p class="description description-5"> {{ exercice.description }} </p>
+                </div>
+            </div>
+            <ul class="list" style="white-space: nowrap;">
+                <li>Series : {{ exercice.serie }}</li>
+                {% if exercice.repetition %}
+                <li>Repetitions : {{ exercice.repetition }}</li>
+                {% endif %}
+                {% if exercice.temps %}
+                <li>Temps : {{ exercice.temps }}</li>
+                {% endif %}
+                {% if exercice.recuperation %}
+                <li>Recuperation : {{ exercice.recuperation}}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}

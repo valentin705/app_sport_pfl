@@ -181,3 +181,36 @@ a {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 5;
 }
+
+.form-container {
+    max-width: 800px;
+}
+
+.list {
+    font-size: 0.7em;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.seance-card-parent {
+    background-size: cover;
+    border-radius: 0.375rem;
+}
+
+.seance-card {
+    background: linear-gradient(#000000, #00000058);
+}
+
+.no-resize {
+    resize: none;
+}
+
+.comment-text {
+    background: none;
+    border-radius: 0.375rem;
+}
+
+.comment-card {
+    border-radius: 0 0.375rem 0.375rem 0.375rem;
+    background-color: #383838;
+}
