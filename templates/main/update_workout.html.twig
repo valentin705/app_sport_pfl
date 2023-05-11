@@ -68,6 +68,10 @@
         {% for exercice in seance.exercices %}
         <div class="card p-4 mb-3">
             <div class="d-flex justify-content-end">
+                <a href="{{ path('update_exercice', {'id': exercice.id}) }}"
+                    class="btn btn-info btn-sm">
+                    Update l'exercice
+                </a>
                 <a href="{{ path('delete_exercise', {'id': seance.id, 'exercice': exercice.id}) }}"
                     class="btn btn-dark btn-sm">
                     Supprimer l'exercice
@@ -102,10 +106,8 @@
         {% endfor %}
 
         <div class="row d-flex">
-            <div class="col">
-                <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
+                <button type="submit" class="btn btn-primary mt-2 w100 mb-4" name="route" value="ajouter">Ajouter un
                     exercice</button>
-            </div>
             {{ form_end(formSeance) }}
 
         </div>

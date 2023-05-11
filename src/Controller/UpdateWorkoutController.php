@@ -44,24 +44,24 @@ class UpdateWorkoutController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
                 try {
-                    // $pictureFile->move(
-                    //     $this->getParameter('seance_avatar_directory'),
-                    //     $newFilename
-                    // );
-                    $pictureType = $form->get('pictureType')->getData();
-                    if ($pictureType === 'seance') {
-                        $directory = $this->getParameter('seance_avatar_directory');
-                        $seance->setPictureFile($newFilename);
-                    } 
-                    if ($pictureType === 'exercice') {
-                        $directory = $this->getParameter('exercice_avatar_directory');
-                        $exercice->setPictureFile($newFilename);
-                    }
-                    $pictureFile->move($directory, $newFilename);
+                    $pictureFile->move(
+                        $this->getParameter('seance_avatar_directory'),
+                        $newFilename
+                    );
+                    // $pictureType = $form->get('pictureType')->getData();
+                    // if ($pictureType === 'seance') {
+                    //     $directory = $this->getParameter('seance_avatar_directory');
+                    //     $seance->setPictureFile($newFilename);
+                    // } 
+                    // if ($pictureType === 'exercice') {
+                    //     $directory = $this->getParameter('exercice_avatar_directory');
+                    //     $exercice->setPictureFile($newFilename);
+                    // }
+                    // $pictureFile->move($directory, $newFilename);
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                // $seance->setPictureFile($newFilename); 
+                $seance->setPictureFile($newFilename); 
             }
 
             $manager->persist($seance);

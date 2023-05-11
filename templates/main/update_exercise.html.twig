@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update exercise!{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/ajout.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-6">
+    <div class="row">
+
+        <h5 class="mx-5">Modifier votre exercice :</h5>
+        <div class="card p-4 mb-3">
+            <div class="card-body">
+
+
+                {{ form_start(formExercice)}}
+                {{ form_row(formExercice.name)}}
+                {{ form_row(formExercice.pictureFile)}}
+                {{ form_row(formExercice.description)}}
+                {{ form_row(formExercice.serie)}}
+                {{ form_row(formExercice.repetition)}}
+                {{ form_row(formExercice.temps)}}
+                {{ form_row(formExercice.recuperation)}}
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2 w100 mb-4">Valider la
+            modification</button>
+        {{ form_end(formExercice) }}
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/ajout.js') }}"></script>
+{% endblock %}
