@@ -1,1 +1,7 @@
-console.log('Hello Webpack Encore! Edit me in assets/js/main.js');
+const desc = document.querySelectorAll(".description");
+
+desc.forEach((element) => {
+  element.addEventListener("click", () => {
+    element.classList.toggle("description-5");
+  });
+});
