@@ -25,7 +25,8 @@
                 <div class="card-body" style="height: 100%;">
                     <form method="post" class="d-flex flex-column" style="height: 100%;">
                         {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}
+                        <div class="alert alert-danger">
+                            Vos informations sont incorrectes
                         </div>
                         {% endif %}
 

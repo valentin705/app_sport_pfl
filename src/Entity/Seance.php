@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 #[ORM\Entity(repositoryClass: SeanceRepository::class)]
 class Seance
@@ -42,6 +43,9 @@ class Seance
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pictureFile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private $slug;
 
     public function __construct()
     {
@@ -237,5 +241,17 @@ class Seance
         $this->pictureFile = $pictureFile;
 
         return $this;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 }

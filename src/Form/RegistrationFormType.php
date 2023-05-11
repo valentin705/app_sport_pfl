@@ -69,6 +69,8 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                // retirer le message par défaut de symfony pour le remplacer par le notre
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
@@ -79,7 +81,6 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Entrez un mot de passe.',
                     ]),
                     new Length([
-                        'min' => 6,
                         'max' => 4096,
                     ]),
                     new Regex([

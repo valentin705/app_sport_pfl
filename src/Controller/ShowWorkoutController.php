@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Comment;
 use App\Form\CommentType;
+// use App\Service\SlugGenerator;
+
 
 class ShowWorkoutController extends AbstractController
 {
@@ -17,7 +19,8 @@ class ShowWorkoutController extends AbstractController
     public function afficherSeance(
         Seance $seance,
         Request $request,
-        EntityManagerInterface $manager
+        EntityManagerInterface $manager,
+        // SlugGenerator $slugGenerator,
     ) {
 
         $comment = new Comment();
@@ -36,6 +39,9 @@ class ShowWorkoutController extends AbstractController
 
             return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
         }
+
+        // $slug = $slugGenerator->generateUniqueSlug($seance->getName());
+        // $seance->setSlug($slug);
 
         return $this->render('main/show_workout.html.twig', [
             'seance' => $seance,

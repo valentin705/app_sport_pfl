@@ -57,9 +57,6 @@ class UserProfilType extends AbstractType
                         'message' => 'Entrez un mot de passe.',
                     ]),
                     new Length([
-                        'min' => 6,
-                        // 'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères.',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                     new Regex([

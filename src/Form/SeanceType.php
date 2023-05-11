@@ -24,6 +24,7 @@ class SeanceType extends AbstractType
     {
         $builder
             ->add('name', null, [
+                'label' => 'Nom de la séance',
                 'attr' => [
                     'class' => 'form-control mb-3',
                     'placeholder' => 'Nom de ta séance'
