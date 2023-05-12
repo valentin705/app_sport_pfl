@@ -23,9 +23,17 @@
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarText">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="navbar-brand"
-                            href="{% if app.user is not null %} {{ path('home_list') }} {% else %} {{ path('app_login') }} {% endif %}">
+                        <a class="" href="{{ path('home_list') }}">
                             <img class="px-4" id="logo" src="{{ asset('images/logoV1.png')}}" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('home_list') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                                class="bi bi-house" viewBox="0 0 16 16">
+                                <path
+                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
+                            </svg>
                         </a>
                     </li>
                     {% if app.user is not null %}
@@ -34,14 +42,31 @@
                 <span class="navbar-text">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a id="search" href="#" class="nav-link">Recherche</a>
+                            <a id="search" href="#" class="nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </a>
                         </li>
                         <li class="nav-item" id="profil">
                             <a href="{{ path('user_profil', {'id': app.user.id}) }}" class="nav-link"
-                                style="white-space : nowrap;">Mon profil</a>
+                                style="white-space : nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="26"
+                                    height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+                                </svg></a>
                         </li>
                         <li class="nav-item" id="logout">
-                            <a href="{{ path('app_logout') }}" class="nav-link">Déconnection</a>
+                            <a href="{{ path('app_logout') }}" class="nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                                    class="bi bi-door-open" viewBox="0 0 16 16">
+                                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                                    <path
+                                        d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z" />
+                                </svg>
+                            </a>
                         </li>
                     </ul>
                 </span>
@@ -67,27 +92,37 @@
 
         search.addEventListener("click", () => {
             if (search_bar.innerHTML == "") {
-                search_bar.innerHTML = `{{ render(controller('App\\Controller\\SearchController::searchBar')) }}`
-                profil.classList.add("hidden");
-                logout.classList.add("hidden");
-                screen.classList.add("black-screen")
-                setTimeout(() => {
-                    profil.classList.add("display-none");
-                    logout.classList.add("display-none");
-                }, 250)
+                addBlackScreen()
             } else {
-                search_bar.innerHTML = ''
-                profil.classList.remove("display-none");
-                logout.classList.remove("display-none");
-                screen.classList.remove("black-screen")
-                setTimeout(() => {
-                    profil.classList.remove("hidden");
-                    logout.classList.remove("hidden");
-                }, 1)
+                removeBlackScreen()
             }
         })
 
+        screen.addEventListener("click", () => {
+            removeBlackScreen()
+        })
 
+        function addBlackScreen() {
+            search_bar.innerHTML = `{{ render(controller('App\\Controller\\SearchController::searchBar')) }}`
+            profil.classList.add("hidden");
+            logout.classList.add("hidden");
+            screen.classList.add("black-screen")
+            setTimeout(() => {
+                profil.classList.add("display-none");
+                logout.classList.add("display-none");
+            }, 250)
+        }
+
+        function removeBlackScreen() {
+            search_bar.innerHTML = ''
+            profil.classList.remove("display-none");
+            logout.classList.remove("display-none");
+            screen.classList.remove("black-screen")
+            setTimeout(() => {
+                profil.classList.remove("hidden");
+                logout.classList.remove("hidden");
+            }, 1)
+        }
     </script>
     {% endblock %}
 </body>

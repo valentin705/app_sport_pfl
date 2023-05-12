@@ -3,6 +3,29 @@
     color: #fff;
 }
 
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #ffffff #191919;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #191919;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #19191900;
+}
+
+
 body {
     background-color: #191919;
 }
@@ -45,11 +68,11 @@ a {
 }
 
 .navbar-text>.navbar-nav>.nav-item {
-    padding-left: 50px;
+    padding-left: 25px;
 }
 
 #logo {
-    height: 25px;
+    height: 20px;
     width: auto;
 }
 

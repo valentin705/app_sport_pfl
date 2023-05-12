@@ -37,14 +37,18 @@
                         exercice</button>
                 </div>
                 <div class="col">
-                    <h5 class="mx-5">Exercices actuels :</h5>
-                    {% if seance.exercices is not empty %}
-                    {% include "components/_exercice.html.twig" %}
-                    {% else %}
-                    <div class="card p-4 col m-0">
-                        <h6>Créé ton premier exercice !</h6>
+                    <div style="height: 80vh;">
+                        <div class="mh-100" style="overflow-y: auto; overflow-x: hidden;">
+                            <h5 class="mx-5">Exercices actuels :</h5>
+                            {% if seance.exercices is not empty %}
+                            {% include "components/_exercice.html.twig" %}
+                            {% else %}
+                            <div class="card p-4 col m-0">
+                                <h6>Créé ton premier exercice !</h6>
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    {% endif %}
                 </div>
             </div>
             {{ form_end(formExercice) }}
