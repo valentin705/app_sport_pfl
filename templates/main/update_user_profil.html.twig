@@ -19,8 +19,8 @@
                         {% else %}
                         <img id="preview" src="#" alt="" style="max-width: 100%; max-height: 200px;">
                         {% endif %}
-                        {{ form_row(formUserProfil.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }} {{
-                        form_row(formUserProfil.email) }}
+                        {{ form_row(formUserProfil.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }} 
+                        {{ form_row(formUserProfil.email) }}
                         {% if form_errors(formUserProfil.password) %}
                         <div class="text-danger">Verifier les conditions pour modifier votre mot de pass</div>
                     {% endif %}
@@ -56,6 +56,5 @@
                 };
                 reader.readAsDataURL(input.files[0]);
             }
-
         </script>
         {% endblock %}

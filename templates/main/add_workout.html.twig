@@ -17,7 +17,8 @@
                 {# <div class="card-body"> #}
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
-                    {{ form_row(formSeance.pictureFile) }}
+                    <img id="preview" src="#" alt="" style="max-width: 100%; max-height: 200px;">
+                    {{ form_row(formSeance.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }}
                     {{ form_row(formSeance.description)}}
                     <div class="d-flex">
                         {% for choice in formSeance.categories %}
@@ -27,47 +28,38 @@
                         </div>
                         {% endfor %}
                     </div>
-                    {# {{ form_row(formSeance.categories) }} #}
-                    {# , {'attr': {'class': 'form-check-label'}} #}
-                    {#
-                </div> #}
-            </div>
-            {# <h5 class="mx-5">Ajouter un exercice :</h5>
-            <div class="card p-4 mb-3">
-                {% for exercice in formSeance.exercices %}
-                {{ form_row(exercice.name) }}
-                {{ form_row(exercice.pictureFile) }}
-                {{ form_row(exercice.description)}}
-                {{ form_row(exercice.serie) }}
-                {{ form_row(exercice.repetition) }}
-                {{ form_row(exercice.temps) }}
-                {{ form_row(exercice.recuperation) }}
-                {% endfor %}
-            </div> #}
-            <div class="d-flex justify-content-between">
-                <div class="col mx-2">
-                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
-                        exercice</button>
                 </div>
-                <div class="col mx-2">
-                    <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="finir">Valider et
-                        terminer la séance</button>
+                <div class="d-flex justify-content-between">
+                    <div class="col mx-2">
+                        <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="ajouter">Ajouter un
+                            exercice</button>
+                    </div>
+                    <div class="col mx-2">
+                        <button type="submit" class="btn btn-primary mt-2 w100" name="route" value="finir">Valider et
+                            terminer la séance</button>
+                    </div>
                 </div>
+                {{ form_end(formSeance) }}
             </div>
-            {{ form_end(formSeance) }}
-            {# <div class="card p-2 col-1">
-                <button id="add" class="btn btn-secondary my-3">+</button>
-                <button id="remove" class="btn btn-secondary my-3">-</button>
-            </div> #}
         </div>
     </div>
-</div>
-<div id="content">
+    <div id="content">
 
-</div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-{% endblock %}
+    {% block javascripts %}
+    {{ parent() }}
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById("preview");
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+    {% endblock %}

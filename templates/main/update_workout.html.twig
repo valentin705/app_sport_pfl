@@ -23,7 +23,13 @@
                     </div>
                     {{ form_start(formSeance) }}
                     {{ form_row(formSeance.name) }}
-                    {{ form_row(formSeance.pictureFile) }}
+                    {% if seance.pictureFile is not null %}
+                    <img id="preview" src="{{ asset('uploads/picturesSeances/' ~ seance.pictureFile) }}" alt=""
+                        style="max-width: 100%; max-height: 200px;">
+                    {% else %}
+                    <img id="preview" src="#" alt="" style="max-width: 100%; max-height: 200px;">
+                    {% endif %}
+                    {{ form_row(formSeance.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }}
                     {{ form_row(formSeance.description)}}
                     <div class="d-flex flex-wrap">
                         {% for choice in formSeance.categories %}
@@ -121,4 +127,15 @@
 {% block javascripts %}
 {{ parent() }}
 <script src="{{ asset('js/ajout.js') }}"></script>
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var img = document.getElementById("preview");
+            img.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
 {% endblock %}

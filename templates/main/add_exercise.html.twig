@@ -26,7 +26,8 @@
                     <div class="card p-4 mb-3">
                         {{ form_start(formExercice) }}
                         {{ form_row(formExercice.name) }}
-                        {{ form_row(formExercice.pictureFile) }}
+                        <img id="preview" src="#" alt="" style="max-width: 100%; max-height: 200px;">
+                        {{ form_row(formExercice.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }} 
                         {{ form_row(formExercice.description)}}
                         {{ form_row(formExercice.serie) }}
                         {{ form_row(formExercice.repetition) }}
@@ -60,4 +61,15 @@
 
 {% block javascripts %}
 {{ parent() }}
+     <script>
+            function previewImage(event) {
+                var input = event.target;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var img = document.getElementById("preview");
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        </script>
 {% endblock %}
