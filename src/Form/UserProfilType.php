@@ -7,21 +7,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\File;
 
-
-
 class UserProfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $user = $options['data'] ?? null;
-
         $builder
             ->add('email', null, [
                 'label' => 'Mettre à jour votre Email',
@@ -44,18 +39,17 @@ class UserProfilType extends AbstractType
                 ],
             ])
             ->add('password', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'label' => 'Mettre à jour votre mot de passe',
+                'required' => false,
                 'mapped' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'class' => 'form-control'
                 ],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez un mot de passe.',
-                    ]),
+                    // new NotBlank([
+                    //     'message' => 'Entrez un mot de passe.',
+                    // ]),
                     new Length([
                         'max' => 4096,
                     ]),

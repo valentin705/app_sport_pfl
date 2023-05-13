@@ -22,26 +22,31 @@ class UpdateUserProfilController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         SluggerInterface $slugger,
-    )
-    {
+    ) {
         $user = $this->getUser();
-
         $form = $this->createForm(UserProfilType::class, $user);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+            // $user->setPassword(
+            //     $userPasswordHasher->hashPassword(
+            //         $user,
+            //         $form->get('password')->getData()
+            //     )
+            // );
+            $password = $form->get('password')->getData();
+            if ($password) {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $password
+                    )
+                );
+            }
             $pictureFile = $form->get('pictureFile')->getData();
-            if($pictureFile) {
+            if ($pictureFile) {
                 $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
                 try {
                     $pictureFile->move(
                         $this->getParameter('user_avatar_directory'),
@@ -52,13 +57,10 @@ class UpdateUserProfilController extends AbstractController
                 }
                 $user->setPictureFile($newFilename);
             }
-            
             $manager->persist($user);
             $manager->flush();
-
             return $this->redirectToRoute('user_profil');
         }
-
         return $this->render('main/update_user_profil.html.twig', [
             'formUserProfil' => $form->createView()
         ]);

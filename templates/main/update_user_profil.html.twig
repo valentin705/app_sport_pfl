@@ -3,28 +3,59 @@
 {% block title %}Update user profil{% endblock %}
 
 {% block body %}
-<div class="container mt-6 d-flex align-items-center justify-content-center">
-    <div class="row">
-        <h5 class="mx-5">Édition de profil :</h5>
-        <div class="card p-4 mb-3" style="min-width: 50vw;">
-            {{ form_start(formUserProfil) }}
-            {{ form_row(formUserProfil.username) }}
-            {{ form_row(formUserProfil.description) }}
-            {{ form_row(formUserProfil.pictureFile) }}
-            {{ form_row(formUserProfil.email) }}
-            {{ form_row(formUserProfil.password)}}
-            {{ form_row(formUserProfil.sports) }}
-
+{# <div class="container mt-6 d-flex align-items-center justify-content-center">
+    <div class="row"> #}
+        <div class="container form-container min-vh-100 d-flex align-items-center">
+            <div class=" d-flex flex-column">
+                <div class="row g-0 h-100">
+                    <h5 class="mx-5">Édition de profil :</h5>
+                    <div class="card p-4 mb-3">
+                        {{ form_start(formUserProfil) }}
+                        {{ form_row(formUserProfil.username) }}
+                        {{ form_row(formUserProfil.description) }}
+                        {% if app.user.pictureFile is not null %}
+                        <img id="preview" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}" alt=""
+                            style="max-width: 100%; max-height: 200px;">
+                        {% else %}
+                        <img id="preview" src="#" alt="" style="max-width: 100%; max-height: 200px;">
+                        {% endif %}
+                        {{ form_row(formUserProfil.pictureFile, {'attr': {'onchange': 'previewImage(event)'}}) }} {{
+                        form_row(formUserProfil.email) }}
+                        {% if form_errors(formUserProfil.password) %}
+                        <div class="text-danger">Verifier les conditions pour modifier votre mot de pass</div>
+                    {% endif %}
+                        {% if formUserProfil.password.vars.value is empty %}
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('password').style.display = 'block'; this.style.display = 'none';">Modifier le mot de passe</button>
+                        <div id="password" style="display: none;">
+                    {% else %}
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('password').style.display = 'block';">Modifier le mot de passe</button>
+                        <div id="password">
+                    {% endif %}
+                        {{ form_row(formUserProfil.password) }}
+                    </div>
+                        {# {{ form_row(formUserProfil.password)}} #}
+                        {{ form_row(formUserProfil.sports) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Modifier</button>
+                {{ form_end(formUserProfil) }}
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Modifier</button>
-        {{ form_end(formUserProfil) }}
-    </div>
-</div>
 
-{% endblock %}
+        {% endblock %}
 
-{% block javascripts %}
+        {% block javascripts %}
+        {{ parent() }}
+        <script>
+            function previewImage(event) {
+                var input = event.target;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var img = document.getElementById("preview");
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
 
-{{ parent() }}
-
-{% endblock %}
+        </script>
+        {% endblock %}

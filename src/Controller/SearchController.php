@@ -11,14 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
 class SearchController extends AbstractController
 {
     /**
      * @Route("/handleSearch", name="handleSearch")
      * @param Request $request
      */
-
     public function handleSearch(
         Request $request,
         SeanceRepository $repoSeance,
@@ -34,7 +32,6 @@ class SearchController extends AbstractController
             'users' => $users
         ]);
     }
-
     public function searchBar()
     {
         $form = $this->createFormBuilder()

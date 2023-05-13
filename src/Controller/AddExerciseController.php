@@ -21,23 +21,20 @@ class AddExerciseController extends AbstractController
     #[Route('/main/add_exercise/{id}', name: 'add_exercise')]
     public function ajouterExercice(
         Seance $seance,
-        Request $request,   
+        Request $request,
         EntityManagerInterface $manager,
         SluggerInterface $slugger
     ) {
         $exercice = new Exercice();
         $exercice->setSeance($seance);
-
         $form = $this->createForm(ExerciceType::class, $exercice);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $pictureFile = $form->get('pictureFile')->getData();
-            if($pictureFile) {
+            if ($pictureFile) {
                 $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
                 try {
                     $pictureFile->move(
                         $this->getParameter('exercice_avatar_directory'),
@@ -50,18 +47,15 @@ class AddExerciseController extends AbstractController
             }
             $manager->persist($exercice);
             $manager->flush();
-
             return $this->redirectToRoute(
-                'add_exercise', ['id' => $seance->getId()]
+                'add_exercise',
+                ['id' => $seance->getId()]
             );
         }
-
         return $this->render('main/add_exercise.html.twig', [
             'exercice' => $exercice,
             'formExercice' => $form->createView(),
             'seance' => $seance,
         ]);
-        
     }
-   
 }

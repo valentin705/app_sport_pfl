@@ -27,22 +27,11 @@ class AddWorkoutController extends AbstractController
         if (!$seance) {
             $seance = new Seance();
         }
-
-        // $exercice = new Exercice();
-        // $seance->addExercice($exercice);
-    
-        // Récupère l'utilisateur connecté
         $user = $this->getUser();
-
-        // $form = $this->createForm(SeanceExercicesType::class, $seance);
         $form = $this->createForm(SeanceType::class, $seance);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // On ajoute l'utilisateur connecté à la séance
             $seance->setUser($user);
-
             $pictureFile = $form->get('pictureFile')->getData();
             if ($pictureFile) {
                 $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -56,27 +45,20 @@ class AddWorkoutController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                $seance->setPictureFile($newFilename); 
-             
+                $seance->setPictureFile($newFilename);
             }
             $manager->persist($seance);
             $manager->flush();
-            // return $this->redirectToRoute('add_workout', ['id' => $seance->getId()]);
             if ($request->request->get('route') === 'ajouter') {
-                // Logique pour la route 'ajouter'
                 return $this->redirectToRoute('add_exercise', ['id' => $seance->getId()]);
             } elseif ($request->request->get('route') === 'finir') {
-                // Logique pour la route 'finir'
                 return $this->redirectToRoute('show_workout', ['id' => $seance->getId()]);
             }
-    
         }
-
         return $this->render('main/add_workout.html.twig', [
             'formSeance' => $form->createView(),
             'editMode' => $seance->getId() !== null,
             'seance' => $seance,
         ]);
     }
-
 }

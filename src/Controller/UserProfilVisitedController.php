@@ -18,24 +18,18 @@ class UserProfilVisitedController extends AbstractController
         SeanceRepository $seanceRepository,
         CategoryRepository $categoryRepository,
         UserRepository $userRepository
-    ): Response
-    {
-
+    ): Response {
         $currentUser = $this->getUser();
-    
         $user = $userRepository->findOneById($id);
         if ($currentUser === $user) {
             return $this->redirectToRoute('user_profil');
         }
-
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-
         $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findByUser($user);
         $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
-
         return $this->render('main/user_profil_visited.html.twig', [
             'seances' => $seances,
             'seancesByLikes' => $seancesByLikes,
