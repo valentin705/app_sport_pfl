@@ -73,7 +73,6 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // filtre par catégorie avec un slug
     public function findByCategory($category)
     {
         $qb = $this->createQueryBuilder('p');

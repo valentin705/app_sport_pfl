@@ -39,14 +39,18 @@
 .menu-div {
    display: flex;
    align-items: center;
+   justify-content: center;
 }
 
 .menu {
-   width: 50px;
-   font-size: 0.8em;
+   font-size: 3em;
    border: none;
    color: white;
    background: none;
+}
+
+#category {
+   width: 10rem;
 }
 
 .menu>option {
@@ -55,8 +59,9 @@
 
 .ligne {
    height: 3px;
-   width: 90%;
+   width: 50%;
    background-color: #680000;
+    margin: 0 10px;
 }
 
 .top-seance {

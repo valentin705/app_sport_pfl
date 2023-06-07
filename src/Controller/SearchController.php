@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Form\SearchBarType;
 
 class SearchController extends AbstractController
 {
@@ -48,4 +49,5 @@ class SearchController extends AbstractController
             'formSearch' => $form->createView()
         ]);
     }
+
 }
