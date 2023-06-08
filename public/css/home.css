@@ -43,7 +43,7 @@
 }
 
 .menu {
-   font-size: 3em;
+   font-size: 30px;
    border: none;
    color: white;
    background: none;
@@ -58,7 +58,7 @@
 }
 
 .ligne {
-   height: 3px;
+   height: 1rem;
    width: 50%;
    background-color: #680000;
     margin: 0 10px;

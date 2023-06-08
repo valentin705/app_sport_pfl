@@ -22,26 +22,36 @@
             <img class="aside-navbar__avatar" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}"
                 alt="image avatar">
             <p class="aside-navbar__username">{{ app.user.username }}</p>
-            <div class="aside-navbar__profil"><a href="">Profil</a><img class="aside-navbar__logo"
-                    src="{{ asset('images/profil-logo.png') }}" alt="logo profil"></div>
-            <div class="aside-navbar__home"><a href="">Home</a><img class="aside-navbar__logo"
-                    src="{{ asset('images/home-logo.png') }}" alt="logo home"></div>
-            <div class="aside-navbar__add"><a href="">Ajouter</a><img class="aside-navbar__logo"
-                    src="{{ asset('images/ajouter-logo.png') }}" alt="logo ajouter"></div>
+
+            <a class="aside-navbar__profil" href="{{ path('user_profil')}}">
+                <p>Profil</p>
+                <img class="aside-navbar__logo" src="{{ asset('images/profil-logo.png') }}" alt="logo profil">
+            </a>
+
+            <a class="aside-navbar__home" href="{{ path('home_list')}}">
+                <p>Home</p>
+                <img class="aside-navbar__logo" src="{{ asset('images/home-logo.png') }}" alt="logo home">
+            </a>
+
+            <a class="aside-navbar__add" href="{{ path('add_workout')}}">
+                <p>Ajouter</p>
+                <img class="aside-navbar__logo" src="{{ asset('images/ajouter-logo.png') }}" alt="logo ajouter">
+            </a>
         </div>
 
-        <div class="aside-navbar__logout"><a href="{{ path('app_logout') }}">Déconnexion</a><img
-                class="aside-navbar__logo" src="{{ asset('images/logout-logo.png') }}" alt="logo logout">
-        </div>
+        <a class="aside-navbar__logout" href="{{ path('app_logout') }}">
+            <p> Déconnexion</p>
+            <img class="aside-navbar__logo" src="{{ asset('images/logout-logo.png') }}" alt="logo logout">
+        </a>
     </aside>
     <div class="screen"></div>
 </header>
 
 <main class="home">
 
-    <div class="filter">
+    <section class="filter">
         {% include "components/_filterCategory.html.twig" %}
-    </div>
+    </section>
 
     <section class="fil-actualite">
         {% for seance in seances %}
@@ -73,15 +83,41 @@
                 <p class="wrap-seance__description">{{ seance.description }}</p>
             </a>
         </article>
-
-        <section class="top-seance">
-            <div >
-
-            </div>
-        </section>
         {% endfor %}
-
     </section>
+
+    <button class="heart-btn"><img class="heart-btn__img" src="{{ asset('images/red-heart.png')}}" alt="">
+    </button>
+
+    <section class="top-like">
+        <h3 class="top-like__title">Meilleures séances</h3>
+
+        {% for seance in seancesByLikes %}
+        {% set seancePicture = asset("uploads/picturesSeances/" ~ seance.pictureFile) %}
+        <div class="top-like__wrap">
+            <a href="{{ path('show_workout', {'id': seance.id}) }}">
+                    <div class="top-like__background" style="background-image: url('{{ seancePicture }}');">
+                        <p class="top-like__username">{{ seance.user.username }}</p>
+                        <p class="top-like__date">{{ seance.createAt | date('d/m/Y') }}</p>
+                        <p class="top-like__name">{{ seance.name }}</p>
+                    </div>
+            </a>
+
+            <div class="wrap-seance__flex">
+                <div class="wrap-seance__flex">
+                    {% include "components/_likesDislikes.html.twig" %}
+                    <p class="wrap-seance__nb-like">{{ seance.likes | length}}</p>
+                </div>
+                <div class="wrap-seance__flex">
+                    <img src="{{ asset('images/comment-logo.png') }}" alt="logo comment">
+                    <p class="wrap-seance__nb-comment">{{ seance.comments | length}} </p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </section>
+    <div class="screen-top-like"></div>
 
 </main>
 
@@ -89,6 +125,7 @@
 
 {% block javascripts %}
 <script>
+
     const btn = document.querySelector(".navbar__btn-asidebar");
     const aside = document.querySelector(".aside-navbar");
     const outsideElements = document.querySelectorAll(':not(.aside-navbar)');
@@ -109,6 +146,21 @@
         }
     });
 
- 
+    const heartBtn = document.querySelector(".heart-btn");
+    const topLike = document.querySelector(".top-like");
+    const outsideTopLike = document.querySelectorAll(':not(.top-like)');
+    const screenTopLike = document.querySelector(".screen-top-like");
+    heartBtn.addEventListener("click", function () {
+        topLike.classList.toggle("top-like--active");
+        screenTopLike.classList.toggle("screen-top-like--active");
+    });
+
+    body.addEventListener("click", function (e) {
+        if (!e.target.closest(".top-like") && !e.target.closest(".heart-btn")) {
+            topLike.classList.remove("top-like--active");
+            screenTopLike.classList.remove("screen-top-like--active");
+        }
+    });
+
 </script>
 {% endblock %}
