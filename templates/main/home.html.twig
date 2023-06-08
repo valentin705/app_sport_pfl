@@ -96,11 +96,15 @@
         {% set seancePicture = asset("uploads/picturesSeances/" ~ seance.pictureFile) %}
         <div class="top-like__wrap">
             <a href="{{ path('show_workout', {'id': seance.id}) }}">
-                    <div class="top-like__background" style="background-image: url('{{ seancePicture }}');">
+                <div class="top-like__background" style="background-image: url('{{ seancePicture }}');">
+                    <div class="top-like__background-dark">
                         <p class="top-like__username">{{ seance.user.username }}</p>
-                        <p class="top-like__date">{{ seance.createAt | date('d/m/Y') }}</p>
-                        <p class="top-like__name">{{ seance.name }}</p>
+                        <div>
+                            <p class="top-like__date">{{ seance.createAt | date('d/m/Y') }}</p>
+                            <p class="top-like__name">{{ seance.name }}</p>
+                        </div>
                     </div>
+                </div>
             </a>
 
             <div class="wrap-seance__flex">

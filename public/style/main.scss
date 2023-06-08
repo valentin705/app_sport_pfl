@@ -231,6 +231,9 @@ body {
         box-shadow: 0 0 10px #000000;
     }
 
+    &__wrap {
+    }
+
     &__title {
         font-size: 3rem;
         text-align: center;
@@ -240,6 +243,17 @@ body {
         height: 20rem;
         width: 100%;
         background-size: cover;
+    }
+
+    &__background-dark {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        height: 20rem;
+        width: 100%;
+        background: linear-gradient(#000000, #00000000);
+        border-radius: 10px;
+        font-size: 2rem;
     }
 }
 
