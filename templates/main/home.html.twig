@@ -7,16 +7,28 @@
 
 <header>
     <nav class="navbar">
+        <a class="navbar__desktop-home" href="{{ path('home_list')}}">
+            <img class="navbar__logo" src="{{ asset('images/Logov1.png')}}" alt="logo appli">
+            <img class="navbar__home" src="{{ asset('images/home-logo.png') }}" alt="logo home">
+        </a>
+
         <button class="navbar__btn-asidebar"><img src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}"
                 alt="image avatar" class="navbar__avatar">
         </button>
-        <div>
+        <div class="navbar__flex">
             {# {% include "search/searchBar.html.twig" %} #}
             <button class="navbar__btn-loupe">
                 <img class="navbar__loupe" src="{{ asset('images/loupe-logo.png')}}" alt="logo loupe">
             </button>
+            <a class="navbar__desktop-profil" href="{{ path('user_profil')}}">
+                <img class="navbar__profil" src="{{ asset('images/profil-logo.png') }}" alt="logo profil">
+            </a>
+            <a class="navbar__desktop-logout" href="{{ path('app_logout') }}">
+                <img class="navbar__logout" src="{{ asset('images/logout-logo.png') }}" alt="logo logout">
+            </a>
         </div>
     </nav>
+
     <aside class="aside-navbar">
         <div>
             <img class="aside-navbar__avatar" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}"
@@ -49,42 +61,62 @@
 
 <main class="home">
 
-    <section class="filter">
-        {% include "components/_filterCategory.html.twig" %}
+    <section class="profil">
+            <img class="profil__avatar" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}" alt="image avatar">
+            <div class="profil__flex">
+                <p class="profil__username">{{ app.user.username }}</p>
+                <p class="profil__description">{{ app.user.description }}</p>
+                <a class="profil__edit" href="{{ path('user_profil')}}">
+                    <p >Ouvrir mon profil</p>
+                </a>
+            </div>
     </section>
 
-    <section class="fil-actualite">
-        {% for seance in seances %}
-        <article class="wrap-seance">
-            <div class="wrap-seance__row-1">
-                <div class="wrap-seance__flex">
-                    <img class="wrap-seance__avatar" src="{{ asset('uploads/avatars/' ~ seance.user.pictureFile) }}"
-                        alt="picture avatar">
-                    <p class="wrap-seance__username">{{ seance.user.username }}</p>
-                </div>
-                <div>
-                    <p class="wrap-seance__date" class="date">{{ seance.createAt | date('d/m/Y') }}</p>
-                </div>
-            </div>
-            <a class="wrap-seance__profil" href="{{ path('show_workout', {'id': seance.id}) }}">
-                <h5 class="wrap-seance__name">{{ seance.name }}</h5>
-                <img class="wrap-seance__picture" src="{{ asset('uploads/picturesSeances/' ~ seance.pictureFile )}}"
-                    alt="picture seance">
-                <div class="wrap-seance__flex">
+    <div class="container-center">
+
+        <div class="filter">
+            {% include "components/_filterCategory.html.twig" %}
+        </div>
+
+        <div class="add-seance">
+            <img src="{{ asset('images/ajouter-logo.png')}}" alt="logo +">
+            <p>Proposer ma séance</p>
+        </div>
+
+        <section class="fil-actualite">
+            {% for seance in seances %}
+            <article class="wrap-seance">
+                <div class="wrap-seance__row-1">
                     <div class="wrap-seance__flex">
-                        {% include "components/_likesDislikes.html.twig" %}
-                        <p class="wrap-seance__nb-like">{{ seance.likes | length}}</p>
+                        <img class="wrap-seance__avatar" src="{{ asset('uploads/avatars/' ~ seance.user.pictureFile) }}"
+                            alt="picture avatar">
+                        <p class="wrap-seance__username">{{ seance.user.username }}</p>
                     </div>
-                    <div class="wrap-seance__flex">
-                        <img src="{{ asset('images/comment-logo.png') }}" alt="logo comment">
-                        <p class="wrap-seance__nb-comment">{{ seance.comments | length}} </p>
+                    <div>
+                        <p class="wrap-seance__date" class="date">{{ seance.createAt | date('d/m/Y') }}</p>
                     </div>
                 </div>
-                <p class="wrap-seance__description">{{ seance.description }}</p>
-            </a>
-        </article>
-        {% endfor %}
-    </section>
+                <a class="wrap-seance__profil" href="{{ path('show_workout', {'id': seance.id}) }}">
+                    <h5 class="wrap-seance__name">{{ seance.name }}</h5>
+                    <img class="wrap-seance__picture" src="{{ asset('uploads/picturesSeances/' ~ seance.pictureFile )}}"
+                        alt="picture seance">
+                    <div class="wrap-seance__flex">
+                        <div class="wrap-seance__flex">
+                            {% include "components/_likesDislikes.html.twig" %}
+                            <p class="wrap-seance__nb-like">{{ seance.likes | length}}</p>
+                        </div>
+                        <div class="wrap-seance__flex">
+                            <img src="{{ asset('images/comment-logo.png') }}" alt="logo comment">
+                            <p class="wrap-seance__nb-comment">{{ seance.comments | length}} </p>
+                        </div>
+                    </div>
+                    <p class="wrap-seance__description">{{ seance.description }}</p>
+                </a>
+            </article>
+            {% endfor %}
+        </section>
+
+    </div>
 
     <button class="heart-btn"><img class="heart-btn__img" src="{{ asset('images/red-heart.png')}}" alt="">
     </button>

@@ -1,0 +1,8 @@
+
+.filter {
+    margin-top: 15rem;
+
+     @include media-size-l {
+        margin: 3rem 0;
+     }
+}

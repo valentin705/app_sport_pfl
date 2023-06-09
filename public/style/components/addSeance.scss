@@ -1,0 +1,10 @@
+.add-seance {
+    display: none;
+    @include media-size-l {
+        display: flex;
+    justify-content: center;
+    color: white;
+    margin: 3rem 0;
+    }
+   
+}

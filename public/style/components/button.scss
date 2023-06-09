@@ -1,0 +1,16 @@
+.heart-btn {
+    position: fixed;
+    bottom: 15rem;
+    right: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: white;
+
+    @include media-size-l {
+       display: none;
+    }
+}

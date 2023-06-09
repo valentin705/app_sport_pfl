@@ -1,0 +1,146 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    background-color: $primary-color;
+    height: 12rem;
+    width: 100%;
+    align-items: center;
+
+    @include media-size-l {
+        position: static;
+        height: 4.5rem;
+    }
+
+    &__btn-asidebar,
+    &__btn-loupe {
+        background: none;
+        border: none;
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        cursor: pointer;
+        @include media-size-l {
+            display: none;
+        }
+    }
+
+    &__loupe {
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+        @include media-size-l {
+            height: 25px;
+            width: 25px;
+            margin: auto 1rem;
+        }
+    }
+
+    &__desktop-home, &__desktop-profil, &__desktop-logout {
+        display: none;
+        @include media-size-l {
+          display: flex;
+        }
+    }
+
+    &__logo {
+        height: 25px;
+        margin: auto 1rem;
+    }
+    
+    &__profil, &__logout, &__home {
+        margin: auto 1rem;
+        height: 25px;
+        width: 25px;
+    }
+
+    &__flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.aside-navbar {
+    display: none;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    background-color: black;
+    width: 35rem;
+    color: white;
+    font-size: 4rem;
+
+    &.aside-navbar--active {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include media-size-l {
+        display: none;
+    }
+
+    }
+
+    &__avatar {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        margin: 2rem 0 0 2rem;
+    }
+
+    &__username {
+        margin: 1rem 0 0 2rem;
+        font-size: 5rem;
+    }
+
+    &__profil,
+    &__home,
+    &__add {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 5rem 2rem 0 2rem;
+    }
+
+    &__logout {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 2rem 5rem 2rem
+    }
+
+    &__logo {
+        height: 50px;
+        width: 50px;
+    }
+
+}
+
+.screen {
+    transition: background-color 0.6s ease-out;
+
+    &.screen--active {
+        background-color: rgba(0, 0, 0, 0.387);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 5;
+
+        @include media-size-l {
+            display: none;
+        }
+    }
+}
+
+
+
+
+
