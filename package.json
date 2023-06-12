@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "sass": "sass --watch ./public/style/main.scss:./public/css/main.css"
+    "sass": "sass --watch ./public/style/style.scss:./public/css/main.css"
   },
   "author": "",
   "license": "ISC",
