@@ -124,7 +124,6 @@
 
     <section class="top-like">
         <h3 class="top-like__title">Meilleures séances</h3>
-
         {% for seance in seancesByLikes %}
         {% set seancePicture = asset("uploads/picturesSeances/" ~ seance.pictureFile) %}
         <div class="top-like__wrap">
