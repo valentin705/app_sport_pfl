@@ -3,7 +3,7 @@ Projet fil rouge symfony en collaboration avec Zakkios
 
 ### 1. Clonez ce dépôt sur votre machine locale:
 ```
-git clone URL
+git clone https://github.com/valentin705/app_sport_pfl.git
 ```
 
 ### 2. Installez les dépendances du projet avec Composer:
