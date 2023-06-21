@@ -1,18 +1,33 @@
 # app_sport_pfl
 Projet fil rouge symfony en collaboration avec Zakkios
 
-Installation
-Clonez ce dépôt sur votre machine locale : 
-git clone <URL_DU_DÉPÔT>
+### 1. Clonez ce dépôt sur votre machine locale:
+```
+git clone URL
+```
 
-Installez les dépendances du projet avec Composer.
+### 2. Installez les dépendances du projet avec Composer:
+```
 composer install
+```
 
-Configurez les paramètres de l'application en créant le fichier .env et en le personnalisant selon vos besoins.
+### 3. Créer la base de donnée qui se trouve dans le fichier .env.local
+```
+php bin/console doctrine:database:create
+```
 
-Créez la base de données et exécutez les migrations.
+### 4. Créez la base de données et exécutez les migrations :
+```
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
+```
 
-(Optionnel) Chargez les données de test avec les fixtures.
+### 5. (Optionnel) Chargez les données de test avec les fixtures ou insérez le script d'initialisation pour les catégories
+```
 php bin/console doctrine:fixtures:load
+```
+
+### 6. Exécutez le serveur symfony
+```
+symfony serve -d
+```
