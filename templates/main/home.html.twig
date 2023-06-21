@@ -15,7 +15,7 @@
         <button class="navbar__btn-asidebar"><img src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}"
                 alt="image avatar" class="navbar__avatar">
         </button>
-        
+
         <div class="navbar__flex">
             {# {% include "search/searchBar.html.twig" %} #}
             <button class="navbar__btn-loupe">
@@ -63,14 +63,15 @@
 <main class="home">
 
     <section class="profil">
-            <img class="profil__avatar" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}" alt="image de l'avatar">
-            <div class="profil__flex">
-                <p class="profil__username">{{ app.user.username }}</p>
-                <p class="profil__description">{{ app.user.description }}</p>
-                <a class="profil__edit" href="{{ path('user_profil')}}">
-                    <p >Ouvrir mon profil</p>
-                </a>
-            </div>
+        <img class="profil__avatar" src="{{ asset('uploads/avatars/' ~ app.user.pictureFile) }}"
+            alt="image de l'avatar">
+        <div class="profil__flex">
+            <p class="profil__username">{{ app.user.username }}</p>
+            <p class="profil__description">{{ app.user.description }}</p>
+            <a class="profil__edit" href="{{ path('user_profil')}}">
+                <p>Ouvrir mon profil</p>
+            </a>
+        </div>
     </section>
 
     <div class="container-center">
@@ -99,19 +100,19 @@
                 </div>
                 <a class="wrap-seance__profil" href="{{ path('show_workout', {'id': seance.id}) }}">
                     <h5 class="wrap-seance__name">{{ seance.name }}</h5>
-                    <img class="wrap-seance__picture" src="{{ asset('uploads/picturesSeances/' ~ seance.pictureFile )}}"
-                        alt="picture seance">
-                    <div class="wrap-seance__flex">
+                        <img class="wrap-seance__picture"
+                            src="{{ asset('uploads/picturesSeances/' ~ seance.pictureFile )}}" alt="picture seance">
                         <div class="wrap-seance__flex">
-                            {% include "components/_likesDislikes.html.twig" %}
-                            <p class="wrap-seance__nb-like">{{ seance.likes | length}}</p>
+                            <div class="wrap-seance__flex">
+                                {% include "components/_likesDislikes.html.twig" %}
+                                <p class="wrap-seance__nb-like">{{ seance.likes | length}}</p>
+                            </div>
+                            <div class="wrap-seance__flex">
+                                <img src="{{ asset('images/comment-logo.png') }}" alt="logo comment">
+                                <p class="wrap-seance__nb-comment">{{ seance.comments | length}} </p>
+                            </div>
                         </div>
-                        <div class="wrap-seance__flex">
-                            <img src="{{ asset('images/comment-logo.png') }}" alt="logo comment">
-                            <p class="wrap-seance__nb-comment">{{ seance.comments | length}} </p>
-                        </div>
-                    </div>
-                    <p class="wrap-seance__description">{{ seance.description }}</p>
+                        <p class="wrap-seance__description">{{ seance.description }}</p>
                 </a>
             </article>
             {% endfor %}

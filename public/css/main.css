@@ -104,6 +104,10 @@
 
 .home {
   display: flex; }
+  @media (min-width: 1024px) {
+    .home {
+      padding: 3rem;
+      gap: 3rem; } }
 
 .profil {
   display: none; }
@@ -113,12 +117,10 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin: 3rem;
       padding: 2rem;
       background-color: #680000;
       color: white;
-      height: fit-content;
-      width: 100%; } }
+      height: fit-content; } }
   .profil__avatar {
     height: 80px;
     width: 80px;
@@ -143,7 +145,6 @@
   color: white; }
   @media (min-width: 1024px) {
     .wrap-seance {
-      margin: 3rem;
       padding: 2rem;
       border-radius: 10px; } }
   .wrap-seance__row-1 {
@@ -205,10 +206,8 @@
       flex-direction: column;
       position: static;
       transform: none;
-      margin: 3rem;
       padding: 2rem;
       border-radius: 10px;
-      width: 100%;
       height: fit-content; } }
   .top-like.top-like--active {
     display: flex;
@@ -222,8 +221,6 @@
     text-align: center;
     margin: 0 0 1rem 0; }
   .top-like__background {
-    height: 20rem;
-    width: 100%;
     background-size: cover;
     box-shadow: 0 0 10px #000000;
     border-radius: 10px; }
@@ -232,7 +229,6 @@
     justify-content: space-between;
     padding: 1rem;
     height: 20rem;
-    width: 100%;
     background: linear-gradient(#000000, #00000000);
     border-radius: 10px;
     font-size: 2rem; }
