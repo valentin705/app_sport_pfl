@@ -11,10 +11,7 @@ git clone https://github.com/valentin705/app_sport_pfl.git
 composer install
 ```
 
-### 3. Créer la base de donnée qui se trouve dans le fichier .env.local
-```
-php bin/console doctrine:database:create
-```
+### 3. Créer la connexion à la bdd le fichier .env.local
 
 ### 4. Créez la base de données et exécutez les migrations :
 ```
@@ -27,7 +24,9 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
-### 6. Exécutez le serveur symfony
+### 6. Installer symfony cli
+
+### 7. Exécutez le serveur symfony
 ```
 symfony serve -d
 ```
