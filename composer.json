@@ -13,6 +13,7 @@
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "lexik/jwt-authentication-bundle": "^2.18",
         "pagerfanta/doctrine-orm-adapter": "*",
         "pagerfanta/pagerfanta": "^4.1",
         "pagerfanta/twig": "*",

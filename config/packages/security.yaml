@@ -10,6 +10,12 @@ security:
         class: App\Entity\User
         property: email
   firewalls:
+    api:
+      pattern: ^/api
+      stateless: true
+      custom_authenticator: App\Security\ApiTokenAuthenticator
+      json_login:
+        check_path: /api/login
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false

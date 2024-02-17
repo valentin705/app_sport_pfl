@@ -7,15 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\SeanceRepository;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends AbstractController
 {
+    // Méthode pour le rendu de la vue Twig
     #[Route('/main/home', name: 'home_list')]
     public function listeSeances(
         SeanceRepository $seanceRepository,
         CategoryRepository $categoryRepository,
     ): Response {
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
@@ -29,6 +30,27 @@ class HomeController extends AbstractController
             'categories' => $categories,
             'user' => $user
         ]);
+    }
+
+    // Méthode dédiée pour l'API qui renvoie une réponse JSON
+    #[Route('/api/home', name: 'api_home_list')]
+    public function apiListeSeances(
+        SeanceRepository $seanceRepository,
+        CategoryRepository $categoryRepository,
+    ): JsonResponse {
+        $categories = $categoryRepository->findAll();
+        $seances = $seanceRepository->findSeancesOrderedByDesc();
+        $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
+
+        // Préparer les données pour la réponse JSON
+        $data = [
+            'seances' => $seances,
+            'seancesByLikes' => $seancesByLikes,
+            'categories' => $categories,
+        ];
+
+        // Retourne une réponse JSON
+        return new JsonResponse($data);
     }
 
     #[Route('/main/home/{slug}', name: 'home_list_by_category')]
