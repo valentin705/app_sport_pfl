@@ -40,18 +40,34 @@ class HomeController extends AbstractController
     ): JsonResponse {
         $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findSeancesOrderedByDesc();
-        $seancesByLikes = $seanceRepository->createdOrderByLikesQueryBuilder();
+
+        // Transformer les séances en tableau
+        $seancesData = array_map(function ($seance) {
+            return [
+                'id' => $seance->getId(),
+                'name' => $seance->getName(),
+                'description' => $seance->getDescription(),
+                // Ajoutez d'autres champs que vous souhaitez exposer
+            ];
+        }, $seances);
+
+        // De même pour les catégories si nécessaire
+        $categoriesData = array_map(function ($category) {
+            return [
+                // Structure pour les catégories
+            ];
+        }, $categories);
 
         // Préparer les données pour la réponse JSON
         $data = [
-            'seances' => $seances,
-            'seancesByLikes' => $seancesByLikes,
-            'categories' => $categories,
+            'seances' => $seancesData,
+            // Ajoutez 'seancesByLikes' et 'categories' si nécessaire
         ];
 
         // Retourne une réponse JSON
         return new JsonResponse($data);
     }
+
 
     #[Route('/main/home/{slug}', name: 'home_list_by_category')]
     public function listeSeancesByCategory(
