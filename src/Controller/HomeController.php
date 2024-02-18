@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\SeanceRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -37,34 +38,33 @@ class HomeController extends AbstractController
     public function apiListeSeances(
         SeanceRepository $seanceRepository,
         CategoryRepository $categoryRepository,
+        Request $request // Injectez le service Request pour accéder aux infos de la requête
     ): JsonResponse {
-        $categories = $categoryRepository->findAll();
         $seances = $seanceRepository->findSeancesOrderedByDesc();
 
-        // Transformer les séances en tableau
-        $seancesData = array_map(function ($seance) {
+        $seancesData = array_map(function ($seance) use ($request) {
+            // Construisez l'URL de base.
+            $baseUrl = $request->getSchemeAndHttpHost();
+
+            $imagePath = $seance->getPictureFile(); // Accès au champ de l'entité
+            // Chemin du dossier où les images sont stockées, ajustez si votre structure de dossiers change
+            $imageUrl = $baseUrl . '/uploads/picturesSeances/' . $imagePath;
+
             return [
                 'id' => $seance->getId(),
                 'name' => $seance->getName(),
                 'description' => $seance->getDescription(),
-                // Ajoutez d'autres champs que vous souhaitez exposer
+                'imageUrl' => $imageUrl, // Utilisez 'imageUrl' comme clé dans la réponse JSON
+                'likes' => count($seance->getLikes()),
+                // autres champs...
             ];
         }, $seances);
 
-        // De même pour les catégories si nécessaire
-        $categoriesData = array_map(function ($category) {
-            return [
-                // Structure pour les catégories
-            ];
-        }, $categories);
-
-        // Préparer les données pour la réponse JSON
         $data = [
             'seances' => $seancesData,
             // Ajoutez 'seancesByLikes' et 'categories' si nécessaire
         ];
 
-        // Retourne une réponse JSON
         return new JsonResponse($data);
     }
 
