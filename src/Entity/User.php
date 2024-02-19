@@ -290,4 +290,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getPublicData(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'email' => $this->getEmail(),
+            'description' => $this->getDescription(),
+            'sports' => $this->getSports(),
+            'createdAt' => $this->getCreatedAt(),
+            'pictureFile' => $this->getPictureFile(),
+        ];
+    }
 }
