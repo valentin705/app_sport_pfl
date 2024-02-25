@@ -12,21 +12,18 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-
 
 class ApiTokenAuthenticator extends AbstractAuthenticator
 {
     private $passwordHasher;
-    private $userRepository;
     private $JWTManager;
 
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, JWTTokenManagerInterface $JWTManager)
-    {
+    public function __construct(
+        UserPasswordHasherInterface $passwordHasher,
+        JWTTokenManagerInterface $JWTManager,
+    ) {
         $this->passwordHasher = $passwordHasher;
-        $this->userRepository = $userRepository;
         $this->JWTManager = $JWTManager;
     }
 
@@ -42,7 +39,7 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
         $password = $data['password'] ?? '';
 
         return new Passport(
-            new UserBadge($email), // Pas besoin de fonction de rappel si votre UserProvider gère le chargement par email
+            new UserBadge($email),
             new CustomCredentials(function ($credentials, $user) {
                 return $this->passwordHasher->isPasswordValid($user, $credentials);
             }, $password)
@@ -51,12 +48,17 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $jwt = $this->JWTManager->create($token->getUser()); // La casse doit correspondre à la déclaration ci-dessus
-        return new JsonResponse(['token' => $jwt]);
+        $user = $token->getUser();
+
+        $jwtToken = $this->JWTManager->create($user);
+
+        return new JsonResponse(['token' => $jwtToken]);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new JsonResponse(['error' => 'Authentification échouée'], JsonResponse::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['error' => 'Identifiants invalides'], JsonResponse::HTTP_UNAUTHORIZED);
     }
 }
+
+

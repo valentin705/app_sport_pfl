@@ -20,6 +20,7 @@ class UserService
         return [
             'id' => $user->getId(),
             'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
             'image' => $userImageUrl,
         ];
     }
@@ -31,7 +32,7 @@ class UserService
             'username' => $user->getUsername(),
             'sports' => $user->getSports(),
             'description' => $user->getDescription(),
-            'picture' => $user->getPictureFile(),
+            'image' => $user->getPictureFile(),
         ];
     }
 }
